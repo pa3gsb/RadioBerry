@@ -17,9 +17,18 @@ Radioberry build up by:
 Multiple configurations:
 
 -) Config A
-PC powersdr  discovers 	Radioberry which implements hpsdr protocol
+PC powersdr  discovers 	Radioberry which implements hpsdr protocol.
 
 -) Config B
-Browser connects via html to Radioberry which implements webserver including dsp and radio control 
+Browser connects via html to Radioberry which implements webserver including dsp and radio control.
+Using websockets, webaudio driver, html5, css3, jquery.
+
+-) Config C
+Using LVDS ; bringing the raw ADC data to the RPI.
+
+
+Planning to make one extension board which makes experimenting for config A, B and C possible.
+
+For the config A and B i want to use the java programming language.
 
 
