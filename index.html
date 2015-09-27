@@ -1,0 +1,498 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>RadioBerry WebSDR</title>
+  <meta name="description" content="websdr blall">
+  <meta name="author" content="Johan Maas PA3GSB">
+
+  <!--<link rel="stylesheet" href="css/styles.css?v=1.0">-->
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  
+
+	<script src="numeral.js"></script>
+	<script type="text/javascript" src="segment-display.js"></script>
+	<script type="text/javascript">
+
+		 var display = new SegmentDisplay("vfo");
+		  display.pattern         = "##.###.###";
+		  display.displayAngle    = 6;
+		  display.digitHeight     = 20;
+		  display.digitWidth      = 14;
+		  display.digitDistance   = 2.5;
+		  display.segmentWidth    = 2;
+		  display.segmentDistance = 0.3;
+		  display.segmentCount    = 7;
+		  display.cornerType      = 1;
+		  display.colorOn         = "#00ff00";
+		  display.colorOff        = "#000000";
+		  display.draw();
+		  
+		 
+		  
+
+		  var displayRIT = new SegmentDisplay("rit");
+		  displayRIT.pattern         = "##.###.###";
+		  displayRIT.displayAngle    = 6;
+		  displayRIT.digitHeight     = 20;
+		  displayRIT.digitWidth      = 14;
+		  displayRIT.digitDistance   = 2.5;
+		  displayRIT.segmentWidth    = 2;
+		  displayRIT.segmentDistance = 0.3;
+		  displayRIT.segmentCount    = 7;
+		  displayRIT.cornerType      = 1;
+		  displayRIT.colorOn         = "#00ff00";
+		  displayRIT.colorOff        = "#000000";
+		  displayRIT.draw();
+
+    </script>
+  
+  
+ <script src="ringbuffer.js"></script>
+ 
+  <script>
+  
+				var w_width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+				var w_height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+  
+  
+		var target = "ws://192.168.2.14:8080/";
+		
+		var audioCtx;
+		var gainNode;
+		var audioBuffer;
+		var channelBuffer;
+		var source;
+		var myEvent = null;
+		var running = false;		
+		var addValue = 0;
+				
+		var ringBuffer = new RingBuffer(8000);		
+		
+		//var sample = new VolumeSample();
+		var volume = 10;
+
+		var reqCountSent = 0;
+		var reqCountReceived = 0;
+  
+		var sup_socket = !!window.WebSocket && !!WebSocket.CLOSING;   // the CLOSING test excludes browsers with an old version of the websocket protocol, in particular Safari 5
+		if (!sup_socket) alert('No support for websockets');
+		isIOS = 0;   
+		isAandroid = 0;   
+		try { 
+			var n=navigator.userAgent.toLowerCase();
+			  if (n.indexOf('iphone')!=-1) isIOS=1;
+			  if (n.indexOf('ipad')!=-1) isIOS=1;
+			  if (n.indexOf('ipod')!=-1) isIOS=1;
+			  if (n.indexOf('ios')!=-1) isIOS=1;
+			  if (n.indexOf('android')!=-1) isAandroid=1;
+			} catch (e) {};
+  
+  		
+				
+		var ws;
+		try {
+		  ws = new WebSocket(target);
+		} catch(e) {
+			alert('Websocket not supported');
+		}
+
+		ws.onopen = function() {
+			//alert("Opened!");
+			ws.send("Hello Server");
+		};
+
+		
+		 //var dataArray = new Uint8Array(1280);
+		 var dataArray = new Float32Array(1280);
+		
+		ws.onmessage = function (evt) {
+			//alert("Message: " + evt.data);
+			var arr = JSON.parse(evt.data);
+			
+			if (arr.audio) {
+				//console.log('audio');
+				//if (running) {
+					for(var i = 0; i < arr.audio.length; i++) {			
+						var value = parseFloat(arr.audio[i].d);
+						ringBuffer.enq(value);
+									
+						//channelBuffer[i] = value;
+				
+					}	
+					
+					//if (running) play();	
+				//}
+			}	
+			if (arr.spectrum) {
+				//console.log('spectrum ' + arr.spectrum.length);
+				for(var i = 0; i < arr.spectrum.length; i++) {			
+					var value = parseFloat(arr.spectrum[i].d);
+					dataArray[i] = value;
+					//console.log(value);
+					//console.log(arr.spectrum[i].d);
+				}	
+				visualize();
+			}
+			
+		};
+
+		ws.onclose = function() {
+			//alert("Closed!");
+		};
+
+		ws.onerror = function(err) {
+			alert("Error: " + err);
+		};
+		
+		
+		function visualize() {
+			var canvas = document.querySelector('.visualizer'); 
+			var canvasCtx = canvas.getContext("2d");
+			 
+			//WIDTH = canvas.width;
+			WIDTH = document.getElementById("spectrum").offsetWidth ;
+			canvas.style.width = WIDTH;
+			console.log("width" + document.getElementById("spectrum").offsetWidth);
+			HEIGHT = canvas.height;
+			var bufferLength = 1280;
+
+			canvasCtx.clearRect(0, 0, WIDTH, HEIGHT);
+			
+			
+
+			function draw() {
+			  canvasCtx.fillStyle = 'rgb(200, 200, 200)'; // draw wave with canvas
+			  canvasCtx.fillRect(0, 0, WIDTH, HEIGHT);
+			  canvasCtx.lineWidth = 1;
+			  canvasCtx.strokeStyle = 'rgb(0, 0, 0)';
+			  canvasCtx.beginPath();
+			  var sliceWidth = WIDTH * 1.0 / bufferLength;
+			  var x = 0;
+			  
+			  for(var i = 0; i < bufferLength; i++) {
+				//console.log(dataArray[i]);
+				//var v = dataArray[i] / 128.0;
+				var y = dataArray[i] * -1;
+				if(i === 0) {
+				  canvasCtx.moveTo(x, y);
+				} else {
+				  canvasCtx.lineTo(x, y);
+				}
+				x += sliceWidth;
+			  }
+			  canvasCtx.lineTo(canvas.width, canvas.height/2);
+			  canvasCtx.stroke();
+			  
+			canvasCtx.beginPath();
+			canvasCtx.lineWidth = 4;
+			canvasCtx.strokeStyle = 'rgb(255, 0, 0)';
+			canvasCtx.moveTo(WIDTH / 2, 0);
+			canvasCtx.lineTo(WIDTH / 2, HEIGHT);
+			canvasCtx.stroke();
+			  
+			  
+			};
+			draw();
+			
+			
+		}
+		
+		function executePlaySound() {
+			
+			//iOS_audio_start();
+			
+			initWebAudio();
+									
+			
+									
+			running = true;
+			
+			play();		
+			
+		}
+
+		function executeStopPlaySound() {
+			if (running) {
+				source.stop();
+				running = false;
+			}
+		}
+	
+		function initWebAudio() {
+
+			try {
+				var AudioContext = window.AudioContext || window.webkitAudioContext;
+				
+				audioCtx = new AudioContext();
+				gainNode = audioCtx.createGain();
+			}
+			catch(e) {
+				alert('Web Audio API is not supported in this browser');
+			}
+			
+			var channels = 1;
+			var channel_0 = 0;
+			var frameCount = 8000; 
+			var sampleRate = 8000;
+		
+			audioBuffer = audioCtx.createBuffer(channels, frameCount, sampleRate); 
+		
+			channelBuffer = audioBuffer.getChannelData(channel_0); 
+		}
+	
+		function play() {
+			var length = ringBuffer.size();
+						
+			for(i = 0; i < length; i++) {
+				channelBuffer[i] = ringBuffer.deq();
+			}	
+			
+			playBuffer(audioBuffer);
+		}
+  
+  		 function playBuffer(buffer) {
+			source = audioCtx.createBufferSource();
+			source.buffer = buffer;
+			source.connect(gainNode);
+			source.onended = onEnded;
+			//source.loop = true;
+			gainNode.connect(audioCtx.destination);
+			source.start();
+		}
+  
+  		function onEnded() {
+			if (running) play();
+		}
+  
+		var radioControl = { "frequency":parseInt(1008000), "mode":parseInt(6), "agc":parseInt(0), "low":parseInt(-4000), "high":parseInt(4000), "agc_gain":parseFloat(85)};
+ 
+		function sendSDRControlData(){
+			
+			document.getElementById("freq").value = radioControl.frequency;
+		
+			var xhr = new XMLHttpRequest();
+			//xhr.open("POST","http://192.168.2.11:8080/ctx/websdr/control", true);
+			xhr.open("POST","/websdr/control.html", true);
+			xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+			var jsondata = JSON.stringify(radioControl);
+			console.log(jsondata);
+			xhr.send(jsondata);
+			
+		}
+ 
+ 
+		function freqChange() {
+			radioControl.frequency = parseInt(document.getElementById("freq").value);
+			showFrequency();
+			sendSDRControlData();
+			
+		}
+		
+		
+		function freqUp() {
+			radioControl.frequency = radioControl.frequency + parseInt(document.getElementById("freqStep").value);
+			sendSDRControlData();
+			showFrequency();
+		}
+		
+		function freqDown() {
+			radioControl.frequency = radioControl.frequency - parseInt(document.getElementById("freqStep").value);
+			sendSDRControlData();
+			showFrequency();
+		}
+ 
+ 		function modeChange() {
+			radioControl.mode = document.getElementById("mode").selectedIndex;
+			sendSDRControlData();
+		}
+		
+		function agcChange() {
+			radioControl.agc = document.getElementById("agc").selectedIndex;
+			sendSDRControlData();
+		}
+   
+   		function agcGain() {
+			radioControl.agc_gain = parseInt(document.getElementById("agc_gain").value);
+			sendSDRControlData();
+		}
+		
+		function audioVolume() {
+			volume = parseInt(document.getElementById("volume").value);
+			//var vol = parseInt(document.getElementById("volume").value);
+			//var fraction = parseInt(vol) / parseInt(document.getElementById("volume").max);
+			//gainNode.gain.value = fraction * fraction * 10;
+			//volume = fraction * fraction * 1000;
+			console.log(volume);
+			gainNode.gain.value = volume;
+		}
+		
+		function showFrequency() {
+			var strFreq = numeral(radioControl.frequency).format('0,0');
+			strFreq = strFreq.replace(/,/g , ".");
+		
+			if (parseInt(radioControl.frequency) >= 10000000){
+					display.setValue(strFreq);
+				}
+				else {
+					display.setValue(" " +strFreq);
+				}
+			displayRIT.setValue(' 3.604.000');
+		}
+		
+		
+		function initFunction() {
+			//alert('INIT');
+			radioControl.frequency = parseInt(document.getElementById("freq").value);
+			radioControl.agc = document.getElementById("agc").selectedIndex;
+			radioControl.agc_gain = parseInt(document.getElementById("agc_gain").value);
+			radioControl.mode = document.getElementById("mode").selectedIndex;
+			showFrequency();
+			sendSDRControlData();
+			executePlaySound();
+			audioVolume();
+			
+			//document.getElementById("visualizer").style.width =  (w_width /12) * 10;
+		}
+		
+		
+
+		
+  </script>
+  
+  
+ 
+</head>
+
+<body style="border-style:solid solid solid solid; border-width: 5px; border-bottom-left-radius: 2em; border-bottom-right-radius: 2em; border-top-left-radius: 2em; border-top-right-radius: 2em;"  onload="initFunction()">
+  
+  
+	<div id="radio" class="container-fluid">
+  
+		<div class="row" >
+			<div class="col-sm-12" style="background-color: transparent; "  >
+				<h1 class="text-center" >Software Defined Radio</h1>
+			</div>
+		</div>
+  
+  
+		<div class="row">
+			<div class="col-sm-1" style="background-color: black; height: 68px;" >
+				<div class="text-center">
+					<button type="button"  class="btn-lg btn-primary center-block">VFO</button>
+				</div>
+			</div>
+			<div class="col-sm-2" style="background-color: black; height: 68px;">
+				 <canvas id="vfo" width="120" height="68"></canvas>
+			</div>
+			<div class="col-sm-6" style="border-style:solid solid solid solid; border-width: 1px; height: 68px;" > 
+				<h3 class="text-center"><mark>SSB</mark></h3>
+			</div>
+			<div class="col-sm-1"  style="background-color: black; height: 68px;" >
+				<button type="button"  style= "font-weight: bold; background-color:red; color:greenyellow" onclick="executeStopPlaySound()">RIT</button>
+			</div>
+			<div class="col-sm-2" style="background-color: black; height: 68px;" >
+				<canvas id="rit" width="120" height="68"></canvas>
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-1">
+			</div>
+		
+			<div id="spectrum" class="col-sm-10">
+				<canvas id="visualizer"  class="visualizer"  width="1592"  height="150" ></canvas> 
+			</div>
+			
+			<div class="col-sm-1">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-2">
+				<input id="freq" type="number" name="points" min="1000" max="60000000"  value="1008000" onchange="freqChange()">
+			</div>
+		
+			<div class="col-sm-2">
+				<select id="freqStep">
+					<option value="1">1 Hz</option>
+					<option value="10">10 Hz</option>
+					<option value="100">100 Hz</option>
+					<option value="1000" selected="selected" >1 KHz</option>
+					<option value="10000">10 KHz</option>
+					<option value="100000">100 KHz</option>
+					<option value="1000000">1 MHz</option>
+					<option value="10000000">10 MHz</option>
+				</select>
+			</div>
+			
+			<div class="col-sm-4">
+				<button type="button" onclick="freqUp()">Freq UP</button>
+			</div>
+			
+			<div class="col-sm-4">
+				<button type="button" onclick="freqDown()">Freq Down </button>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+		
+			<div class="col-sm-4">
+					<select id="mode" onchange="modeChange()" >
+						<option value="0">LSB</option>
+						<option value="1">USB</option>
+						<option value="2">DSB</option>
+						<option value="3">CWL</option>
+						<option value="4">CWU</option>
+						<option value="5">FMN</option>
+						<option value="6" selected="selected" >AM</option>
+						<option value="7">CWL</option>
+						<option value="8">CWU</option>
+						<option value="9">FMN</option>
+						<option value="10">SAM</option>
+						<option value="11">DRM</option>
+					</select>
+			</div>
+			
+			<div class="col-sm-8">
+				<select id="agc" onchange="agcChange()">
+					<option value="0" selected="selected" >AGC OFF</option>
+					<option value="1">AGC LONG</option>
+					<option value="2">AGC SLOW</option>
+					<option value="3">AGC MEDIUM</option>
+					<option value="4">AGC FAST</option>
+				</select>
+			</div>
+		</div>
+			
+		<div class="row">
+			<div class="col-sm-6">
+				<input id="agc_gain" type="range" min="0" max="120" value="85" onchange="agcGain()"> AGC </input>
+			</div>
+		
+			<div class="col-sm-6">
+				<input id="volume" type="range" min="0" max="1024" value="512" onchange="audioVolume()"> Volume </input>
+			</div>
+			
+		</div>
+		
+
+
+		
+		
+	</div>
+ 
+ 
+ 
+ 
+ 
+ 
+</body>
+</html>

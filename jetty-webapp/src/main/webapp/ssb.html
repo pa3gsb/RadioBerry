@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>PA3GSB WebSDR SDR-T9R</title>
+
+<meta name="description" content="websdr blall">
+<meta name="author" content="Johan Maas PA3GSB">
+
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css">
+<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+
+<!--
+<link rel="stylesheet" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.5.min.css">
+<script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.5.min.js"></script>
+-->
+
+
+<script src="js/numeral.js"></script>
+<script src="js/ringbuffer.js"></script>
+<script src="scripts/webaudio-1.0.js"></script>
+<script src="scripts/sdrspectrum-1.0.js"></script>
+<script src="scripts/websockets-1.0.js"></script>
+<script type="text/javascript" src="segment-display.js"></script>
+<script src="scripts/frequencydisplay-1.0.js"></script>
+<script src="scripts/radiocontrol-1.0.js"></script>
+<script src="scripts/dspcontrol-1.0.js"></script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script src="js/bootstrap.min.js"></script>
+
+
+ <style>
+	#bandwithview {border: none; position: absolute; bottom: 0px; width:100%; height:100%; background: transparent;}
+	#bandwith {  cursor: move; background-position: top left; top:0px; width: 50px; height: 100%; z-index: 2; background-color:aqua; opacity:0.2;}
+	#agcgainlevel {border: 1px dotted; padding-left: 150px; cursor: move; background-position: top left; width: 100%; height: 1px; z-index: 2; top: -135px; color: blue; background-color: blue;}
+
+	
+</style>
+
+
+
+ <script>
+  $(function() {
+	
+    $( ".draggable" ).draggable({ containment: "parent", axis: "x,y" , scroll: false });
+	$( "#bandwith" ).resizable({ handles: "w" , containment: "parent",  maxHeight: 300, maxWidth: 150, minHeight: 300, minWidth: 20 });
+
+	// make sure the secondary mouse context menu does not appear,
+	$('#spectrum').bind('contextmenu', function(e) {
+     e.preventDefault();
+	});
+	
+	//change the tune freq step.
+	$('#spectrum').mousedown(function(event) {
+		switch (event.which) {
+			case 1:
+				var step = $('#freqStep').val();
+				console.log('step = ' + step);
+				if (step < 10000000) {step = step * 10;}
+				$('#freqStep').val(step);
+				break;
+			case 2:
+				break;
+			case 3:
+				var step = $('#freqStep').val();
+				console.log('step = ' + step);
+				
+				if (step > 1) {step = step /10;}
+				$('#freqStep').val(step);
+				break;
+			default:
+				alert('You have a strange Mouse!');
+		}
+	});
+	
+	$( "#slider-vertical" ).slider({
+      orientation: "vertical",
+      range: false,
+      min: 0,
+      max: 120,
+      value: 85,
+      slide: function( event, ui ) {
+		dspControl.setAGCGain( parseInt(120 - ui.value) );
+      }
+    });
+  });
+</script>
+<script>
+	var w_width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	var w_height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+	
+	
+	
+	function initFunction() {
+		
+		keepwidth = $('#bandwith').pixels('width');
+		
+		$("#mode li a").click(function(){
+        	var selText = $(this).text();
+       		$(this).parents('.btn-group').find('.dropdown-toggle').html(selText +' <span class="caret"></span>');
+    		dspControl.setMode($(this).attr("radioMode"));
+			changeModeActions();
+    	});
+    	
+    	$("#agc li a").click(function(){
+        	var selText = $(this).text();
+       		$(this).parents('.btn-group').find('.dropdown-toggle').html(selText +' <span class="caret"></span>');
+    		dspControl.setAGC($(this).attr("agcMode"));
+			changeModeActions();
+    	});
+		
+		//set mode to lsb
+		$("#mode li a")[0].click();		
+		//set agc mode	
+		$("#agc li a")[2].click();
+				
+		
+		$( "#bandwith" ).mouseup(function() {
+			if (sdrspectrum.isBandwithChanged())
+			{
+				var bwidth=[];
+				bwidth = sdrspectrum.getBandwidth(dspControl.mode);
+				dspControl.setBandWidth(bwidth[0], bwidth[1]);
+			} else {
+				dspControl.setShift(sdrspectrum.getFrequencyShift(dspControl.mode));
+			}
+		});
+		
+		$( "#agcgainlevel" ).mouseup(function() {
+			//var top = $('#agcgainlevel').pixels('top');
+			//top = top * -1;
+			//var gain = parseInt(120 - (top * 0.4));
+			//dspControl.setAGCGain(parseInt(gain));
+			//alert( "Handler for .mouseup() called." + gain );
+		});
+		
+		
+		$(function(){
+				$('#agcgain').slider({
+					formater: function(value) {
+					return 'Value: '+value;
+				},
+				reversed: true
+				});
+				$('#agcgain').slider().on('slideStop', function(ev){
+					dspControl.setAGCGain(parseInt($('#agcgain').data('slider').getValue()));
+				});
+		});
+	}
+	
+	function initSpectrum() {
+		//LSB
+		if (dspControl.mode == 0) {
+			var width = $('#bandwith').pixels('width');
+			var left = $('#bandwith').pixels('left');
+			
+				console.log("left = " + left);
+			
+			$( ".ui-resizable-handle.ui-resizable-e" ).removeClass( "ui-resizable-e" ).addClass( "ui-resizable-w" );
+			document.getElementById("bandwith").style.left = "" + (parseInt(sdrspectrumcenter) - width) + "px";
+			
+			document.getElementById("bandwith").style.borderRight = "4px solid";
+			document.getElementById("bandwith").style.borderLeft = "none";
+			document.getElementById("bandwith").style.borderColor = "red";
+		} 
+		//USB
+		if (dspControl.mode == 1) {
+		
+			var width = $('#bandwith').pixels('width');
+			
+				console.log("width = " + width);
+			document.getElementById("bandwith").style.left = "" + parseInt(sdrspectrumcenter) + "px";
+			
+			document.getElementById("bandwith").style.borderLeft = "4px solid";
+			document.getElementById("bandwith").style.borderRight = "none";
+			//document.getElementById("bandwith").style.borderColor = "red";
+			
+			
+			$( ".ui-resizable-handle.ui-resizable-w" ).removeClass( "ui-resizable-w" ).addClass( "ui-resizable-e" );
+		} 
+	}
+	
+	function MouseScroll (event) {
+            var rolled = 0;
+            if ('wheelDelta' in event) {
+                rolled = event.wheelDelta;
+            }
+            else {  // Firefox
+                // The measurement units of the detail and wheelDelta properties are different.
+                rolled = -40 * event.detail;
+				rolled = event.detail;
+            }
+            
+			console.log('rolled ' + rolled);
+			if (rolled > 0) { radioControl.setRXFrequencyStepUp();} else {radioControl.setRXFrequencyStepDown();}	
+    }
+	
+	function Init() {
+            var elem = document.getElementById ("radio");
+            if (elem.addEventListener) {   
+                    // Internet Explorer, Opera, Google Chrome and Safari
+                elem.addEventListener ("mousewheel", MouseScroll, false);
+                    // Firefox
+                elem.addEventListener ("DOMMouseScroll", MouseScroll, false);
+            }	
+    }
+
+	function changeModeActions() {
+		//LSB
+		if (dspControl.mode == 0) {
+			var width = $('#bandwith').pixels('width');
+			var left = $('#bandwith').pixels('left');
+			
+			document.getElementById("bandwith").style.left = "" + (left - width) + "px";
+			
+			document.getElementById("bandwith").style.borderRight = "1px solid";
+			document.getElementById("bandwith").style.borderLeft = "none";
+			
+			$( ".ui-resizable-handle.ui-resizable-e" ).removeClass( "ui-resizable-e" ).addClass( "ui-resizable-w" );
+		} 
+		//USB
+		if (dspControl.mode == 1) {
+			var width = $('#bandwith').pixels('width');
+			var left = $('#bandwith').pixels('left');
+			
+			document.getElementById("bandwith").style.left = "" + (left + width) + "px";
+			
+			document.getElementById("bandwith").style.borderLeft = "1px solid";
+			document.getElementById("bandwith").style.borderRight = "none";
+			
+			$( ".ui-resizable-handle.ui-resizable-w" ).removeClass( "ui-resizable-w" ).addClass( "ui-resizable-e" );
+		} 
+	}
+	
+</script>
+</head>
+<body
+	style="background-color: black; border-style: solid solid solid solid; border-width: 8px; border-bottom-left-radius: 4em; border-bottom-right-radius: 4em; border-top-left-radius: 4em; border-top-right-radius: 4em;"
+	onload="vfo.display(); rit.display(); webaudio.play();  websockets.connect(); dspControl.init(); radioControl.init(); sdrspectrum.visualize(); initFunction(); Init(); initSpectrum()">
+<!--	onload="vfo.display(); rit.display(); webaudio.play(); sdrspectrum.visualize(); websockets.connect(); dspControl.init(); radioControl.init(); initFunction(); Init();"> -->
+	
+	<div id="radio" class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12" style="background-color: transparent;">
+				<h1 style="color:white" class="text-center">Software Defined Radio</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-1"
+				style="padding: 10px; background-color: transparent; height: 68px;">
+				<button type="button" class="btn-lg btn-primary"
+					style="position: absolute; right: 10px;">VFO</button>
+				<input style="display:none"; id="freq" type="number" min="1000" max="60000000"  value="1008000">Frequency</input>
+				<select style="display:none"; id="freqStep">
+					<option value="1">1 Hz</option>
+					<option value="10">10 Hz</option>
+					<option value="100">100 Hz</option>
+					<option value="1000" selected="selected" >1 KHz</option>
+					<option value="10000">10 KHz</option>
+					<option value="100000">100 KHz</option>
+					<option value="1000000">1 MHz</option>
+					<option value="10000000">10 MHz</option>
+				</select>
+				
+			</div>
+			<div class="col-sm-1"
+				style="border-style: solid solid solid solid; border-width: 5px; border-bottom-left-radius: 2em; border-bottom-right-radius: 2em; border-top-left-radius: 2em; border-top-right-radius: 2em; background-color: black; height: 68px;">
+				<canvas id="vfo" width="120" height="68"></canvas>
+			</div>
+			<div class="col-sm-8" style="height: 68px;">
+				<h2 style="color:white" class="text-center">SSB</h2>
+			</div>
+			<div class="col-sm-1"
+				style="padding: 10px; background-color: transparent; height: 68px;">
+				<button type="button" class="btn-lg btn-primary"
+					style="position: absolute; right: 10px;">RIT</button>
+			</div>
+			<div class="col-sm-1"
+				style="border-style: solid solid solid solid; border-width: 5px; border-bottom-left-radius: 2em; border-bottom-right-radius: 2em; border-top-left-radius: 2em; border-top-right-radius: 2em; background-color: black; height: 68px;">
+				<canvas id="rit" width="120" height="68"></canvas>
+			</div>
+
+		</div>
+		<div class="row" style="padding: 25px; height: 300px;">
+			<div class="col-sm-1">	
+				<div id="slider-vertical" style="float: right; height:240px; "></div>
+				<div style="float: left; padding-top: 125px; color:white; font-weight:bold;  ">AGC Gain</div>
+			</div>
+			
+			<div id="spectrum" class="col-sm-10">
+				<canvas id="visualizer" class="visualizer" height="300"></canvas>
+			
+				<div id="bandwithview" class="ui-widget-content">
+						<div  class="draggable" id="bandwith" > 
+						</div>
+						<div  class="draggable" id="agcgainlevel" >
+							<p style="margin-top: -25px;">AGC gain</p>
+					</div>
+					
+				</div>
+			</div>
+			<div class="col-sm-1"></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3"
+				style="height: 107px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+
+				<div style="float: left; margin-top: 40px; width: 75%;">
+					<input id="drive" type="range" min="0" max="100" value="50" >
+					<bold style="color:white" >Drive</bold>
+					</input>
+				</div>
+			</div>
+			<div class="col-sm-3"
+				style="border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+				<div class="progress" style="margin-top: 40px;">
+					<div class="progress-bar progress-bar-success" role="progressbar"
+						style="width: 80%">0..100 Watt</div>
+					<div class="progress-bar progress-bar-danger" role="progressbar"
+						style="width: 20%"></div>
+				</div>
+				<div>
+					<label style="text-align: center;"><bold style="color:white" >Power</bold></label>
+				</div>
+			</div>
+			<div class="col-sm-3"
+				style="border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+
+				<div class="btn-group"
+					style="float: left; margin-top: 2px; margin-right: 10px;">
+					<button type="button" class="btn-lg btn-primary dropdown-toggle "
+						data-toggle="dropdown">
+						<span class="selection">LSB </span><span class="caret"></span>
+					</button>
+					<ul id="mode" class="dropdown-menu" role="menu">
+						<li><a href="#" radioMode="0">LSB </a></li>
+						<li><a href="#" radioMode="1">USB </a></li>
+					</ul>
+				</div>
+				<div class="btn-group agcMode" style="float: left; margin-top: 2px;">
+					<button type="button" class="btn-lg btn-primary dropdown-toggle"
+						data-toggle="dropdown">
+						<span class="selection">AGC</span><span class="caret"></span>
+					</button>
+					<ul id="agc" class="dropdown-menu" role="menu">
+						<li><a href="#" agcMode="0">AGC OFF </a></li>
+						<li><a href="#" agcMode="1">AGC LONG </a></li>
+						<li><a href="#" agcMode="2">AGC SLOW </a></li>
+						<li><a href="#" agcMode="3">AGC MEDIUM </a></li>
+						<li><a href="#" agcMode="4">AGC FAST </a></li>
+					</ul>
+				</div>
+				<div style="float: left; margin-top: 20px; width: 75%;">
+					<input id="bandwidth" type="range" min="-9999" max="-150" value="0">
+					<bold style="color:white" >ATT</bold>
+					</input>
+				</div>
+			</div>
+			<div class="col-sm-3"
+				style="border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+				<div class="progress" style="margin-top: 40px;">
+					<div class="progress-bar progress-bar-success" role="progressbar"
+						style="width: 60%">S0-S9</div>
+					<div class="progress-bar progress-bar-warning" role="progressbar"
+						style="width: 20%">+40dB</div>
+					<div class="progress-bar progress-bar-danger" role="progressbar"
+						style="width: 20%">Danger</div>
+				</div>
+				<div>
+					<label style="text-align: center;"><bold style="color:white" >S-Meter</bold></label>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6"
+				style="height: 80px; margin-top: 25px; padding-left: 20%; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+				<div class="container">
+					<div class="btn-group-vertical">
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(3604000)"
+							style="margin-top: 2px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">160</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(3604000)"
+							style="margin-top: 14px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">17</button>
+					</div>
+					<div class="btn-group-vertical">
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(3604000)"
+							style="margin-top: 2px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">80</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(21250000)"
+							style="margin-top: 14px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">15</button>
+					</div>
+					<div class="btn-group-vertical">
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(7050000)"
+							style="margin-top: 2px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">40</button>
+						<button type="button" class="btn btn-primary btn-lg"
+							style="margin-top: 14px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">12</button>
+					</div>
+					<div class="btn-group-vertical">
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(10000000)"
+							style="margin-top: 2px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">30</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(28000000)"
+							style="margin-top: 14px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">10</button>
+					</div>
+					<div class="btn-group-vertical">
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(14250000)"
+							style="margin-top: 2px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">20</button>
+						<button type="button" class="btn btn-primary btn-lg" onclick="radioControl.setRXFrequency(50000000)"
+							style="margin-top: 14px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">6</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3"
+				style="height: 80px; margin-top: 25px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+				<div
+					style="float: left; width: 50px; margin-top: 18px; margin-right: 10px; background: #006dcc; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+					<label style="text-align: center; color: #ffffff"><bold>NR</bold></label>
+					<input type="checkbox" style="margin: 4px 20px 0"> </input>
+				</div>
+				<div
+					style="float: left; width: 50px; margin-top: 18px; margin-right: 10px; background: #006dcc; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+					<label style="text-align: center; color: #ffffff"><bold>ANF</bold></label>
+					<input type="checkbox" style="margin: 4px 20px 0"> </input>
+				</div>
+				<div
+					style="float: left; width: 50px; margin-top: 18px; background: #006dcc; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+					<label style="text-align: center; color: #ffffff"><bold>NB</bold></label>
+					<input type="checkbox" style="margin: 4px 20px 0"> </input>
+				</div>
+			</div>
+
+			<div class="col-sm-3"
+				style="height: 80px; margin-top: 25px; border-style: solid solid solid solid; border-width: 1px; border-bottom-left-radius: 1em; border-bottom-right-radius: 1em; border-top-left-radius: 1em; border-top-right-radius: 1em;">
+				<div style="float: left; margin-top: 20px; width: 50%;">
+					<input style="float: left;" id="bandwidth" type="range" min="0"
+						max="2700" value="2400""></input><label><bold style="color:white">Bandwidth</bold></label>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top: 25px;">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<div>
+					<input style="width: 100%;" id="volume" type="range" min="0"
+						max="1024" onchange="radioControl.setWebAudioVolume()"></input> <label><bold style="color:white">Volume</bold></label>
+				</div>
+			</div>
+			<div class="col-sm-4"></div>
+		</div>
+	</div>
+</body>
+</html>
