@@ -1,0 +1,26 @@
+{
+  "name": "jquery-mobile-bower",
+  "version": "1.4.5",
+  "main": [
+    "js/jquery.mobile-1.4.5.js",
+    "css/jquery.mobile-1.4.5.css"
+  ],
+  "dependencies": {
+    "jquery": "~1.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jobrapido/jquery-mobile-bower.git"
+  },
+  "homepage": "https://github.com/jobrapido/jquery-mobile-bower",
+  "_release": "1.4.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.4.5",
+    "commit": "cc8562583b1fef79c1f8a389f9f5c52a86ff4354"
+  },
+  "_source": "git://github.com/jobrapido/jquery-mobile-bower.git",
+  "_target": "~1.4.5",
+  "_originalSource": "jquery-mobile-bower",
+  "_direct": true
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+   <head>
+		<script src='zebra.js' type='text/javascript'></script>
+		 <script src='zebra-radio.js' type='text/javascript'></script>
+	 
+		<script type="text/javascript">
+		   zebra.ready(function() {
+		   
+		   		if (zebra.ui.$detectZCanvas("zebcanvas") != null) return;
+		   		
+		   		eval(zebra.Import("ui", "layout"));
+
+	        	desktop = new zCanvas("zebcanvas");
+				var root = desktop.root, nt = new Tabs(), prevSelected = -1;
+
+	    		root.properties({
+	    			padding: 4,
+	    			border : new Border(),
+	    			layout : new BorderLayout(),
+	    			kids   : {
+	    				CENTER: nt.properties({
+	    					kids : { 
+								"Layouts"      : new zebra.ui.radio.LayoutDemo()
+							}
+						})
+		    		} 
+	    		});		
+			});
+		</script>
+ 
+    </head>
+	<body> 
+	<h1> Zebra Radio </h1>
+	<canvas width="400" height="400" tabindex="1" id="zebcanvas" style="width: 400px; height: 400px;"></canvas>
+	</body>
+</html>
