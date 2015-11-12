@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="HermesLite/src"/>
+	<classpathentry kind="src" path="RadioBerry/src"/>
+	<classpathentry kind="lib" path="HermesLite/bin/hermeslite.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/commons-collections4-4.0-sources.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/commons-collections4-4.0.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/commons-io-2.4.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/commons-net-3.3.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/java-json.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/jetty-all-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/slf4j-api-1.6.4.jar"/>
+	<classpathentry kind="lib" path="RadioBerry/lib/slf4j-log4j12-1.6.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="RadioBerry/bin"/>
+</classpath>

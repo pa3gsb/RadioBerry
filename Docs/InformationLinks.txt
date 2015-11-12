@@ -1,0 +1,35 @@
+
+Links:
+
+
+https://learn.adafruit.com/introducing-the-raspberry-pi-model-b-plus-plus-differences-vs-model-b/power-supply
+
+https://learn.adafruit.com/system/assets/assets/000/017/950/original/raspberry_pi_dims.png?1405287230
+
+
+http://www.elecraft.com/manual/KX3SchematicDiagramDec2012.pdf
+
+
+https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/hb/cyc3/cyc3_ciii51016.pdf
+
+
+Connnectoren:
+https://www.kiwi-electronics.nl/
+
+Prik je eigen addon board op de Raspberry Pi met deze op maat gemaakte extra hoge 2x20 header. Het female header deel is extra hoog (13.6mm) - wanneer je deze op je Pi zet, zal een PCB de Ethernet- en USB-aansluitingen niet in de weg zitten.
+
+De pinnen zijn extra lang zodat addon boards gestapeld kunnen worden.
+
+
+http://pi4j.com/
+java IO lib
+
+
+Very nice :
+https://pi.gadgetoid.com/pinout
+
+http://pi4j.com/pins/model-2b-rev1.html
+
+https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md
+
+http://wiringpi.com/
