@@ -33,3 +33,7 @@ http://pi4j.com/pins/model-2b-rev1.html
 https://www.raspberrypi.org/documentation/hardware/raspberrypi/spi/README.md
 
 http://wiringpi.com/
+
+
+http://www.findchips.com/
+https://octopart.com/
