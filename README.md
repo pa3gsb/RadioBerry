@@ -45,5 +45,15 @@ For different modes an unique interface can be designed.
 
 ## Hardware
 
-TODO....
+![RadioBerry](Gallery/radioberry_wip.png)
+
+Schema and layout available. The print is created by elecrow. 
+
+As can be seen in the picture the first components are mounted and the first firmware is loaded; showing the heart beat!
+
+Some schema and layout errors:
+
+-)	Pin 23 AD9866 not connected to FPGA!
+-)	10 MHz not connected to 3.3V
+-) 	LED for the 1V2 is not needed; the LED need at least 1.4..1.5V
 
