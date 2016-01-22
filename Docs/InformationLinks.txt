@@ -37,3 +37,12 @@ http://wiringpi.com/
 
 http://www.findchips.com/
 https://octopart.com/
+
+
+i2c:
+
+https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c
+
+
+c code controlling the ports:
+http://elinux.org/RPi_GPIO_Code_Samples
