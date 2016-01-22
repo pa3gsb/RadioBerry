@@ -45,7 +45,7 @@ For different modes an unique interface can be designed.
 
 ## Hardware
 
-![RadioBerry](Gallery/radioberry_wip.png)
+![RadioBerry](Gallery/radioberry_wip.jpg)
 
 Schema and layout available. The print is created by elecrow. 
 
