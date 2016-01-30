@@ -14,7 +14,7 @@
 //
 // Johan Maas PA3GSB 
 //
-// Date:    27 December October 2015
+// Date:    27 December 2015
 //				First version.
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +24,8 @@ module radioberry(
 clk_10mhz, 
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,ad9866_pga,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
-DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4);
+DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
+controlio);
 
 input clk_10mhz;	
 input ad9866_clk;
@@ -41,7 +42,7 @@ output ad9866_rst_n;
 output ad9866_mode;
 output [5:0] ad9866_pga;
 
-// SPI connect to Rpi SPI0.
+// SPI connect to Raspberry PI SPI-0.
 input spi_sck;
 input spi_mosi; 
 output spi_miso; 
@@ -52,14 +53,20 @@ output  wire  DEBUG_LED2;
 output  wire  DEBUG_LED3;  
 output  wire  DEBUG_LED4;  
 
+output wire controlio;
+
 // ADC vars...
 wire adc_clock;		
 reg [11:0]	adc;
 
 
 //Debug	
-assign DEBUG_LED3 = 1'b0;	//Led on
-assign DEBUG_LED4 = 1'b1;	//Led off
+//assign DEBUG_LED3 = 1'b0;	//Led off
+//assign DEBUG_LED4 = 1'b1;	//Led on
+
+assign DEBUG_LED3 = pll_locked;
+assign DEBUG_LED4 = (rxfreq == 32'd4607000) ? 1'b1:1'b0;
+
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Receive Testing....compile time setup.
@@ -70,7 +77,7 @@ assign DEBUG_LED4 = 1'b1;	//Led off
 //										Using the pllclock to set a clock as close to the 73.728 Mhz.
 //										10 Mhz clock in divided by 25 and multiplied with 295 results in 73.750Mhz
 //										This clock will be used iso of the ad9866 clock and also the ADC will be generated.
-//										A pure CW signal with a frequency of around 3.840 Mhz will be received.
+//										A pure CW signal with a frequency of around 4.609 Mhz will be received.
 //		Testing OFF:
 //			Testing mode is off; 
 //										The wire ad9866_present must be set to 1 (=true); 
@@ -82,6 +89,8 @@ wire pll_locked;
 wire test_ad9866_clk;
 
 pllclock pllclock_inst(.inclk0(clk_10mhz), .c0(test_ad9866_clk), .locked(pll_locked));
+
+assign controlio = adc_clock;
 
 assign adc_clock = ad9866_present ? ad9866_clk : test_ad9866_clk;
 
@@ -136,19 +145,39 @@ assign ad9866_rxen = 'b1;		// starting with rx mode...
 
 assign ad9866_pga = 6'b011111;
 
+wire [47:0] spi_recv;
+wire spi_done;
+
+always @ (negedge spi_sck)
+begin
+  if (reset)
+		rxFIFOReadStrobe <= 1'b0;
+  else	
+		if (!rxFIFOEmpty && spi_done)
+			rxFIFOReadStrobe <= 1'b1;
+		else
+			rxFIFOReadStrobe <= 1'b0;	
+		
+		if (spi_done)
+			rxfreq <= spi_recv[31:0];
+end
+ 
+spi_slave spi_slave_inst(.rstb(!reset),.ten(1'b1),.tdata(rxDataFromFIFO),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi_recv));
+
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Convert frequency to phase word 
 //
-//		Calculates  ratio = fo/fs = frequency/122.88Mhz where frequency is in MHz
+//		Calculates  ratio = fo/fs = frequency/73.728Mhz where frequency is in MHz
 //
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire  [31:0] rxfreq;
 wire   [31:0] sync_phase_word;
 wire  [63:0] ratio;
 
+reg[31:0] rxfreq;
+
 localparam M2 = 32'd1954687338; 	// B57 = 2^57.   M2 = B57/CLK_FREQ = 73728000
 localparam M3 = 32'd16777216;   	// M3 = 2^24, used to round the result
-assign rxfreq = 32'd3630000;		// set rx frequency to 3.63 Mhz
 assign ratio = rxfreq * M2 + M3; 
 assign sync_phase_word = ratio[56:25]; 
 
@@ -179,11 +208,11 @@ receiver #(.CICRATE(CICRATE))
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 wire [47:0] rxDataFromFIFO;
 wire rxFIFOEmpty;
-wire rxFIFOReadStrobe;
+reg rxFIFOReadStrobe;
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
 							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe),
-							.rdclk(clk_10mhz),.q(rxDataFromFIFO),.rdreq(rxFIFOReadStrobe),.rdempty(rxFIFOEmpty));
+							.rdclk(spi_sck),.q(rxDataFromFIFO),.rdreq(rxFIFOReadStrobe),.rdempty(rxFIFOEmpty));
 						
 						
 //------------------------------------------------------------------------------

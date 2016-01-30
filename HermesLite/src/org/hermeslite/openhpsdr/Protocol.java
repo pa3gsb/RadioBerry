@@ -94,19 +94,26 @@ public class Protocol implements Runnable {
 			System.out.println(" Discovery packet received ");
 			this.remoteAddress = receivedDatagram.getAddress();
 			this.remotePort = receivedDatagram.getPort();
+			System.out.println(" Discovery Remote Address " + this.remoteAddress + " Remote Port " + this.remotePort);
 			byte[] response = getDiscoveryReplyMessage();
 			DatagramPacket datagram = new DatagramPacket(response, response.length, this.remoteAddress, this.remotePort);
 			socket.send(datagram);
 			System.out.println(" Discovery reply packet sent ");
 
+			return;
+			
 		} else if (received[2] == 4) {
 			if (received[3] == 1 || received[3] == 3) {
 				running = true;
+				this.remotePort = receivedDatagram.getPort();
+				System.out.println(" Data Remote Address " + this.remoteAddress + " Remote Port " + this.remotePort);
 				System.out.println(" SDR Program sends Start command ");
+				return;
 			} else {
 				last_sequence_number = 0;
 				running = false;
 				System.out.println("  SDR Program sends Stop command ");
+				return;
 			}
 		}
 
@@ -138,6 +145,9 @@ public class Protocol implements Runnable {
 				}
 			}
 		}
+		else {
+			System.out.println(" Invalid frame ");
+		}
 
 	}
 
@@ -164,7 +174,7 @@ public class Protocol implements Runnable {
 		broadcastReply[i++] = (byte) 0x03;
 		broadcastReply[i++] = (byte) 0x04;
 		broadcastReply[i++] = (byte) 0x05;
-		broadcastReply[i++] = (byte) 31;
+		broadcastReply[i++] = (byte) 29;
 		broadcastReply[i++] = (byte) 1; // Hermes boardtype public static final
 										// int DEVICE_HERMES_LITE = 6;
 

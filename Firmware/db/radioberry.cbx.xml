@@ -1,23 +1,40 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="radioberry">
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_e991.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|lpm_mult:Mult0" CBX_FILE_NAME="mult_gft.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_b991.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_f991.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_c991.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_g991.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_d991.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_h991.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|pllclock:pllclock_inst|altpll:altpll_component" CBX_FILE_NAME="pllclock_altpll.v"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_a991.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_rph1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_b991.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_c991.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_d991.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_e991.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

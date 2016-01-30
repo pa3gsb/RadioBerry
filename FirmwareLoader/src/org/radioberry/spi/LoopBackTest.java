@@ -43,7 +43,10 @@ public class LoopBackTest {
 		
 		byte[] result = spi.write(packet);
 		
-		System.out.println("Ontvangen " + Arrays.toString(result));
+		//System.out.println("Ontvangen " + Arrays.toString(result));
+		
+		for (int i =0; i < result.length; i++)
+			System.out.println(String.format("%02x ", result[i]));
 		
 		
 	}

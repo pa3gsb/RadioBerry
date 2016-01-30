@@ -1,5 +1,5 @@
 Assembler report for radioberry
-Sun Jan 17 12:14:33 2016
+Thu Jan 28 20:17:32 2016
 Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Jan 17 12:14:33 2016 ;
+; Assembler Status      ; Successful - Thu Jan 28 20:17:32 2016 ;
 ; Revision Name         ; radioberry                            ;
 ; Top-level Entity Name ; radioberry                            ;
 ; Family                ; Cyclone III                           ;
@@ -99,7 +99,7 @@ applicable agreement for further details.
 +----------------+-----------------------------------------------------------------+
 ; Device         ; EP3C25E144C8                                                    ;
 ; JTAG usercode  ; 0xFFFFFFFF                                                      ;
-; Checksum       ; 0x00145567                                                      ;
+; Checksum       ; 0x0040A180                                                      ;
 +----------------+-----------------------------------------------------------------+
 
 
@@ -118,7 +118,7 @@ applicable agreement for further details.
 ; Option              ; Setting                                                    ;
 +---------------------+------------------------------------------------------------+
 ; Raw Binary File     ;                                                            ;
-;  Compression Ratio  ; 3                                                          ;
+;  Compression Ratio  ; 2                                                          ;
 +---------------------+------------------------------------------------------------+
 
 
@@ -137,13 +137,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun Jan 17 12:14:30 2016
+    Info: Processing started: Thu Jan 28 20:17:30 2016
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off RadioBerry -c radioberry
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 459 megabytes
-    Info: Processing ended: Sun Jan 17 12:14:33 2016
+    Info: Peak virtual memory: 477 megabytes
+    Info: Processing ended: Thu Jan 28 20:17:33 2016
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 
