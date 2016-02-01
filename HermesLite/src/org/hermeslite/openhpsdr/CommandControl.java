@@ -37,6 +37,10 @@ public class CommandControl {
     	return freq;
     }
     
+    protected int getNrOfReceivers() {
+    	return nrx;
+    }
+    
     protected void CommandAndControl(byte[] data)
     {
         CC[0] = data[0];

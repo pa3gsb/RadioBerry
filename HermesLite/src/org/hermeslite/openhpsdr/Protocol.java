@@ -16,7 +16,7 @@ public class Protocol implements Runnable {
 
 	private byte SYNC = 0x7F;
 	int last_sequence_number = 0;
-	int nrx = 1; // 1 Receiver (FOR NOW ONLY 1 receiver)
+	int nrx = 1; // n Receivers
 
 	private DatagramSocket socket = null;
 	private InetAddress remoteAddress;
@@ -125,9 +125,12 @@ public class Protocol implements Runnable {
 			System.arraycopy(received, 523, cc, 0, 5); // index 523 .... 531 (8
 														// + 512 + 3 sync)
 			ccontrol.CommandAndControl(cc);
+			
+			nrx = ccontrol.getNrOfReceivers();
 
 			if (ccontrol.isControlDataChanged()) {
 				rxHandler.setRXFrequency(ccontrol.getRXFrequency());
+				System.out.println("Number of receivers " +nrx);
 			}
 
 			// lees data en vul buffers
@@ -158,8 +161,8 @@ public class Protocol implements Runnable {
 
 	private byte[] getDiscoveryReplyMessage() {
 
-		byte[] broadcastReply = new byte[63];
-		for (int i = 0; i < 63; i++) {
+		byte[] broadcastReply = new byte[60];
+		for (int i = 0; i < 60; i++) {
 			broadcastReply[i] = 0;
 		}
 

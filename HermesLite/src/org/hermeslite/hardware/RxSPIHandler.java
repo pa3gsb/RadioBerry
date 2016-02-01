@@ -37,13 +37,13 @@ public class RxSPIHandler  implements Runnable, IRxHandler {
 		this.rxIQBuffer = rxIQBuffer;
 		
 		// create SPI object instance for SPI for communication
-		spi = SpiFactory.getInstance(SpiChannel.CS0, 10000000, SpiMode.MODE_3);
+		spi = SpiFactory.getInstance(SpiChannel.CS0, 32000000, SpiMode.MODE_3);
 	}
 
 	public void start() {
 		if (thread == null) {
 			thread = new Thread(this);
-			thread.setPriority(Thread.MIN_PRIORITY);
+			thread.setPriority(Thread.MAX_PRIORITY);
 			thread.start();
 		}
 	}
@@ -81,9 +81,9 @@ public class RxSPIHandler  implements Runnable, IRxHandler {
 					try {
 						//msb first
 						rxIQBuffer.add(result[i]);
-						if (rxfreq==4607000){
+						//if (rxfreq==4607000){
 								//System.out.print(String.format("%02x ", result[i]));
-						}
+						//}
 					} catch (InterruptedException e) {
 						System.out.println("adding problem");
 					}
