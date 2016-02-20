@@ -25,7 +25,8 @@ clk_10mhz,
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,ad9866_pga,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
-controlio);
+controlio,
+spivalid);
 
 input clk_10mhz;	
 input ad9866_clk;
@@ -47,6 +48,7 @@ input spi_sck;
 input spi_mosi; 
 output spi_miso; 
 input [1:0] spi_ce; 
+output spivalid;
 
 output  wire  DEBUG_LED1;  
 output  wire  DEBUG_LED2;  
@@ -90,7 +92,7 @@ wire test_ad9866_clk;
 
 pllclock pllclock_inst(.inclk0(clk_10mhz), .c0(test_ad9866_clk), .locked(pll_locked));
 
-assign controlio = adc_clock;
+//assign controlio = adc_clock;
 
 assign adc_clock = ad9866_present ? ad9866_clk : test_ad9866_clk;
 
@@ -152,12 +154,19 @@ always @ (negedge spi_sck)
 begin
   if (reset)
 		rxFIFOReadStrobe <= 1'b0;
+		
   else	
-		if (!rxFIFOEmpty && spi_done)
+		if (!rxFIFOEmpty && spi_done) begin
 			rxFIFOReadStrobe <= 1'b1;
 		else
 			rxFIFOReadStrobe <= 1'b0;	
 		
+		if (!rxFIFOEmpty && spi_done)
+			spivalid <= 1'b1;
+		
+		if (rxFIFOEmpty && spi_done)
+			spivalid <= 1'b0;
+			
 		if (spi_done)
 			rxfreq <= spi_recv[31:0];
 end
@@ -209,6 +218,9 @@ receiver #(.CICRATE(CICRATE))
 wire [47:0] rxDataFromFIFO;
 wire rxFIFOEmpty;
 reg rxFIFOReadStrobe;
+
+
+assign controlio = rxFIFOEmpty;
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
 							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe),

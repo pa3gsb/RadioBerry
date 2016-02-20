@@ -92,6 +92,36 @@ public final class RingBuffer<T> {
         notifyAll();
     }
 
+    
+    public synchronized void add(T[] elem) throws InterruptedException {
+    	 while (unconsumedElements + elem.length > elements.length)
+    		 wait();
+    	 
+    	 for (int i=0; i < elem.length; i++){
+    		 elements[offset] = elem[i];
+    	     offset = (offset + 1) % elements.length;
+    	      ++unconsumedElements;
+    	 }
+    	
+    	 notifyAll();
+    }
+    
+//    public synchronized void add(byte[] elem) throws InterruptedException {
+//   	 while (unconsumedElements + elem.length > elements.length)
+//   		 wait();
+//   	 
+//   	 Byte value;
+//   	 for (int i=0; i < elem.length; i++){
+//   		 value = (Byte)elem[i];
+//   		 elements[offset] = (T) value;
+//   	     offset = (offset + 1) % elements.length;
+//   	      ++unconsumedElements;
+//   	 }
+//   	
+//   	 notifyAll();
+//   }
+    
+    
     /**
      * Returns the maximum capacity of the ring buffer.
      *
@@ -153,6 +183,23 @@ public final class RingBuffer<T> {
 
         return result;
     }
+    
+    
+    public synchronized Byte[] remove(int size) throws InterruptedException {
+   	 while (unconsumedElements - size < 0)
+   		 wait();
+   	 
+   	 Byte[] result = new Byte[size];
+   	 
+   	 for (int i=0; i < size; i++){
+   		result[i] = (Byte) elements[(offset + (capacity() - unconsumedElements)) % capacity()];
+   	     --unconsumedElements;
+   	 }
+   	
+   	 notifyAll();
+   	 
+   	 return result;
+   }
 
     /**
      * Returns the number of elements that are currently being stored in the

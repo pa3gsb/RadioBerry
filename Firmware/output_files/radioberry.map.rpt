@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Thu Jan 28 20:16:36 2016
+Tue Feb 16 17:26:01 2016
 Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
 
 
@@ -46,8 +46,8 @@ Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Editio
  38. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe10
  39. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|alt_synch_pipe_sld:ws_dgrp
  40. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe10
- 41. Parameter Settings for User Entity Instance: spi_slave:spi_slave_inst
- 42. Parameter Settings for User Entity Instance: pllclock:pllclock_inst|altpll:altpll_component
+ 41. Parameter Settings for User Entity Instance: pllclock:pllclock_inst|altpll:altpll_component
+ 42. Parameter Settings for User Entity Instance: spi_slave:spi_slave_inst
  43. Parameter Settings for User Entity Instance: receiver:receiver_inst
  44. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
  45. Parameter Settings for User Entity Instance: receiver:receiver_inst|cic:cic_inst_I2
@@ -176,16 +176,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jan 28 20:16:35 2016         ;
+; Analysis & Synthesis Status        ; Successful - Tue Feb 16 17:26:01 2016         ;
 ; Quartus II 64-Bit Version          ; 12.1 Build 243 01/31/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; radioberry                                    ;
 ; Top-level Entity Name              ; radioberry                                    ;
 ; Family                             ; Cyclone III                                   ;
-; Total logic elements               ; 4,982                                         ;
-;     Total combinational functions  ; 3,433                                         ;
-;     Dedicated logic registers      ; 4,055                                         ;
-; Total registers                    ; 4055                                          ;
-; Total pins                         ; 40                                            ;
+; Total logic elements               ; 4,984                                         ;
+;     Total combinational functions  ; 3,435                                         ;
+;     Dedicated logic registers      ; 4,056                                         ;
+; Total registers                    ; 4056                                          ;
+; Total pins                         ; 41                                            ;
 ; Total virtual pins                 ; 0                                             ;
 ; Total memory bits                  ; 208,896                                       ;
 ; Embedded Multiplier 9-bit elements ; 40                                            ;
@@ -373,31 +373,31 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 4,982  ;
+; Estimated Total logic elements              ; 4,984  ;
 ;                                             ;        ;
-; Total combinational functions               ; 3433   ;
+; Total combinational functions               ; 3435   ;
 ; Logic element usage by number of LUT inputs ;        ;
 ;     -- 4 input functions                    ; 337    ;
-;     -- 3 input functions                    ; 2189   ;
+;     -- 3 input functions                    ; 2191   ;
 ;     -- <=2 input functions                  ; 907    ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 816    ;
+;     -- normal mode                          ; 818    ;
 ;     -- arithmetic mode                      ; 2617   ;
 ;                                             ;        ;
-; Total registers                             ; 4055   ;
-;     -- Dedicated logic registers            ; 4055   ;
+; Total registers                             ; 4056   ;
+;     -- Dedicated logic registers            ; 4056   ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
-; I/O pins                                    ; 40     ;
+; I/O pins                                    ; 41     ;
 ; Total memory bits                           ; 208896 ;
 ; Embedded Multiplier 9-bit elements          ; 40     ;
 ; Total PLLs                                  ; 1      ;
 ;     -- PLLs                                 ; 1      ;
 ;                                             ;        ;
-; Maximum fan-out                             ; 4285   ;
-; Total fan-out                               ; 31317  ;
-; Average fan-out                             ; 3.87   ;
+; Maximum fan-out                             ; 4284   ;
+; Total fan-out                               ; 31327  ;
+; Average fan-out                             ; 3.86   ;
 +---------------------------------------------+--------+
 
 
@@ -406,7 +406,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                  ; Library Name ;
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |radioberry                                                 ; 3433 (79)         ; 4055 (67)    ; 208896      ; 40           ; 0       ; 20        ; 40   ; 0            ; |radioberry                                                                                                                          ;              ;
+; |radioberry                                                 ; 3435 (81)         ; 4056 (68)    ; 208896      ; 40           ; 0       ; 20        ; 41   ; 0            ; |radioberry                                                                                                                          ;              ;
 ;    |lpm_mult:Mult0|                                         ; 72 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0                                                                                                           ;              ;
 ;       |mult_gft:auto_generated|                             ; 72 (72)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0|mult_gft:auto_generated                                                                                   ;              ;
 ;    |pllclock:pllclock_inst|                                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|pllclock:pllclock_inst                                                                                                   ;              ;
@@ -539,16 +539,16 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst                            ;              ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                            ;              ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                            ;              ;
-;    |reset_handler:reset_handler_inst|                       ; 34 (34)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|reset_handler:reset_handler_inst                                                                                         ;              ;
-;    |rxFIFO:rxFIFO_inst|                                     ; 57 (0)            ; 92 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst                                                                                                       ;              ;
-;       |dcfifo:dcfifo_component|                             ; 57 (0)            ; 92 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component                                                                               ;              ;
-;          |dcfifo_rph1:auto_generated|                       ; 57 (3)            ; 92 (36)      ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated                                                    ;              ;
+;    |reset_handler:reset_handler_inst|                       ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|reset_handler:reset_handler_inst                                                                                         ;              ;
+;    |rxFIFO:rxFIFO_inst|                                     ; 58 (0)            ; 92 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst                                                                                                       ;              ;
+;       |dcfifo:dcfifo_component|                             ; 58 (0)            ; 92 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component                                                                               ;              ;
+;          |dcfifo_rph1:auto_generated|                       ; 58 (3)            ; 92 (36)      ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated                                                    ;              ;
 ;             |a_graycounter_qjc:wrptr_g1p|                   ; 22 (22)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_qjc:wrptr_g1p                        ;              ;
 ;             |a_graycounter_u57:rdptr_g1p|                   ; 25 (25)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_u57:rdptr_g1p                        ;              ;
 ;             |alt_synch_pipe_sld:rs_dgwp|                    ; 0 (0)             ; 24 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|alt_synch_pipe_sld:rs_dgwp                         ;              ;
 ;                |dffpipe_re9:dffpipe10|                      ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe10   ;              ;
 ;             |altsyncram_hl31:fifo_ram|                      ; 0 (0)             ; 0 (0)        ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|altsyncram_hl31:fifo_ram                           ;              ;
-;             |cmpr_g66:rdempty_eq_comp|                      ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|cmpr_g66:rdempty_eq_comp                           ;              ;
+;             |cmpr_g66:rdempty_eq_comp|                      ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|cmpr_g66:rdempty_eq_comp                           ;              ;
 ;    |spi_slave:spi_slave_inst|                               ; 63 (63)           ; 119 (119)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_inst                                                                                                 ;              ;
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -749,12 +749,12 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 4055  ;
-; Number of registers using Synchronous Clear  ; 873   ;
+; Total registers                              ; 4056  ;
+; Number of registers using Synchronous Clear  ; 872   ;
 ; Number of registers using Synchronous Load   ; 300   ;
 ; Number of registers using Asynchronous Clear ; 211   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 3071  ;
+; Number of registers using Clock Enable       ; 3072  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -764,10 +764,10 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +--------------------------------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                                            ; Fan out ;
 +--------------------------------------------------------------------------------------------------------------+---------+
-; reset_handler:reset_handler_inst|reset                                                                       ; 284     ;
+; reset_handler:reset_handler_inst|reset                                                                       ; 285     ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_u57:rdptr_g1p|counter3a0 ; 8       ;
-; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_qjc:wrptr_g1p|counter6a0 ; 7       ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_u57:rdptr_g1p|parity4    ; 5       ;
+; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_qjc:wrptr_g1p|counter6a0 ; 6       ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_rph1:auto_generated|a_graycounter_qjc:wrptr_g1p|parity7    ; 4       ;
 ; spi_slave:spi_slave_inst|treg[7]                                                                             ; 1       ;
 ; spi_slave:spi_slave_inst|treg[6]                                                                             ; 1       ;
@@ -786,33 +786,33 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|cordic:cordic_inst|X[0][9]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|Iaccum[1]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|Iaccum[3]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|Rmult[27]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|Iaccum[5]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|Iaccum[1]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|Raccum[12] ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|Iaccum[2]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|Iaccum[22] ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|caddr[5]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|raddr[4]   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|caddr[5]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|raddr[0]   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|counter[2] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|raddr[4]   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|caddr[2]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|raddr[4]   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|counter[3] ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|raddr[2]   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[7]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|raddr[2]   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|counter[1] ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|cordic:cordic_inst|X[0][5]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|Iaccum[13] ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|Rmult[30]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|Raccum[5]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|Rmult[14]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|Iaccum[5]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|Iaccum[6]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|Rmult[29]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|Iaccum[17] ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|counter[7] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|raddr[1]   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|caddr[7]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|raddr[7]   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|counter[3] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|raddr[5]   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|counter[8] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|raddr[0]   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|caddr[3]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|raddr[5]   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|counter[3] ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|raddr[7]   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|caddr[0]   ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|raddr[1]   ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[5]   ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|raddr[2]   ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|wstate[3]           ;
-; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Iacc[23]            ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[3]   ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|raddr[1]   ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|wstate[0]           ;
+; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Racc[1]             ;
 ; 7:1                ; 48 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; No         ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Add3                ;
 ; 3:1                ; 48 bits   ; 96 LEs        ; 0 LEs                ; 96 LEs                 ; No         ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Add3                ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
@@ -1049,16 +1049,6 @@ Note: number of Embedded Multiplier Blocks used is only available after a succes
 +---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
 ; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                            ;
 +---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: spi_slave:spi_slave_inst ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; WIDTH          ; 48    ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +---------------------------------------------------------------------------------------------+
@@ -1432,6 +1422,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS           ; ON                         ; AUTO_CASCADE                   ;
 ; IGNORE_CASCADE_BUFFERS        ; OFF                        ; IGNORE_CASCADE                 ;
 +-------------------------------+----------------------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: spi_slave:spi_slave_inst ;
++----------------+-------+----------------------------------------------+
+; Parameter Name ; Value ; Type                                         ;
++----------------+-------+----------------------------------------------+
+; WIDTH          ; 48    ; Signed Integer                               ;
++----------------+-------+----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -4121,7 +4121,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Jan 28 20:16:18 2016
+    Info: Processing started: Tue Feb 16 17:25:41 2016
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RadioBerry -c radioberry
 Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file cic_comb.v
@@ -4159,13 +4159,11 @@ Info (12021): Found 1 design units, including 1 entities, in source file polypha
 Info (12021): Found 1 design units, including 1 entities, in source file polyphase_fir/firromi_1024.v
     Info (12023): Found entity 1: firromI_1024
 Info (12127): Elaborating entity "radioberry" for the top level hierarchy
-Warning (10034): Output port "ad9866_sclk" at radioberry.v(37) has no driver
-Warning (10034): Output port "ad9866_sdio" at radioberry.v(38) has no driver
-Warning (10034): Output port "ad9866_sen_n" at radioberry.v(40) has no driver
-Warning (10034): Output port "ad9866_rst_n" at radioberry.v(41) has no driver
-Warning (10034): Output port "ad9866_mode" at radioberry.v(42) has no driver
-Info (12128): Elaborating entity "spi_slave" for hierarchy "spi_slave:spi_slave_inst"
-Warning (10230): Verilog HDL assignment warning at spi_slave.v(44): truncated value with size 32 to match size of target (7)
+Warning (10034): Output port "ad9866_sclk" at radioberry.v(38) has no driver
+Warning (10034): Output port "ad9866_sdio" at radioberry.v(39) has no driver
+Warning (10034): Output port "ad9866_sen_n" at radioberry.v(41) has no driver
+Warning (10034): Output port "ad9866_rst_n" at radioberry.v(42) has no driver
+Warning (10034): Output port "ad9866_mode" at radioberry.v(43) has no driver
 Warning (12125): Using design file pllclock.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info (12023): Found entity 1: pllclock
 Info (12128): Elaborating entity "pllclock" for hierarchy "pllclock:pllclock_inst"
@@ -4230,6 +4228,8 @@ Info (12133): Instantiated megafunction "pllclock:pllclock_inst|altpll:altpll_co
 Info (12021): Found 1 design units, including 1 entities, in source file db/pllclock_altpll.v
     Info (12023): Found entity 1: pllclock_altpll
 Info (12128): Elaborating entity "pllclock_altpll" for hierarchy "pllclock:pllclock_inst|altpll:altpll_component|pllclock_altpll:auto_generated"
+Info (12128): Elaborating entity "spi_slave" for hierarchy "spi_slave:spi_slave_inst"
+Warning (10230): Verilog HDL assignment warning at spi_slave.v(44): truncated value with size 32 to match size of target (7)
 Info (12128): Elaborating entity "reset_handler" for hierarchy "reset_handler:reset_handler_inst"
 Warning (10230): Verilog HDL assignment warning at reset_handler.v(27): truncated value with size 32 to match size of target (24)
 Info (10648): Verilog HDL Display System Task info at reset_handler.v(38): Reset handler initialization done
@@ -4575,19 +4575,19 @@ Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
 Warning (21074): Design contains 2 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "ad9866_sdo"
     Warning (15610): No output dependent on input pin "spi_ce[1]"
-Info (21057): Implemented 5549 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 5552 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 7 input pins
-    Info (21059): Implemented 21 output pins
+    Info (21059): Implemented 22 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 4988 logic cells
+    Info (21061): Implemented 4990 logic cells
     Info (21064): Implemented 480 RAM segments
     Info (21065): Implemented 1 PLLs
     Info (21062): Implemented 40 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 47 warnings
     Info: Peak virtual memory: 581 megabytes
-    Info: Processing ended: Thu Jan 28 20:16:36 2016
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:17
+    Info: Processing ended: Tue Feb 16 17:26:01 2016
+    Info: Elapsed time: 00:00:20
+    Info: Total CPU time (on all processors): 00:00:18
 
 
 +------------------------------------------+

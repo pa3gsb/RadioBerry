@@ -8,5 +8,9 @@
 	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/java-json.jar"/>
 	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/javax.servlet-api-3.1.0.jar"/>
 	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/jetty-all-9.2.7.v20150116.jar"/>
+	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="lib" path="C:/dev/RadioBerry/RadioBerry/lib/pi4j-service.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

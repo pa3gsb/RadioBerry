@@ -1,3 +1,3 @@
 Info (10281): Verilog HDL Declaration information at FirInterp8_1024.v(115): object "rAddr" differs only in case from object "raddr" in the same scope
 Warning (10268): Verilog HDL information at firfilt.v(207): always construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at radioberry.v(121): always construct contains both blocking and non-blocking assignments
+Warning (10268): Verilog HDL information at radioberry.v(100): always construct contains both blocking and non-blocking assignments

@@ -38,10 +38,16 @@ public class Protocol implements Runnable {
 
 	public void start() {
 		System.out.println("start");
-		if (thread == null) {
-			thread = new Thread(this);
-			thread.setPriority(Thread.MAX_PRIORITY);
-			thread.start();
+		// if (thread == null) {
+		// thread = new Thread(this);
+		// thread.setPriority(Thread.MAX_PRIORITY);
+		// thread.start();
+		// }
+		while (true) {
+			readPackets();
+			if (running) {
+				sendPacket();
+			}
 		}
 	}
 
@@ -75,7 +81,7 @@ public class Protocol implements Runnable {
 				socket = new DatagramSocket(socketaddress);
 				socket.setReuseAddress(true);
 				socket.setBroadcast(true);
-				socket.setSoTimeout(1);
+				socket.setSoTimeout(100);
 			}
 
 			DatagramPacket datagram = new DatagramPacket(rxbuffer, rxbuffer.length);
@@ -101,7 +107,7 @@ public class Protocol implements Runnable {
 			System.out.println(" Discovery reply packet sent ");
 
 			return;
-			
+
 		} else if (received[2] == 4) {
 			if (received[3] == 1 || received[3] == 3) {
 				running = true;
@@ -125,12 +131,12 @@ public class Protocol implements Runnable {
 			System.arraycopy(received, 523, cc, 0, 5); // index 523 .... 531 (8
 														// + 512 + 3 sync)
 			ccontrol.CommandAndControl(cc);
-			
+
 			nrx = ccontrol.getNrOfReceivers();
 
 			if (ccontrol.isControlDataChanged()) {
 				rxHandler.setRXFrequency(ccontrol.getRXFrequency());
-				System.out.println("Number of receivers " +nrx);
+				System.out.println("Number of receivers " + nrx);
 			}
 
 			// lees data en vul buffers
@@ -147,8 +153,7 @@ public class Protocol implements Runnable {
 
 				}
 			}
-		}
-		else {
+		} else {
 			System.out.println(" Invalid frame ");
 		}
 
@@ -184,14 +189,30 @@ public class Protocol implements Runnable {
 		return broadcastReply;
 	}
 
+	private DatagramPacket rxdatagram;
+
 	private void sendPacket() {
 
+		long start = System.nanoTime();
 		byte[] hpsdrdata = getPacketToSend();
 
 		try {
-			DatagramPacket datagram = new DatagramPacket(hpsdrdata, hpsdrdata.length, this.remoteAddress, this.remotePort);
+			if (rxdatagram == null)
+				rxdatagram = new DatagramPacket(hpsdrdata, hpsdrdata.length, this.remoteAddress, this.remotePort);
+			else {
+				rxdatagram.setData(hpsdrdata);
+				rxdatagram.setLength(hpsdrdata.length);
+				rxdatagram.setAddress(this.remoteAddress);
+				rxdatagram.setPort(this.remotePort);
+			}
+
 			socket.setReuseAddress(true);
-			socket.send(datagram);
+			socket.send(rxdatagram);
+
+			double time = (System.nanoTime() - start) / 100000d;
+			// if (time > 50.0)
+			// System.out.println("samen stellen packet " + time + " msec");
+
 		} catch (SocketException se) {
 			System.out.println("se exception");
 		} catch (IOException ioe) {
@@ -230,18 +251,36 @@ public class Protocol implements Runnable {
 				// Only (for now) supporting receiving mode....
 
 				try {
-					// I
 					hpsdrdata[index + 0] = rxHandler.getReceiveIQStream().remove(); // MSB;
-																					// comes
+					// comes
 					// first!!!!
 					hpsdrdata[index + 1] = rxHandler.getReceiveIQStream().remove();
 					hpsdrdata[index + 2] = rxHandler.getReceiveIQStream().remove();
 					// Q
 					hpsdrdata[index + 3] = rxHandler.getReceiveIQStream().remove(); // MSB;
-																					// comes
+					// comes
 					// first!!!!
 					hpsdrdata[index + 4] = rxHandler.getReceiveIQStream().remove();
 					hpsdrdata[index + 5] = rxHandler.getReceiveIQStream().remove();
+
+					// Byte[] remove = rxHandler.getReceiveIQStream().remove(6);
+					//
+					// hpsdrdata[index + 0] = remove[0]; // I MSB first;
+					// hpsdrdata[index + 1] = remove[1];
+					// hpsdrdata[index + 2] = remove[2];
+					// hpsdrdata[index + 3] = remove[3];// Q MSB first;
+					// hpsdrdata[index + 4] = remove[4];
+					// hpsdrdata[index + 5] = remove[5];
+
+					// Integer i, q;
+					// i = rxHandler.getReceiveIQStream().remove();
+					// q = rxHandler.getReceiveIQStream().remove();
+					// hpsdrdata[index + 0] = (byte) ((i >> 16) & 0xff);
+					// hpsdrdata[index + 1] = (byte) ((i >> 8) & 0xff);
+					// hpsdrdata[index + 2] = (byte) ((i ) & 0xff);
+					// hpsdrdata[index + 3] = (byte) ((q >> 16) & 0xff);
+					// hpsdrdata[index + 4] = (byte) ((q >> 8) & 0xff);
+					// hpsdrdata[index + 5] = (byte) ((q ) & 0xff);
 
 				} catch (InterruptedException e) {
 					System.out.println("remove exception");

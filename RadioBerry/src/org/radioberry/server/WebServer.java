@@ -26,7 +26,8 @@ public class WebServer {
 		// System.getProperties().list(System.out);
 		System.setProperty("java.library.path", System.getProperty("user.dir") + File.separator + "lib");
 
-		InetAddress address = InetAddress.getByName("192.168.2.8");
+		//InetAddress address = InetAddress.getByName("192.168.2.8");
+		InetAddress address = InetAddress.getByName("169.254.214.88");
 		InetSocketAddress socketaddress = new InetSocketAddress(address, 8080);
 
 		Server server = new Server(socketaddress);
@@ -52,7 +53,8 @@ public class WebServer {
 		// Start radio
 		Radio.getInstance().start();
 		
-		Radio.getInstance().getGenerator().start();
+		//Radio.getInstance().getGenerator().start();
+		Radio.getInstance().getRxData().start();
 		
 		// Start Audio Stream
 		AudioStream as = new AudioStream();

@@ -78,15 +78,8 @@ public class RxSPIHandler  implements Runnable, IRxHandler {
 				byte[] result = spi.write(packet);
 				
 				for (int i = 0; i < 6; i++) {
-					try {
-						//msb first
-						rxIQBuffer.add(result[i]);
-						//if (rxfreq==4607000){
-								//System.out.print(String.format("%02x ", result[i]));
-						//}
-					} catch (InterruptedException e) {
-						System.out.println("adding problem");
-					}
+					//rxIQBuffer.add(result[i]);
+					
 				}
 				//if (rxfreq==4607000){System.out.println();}
 				

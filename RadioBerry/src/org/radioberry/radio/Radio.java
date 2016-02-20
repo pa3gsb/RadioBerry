@@ -5,6 +5,7 @@ import java.io.File;
 import org.g0orx.openhpsdr.wdsp.WDSP;
 import org.radioberry.service.Configuration;
 import org.radioberry.service.Generator;
+import org.radioberry.service.RXIQData;
 import org.radioberry.utility.Channel;
 import org.radioberry.utility.Display;
 import org.radioberry.utility.Modes;
@@ -18,6 +19,11 @@ public class Radio {
 	private Configuration configuration;
 	
 	private Generator generator;
+	private RXIQData rxData;
+
+	public RXIQData getRxData() {
+		return rxData;
+	}
 
 	public Generator getGenerator() {
 		return generator;
@@ -35,7 +41,8 @@ public class Radio {
 	private Radio() {
 		configuration = Configuration.getInstance();
 		wdsp = WDSP.getInstance();
-		generator = new Generator();
+		//generator = new Generator();
+		rxData = new RXIQData();
 	}
 
 	public int getFrequency() {
@@ -45,7 +52,9 @@ public class Radio {
 	public void setFrequency(Integer frequency) {
 		this.frequency = frequency;
 		
-		generator.setVFOFrequency(frequency);
+		rxData.setRXFrequency(frequency);
+		
+		//generator.setVFOFrequency(frequency);
 
 		//SDRT9RControlMessage.getInstance().setFrequency(frequency);
 	}
