@@ -58,6 +58,12 @@ int nrx = 1; // n Receivers
 int holdfreq = 0;
 int freq = 4706000;
 
+int att = 0;
+int holdatt =128;
+int dither = 0;
+int rando = 0;
+int sampleSpeed;
+
 unsigned char SYNC = 0x7F;
 int last_sequence_number = 0;
 
@@ -145,7 +151,7 @@ void runHermesLite() {
 				gettimeofday(&t11, 0);
 				elapsed = timedifference_msec(t10, t11);
 
-				printf("Code packets executed in %f milliseconds.\n", elapsed);
+				//printf("Code packets executed in %f milliseconds.\n", elapsed);
 				gettimeofday(&t10, 0);
 			}
 		}
@@ -198,9 +204,23 @@ void handlePacket(char* buffer){
 			}
 		}
 	if (isValidFrame(buffer)) {
-			
+		if ((buffer[523] & 0xFE)  == 0x14) {
+			att = (buffer[523 + 4] & 0x1F);
+			//printf("att 523 =  %d \n", att);
+		}
+		
 		if ((buffer[11] & 0xFE)  == 0x00) {
 			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
+			
+			sampleSpeed = (buffer[11 + 1] & 0x03);
+			
+			dither = 0;
+            if ((buffer[11 + 3] & 0x08) == 0x08)
+                dither = 1; 
+                
+            rando = 0;
+            if ((buffer[11 + 3] & 0x10) == 0x10)
+                rando = 1;
 		}
 		
 		if ((buffer[523] & 0xFE)  == 0x00) {
@@ -219,7 +239,11 @@ void handlePacket(char* buffer){
                     + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
         }
 	
-	
+		if (holdatt != att) {
+			holdatt = att;
+			printf("att =  %d \n", att);printf("dither =  %d \n", dither);printf("rando =  %d \n", rando);
+			printf("code =  %x \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
+		}
 		if (holdfreq != freq) {
 			holdfreq = freq;
 			printf("frequency %d en aantal rx %d \n", freq, nrx);
@@ -301,7 +325,7 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x03;
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
-	broadcastReply[i++] =  29;
+	broadcastReply[i++] =  31;
 	broadcastReply[i++] =  1; // Hermes boardtype public static final
 									// int DEVICE_HERMES_LITE = 6;
 }
@@ -330,7 +354,7 @@ void *spiReader(void *arg) {
 	gettimeofday(&t0, 0);
 	while(1) {
 		iqdata[0] = 0;
-		iqdata[1] = 0;
+		iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 		iqdata[2] = ((freq >> 24) & 0xFF);
 		iqdata[3] = ((freq >> 16) & 0xFF);
 		iqdata[4] = ((freq >> 8) & 0xFF);
@@ -340,7 +364,7 @@ void *spiReader(void *arg) {
 		while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == LOW) 
 		{
 			iqdata[0] = 0;
-			iqdata[1] = 0;
+			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 			iqdata[2] = ((freq >> 24) & 0xFF);
 			iqdata[3] = ((freq >> 16) & 0xFF);
 			iqdata[4] = ((freq >> 8) & 0xFF);
@@ -360,7 +384,7 @@ void *spiReader(void *arg) {
 			count = 0;
 			gettimeofday(&t1, 0);
 			elapsed = timedifference_msec(t0, t1);
-			printf("Code spi executed in %f milliseconds.\n", elapsed);
+			//printf("Code spi executed in %f milliseconds.\n", elapsed);
 			gettimeofday(&t0, 0);
 		}
 		

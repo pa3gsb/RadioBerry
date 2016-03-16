@@ -150,11 +150,11 @@ ad9866_txen                  : 79        : output : 3.3-V LVCMOS      :         
 ad9866_rxen                  : 80        : output : 3.3-V LVCMOS      :         : 5         : Y              
 VCCIO5                       : 81        : power  :                   : 3.3V    : 5         :                
 GND                          : 82        : gnd    :                   :         :           :                
-ad9866_adio[11]              : 83        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
+ad9866_adio[0]               : 83        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
 VCCINT                       : 84        : power  :                   : 1.2V    :           :                
-ad9866_adio[10]              : 85        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
-ad9866_adio[9]               : 86        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
-ad9866_adio[8]               : 87        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
+ad9866_adio[1]               : 85        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
+ad9866_adio[2]               : 86        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
+ad9866_adio[3]               : 87        : bidir  : 3.3-V LVCMOS      :         : 5         : Y              
 GND+                         : 88        :        :                   :         : 5         :                
 GND+                         : 89        :        :                   :         : 5         :                
 GND+                         : 90        :        :                   :         : 6         :                
@@ -165,15 +165,15 @@ MSEL0                        : 94        :        :                   :         
 GND                          : 95        : gnd    :                   :         :           :                
 MSEL1                        : 96        :        :                   :         : 6         :                
 MSEL2                        : 97        :        :                   :         : 6         :                
-ad9866_adio[7]               : 98        : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
-ad9866_adio[6]               : 99        : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
-ad9866_adio[5]               : 100       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
-ad9866_adio[4]               : 101       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[4]               : 98        : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[5]               : 99        : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[6]               : 100       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[7]               : 101       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
 VCCINT                       : 102       : power  :                   : 1.2V    :           :                
-ad9866_adio[3]               : 103       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
-ad9866_adio[2]               : 104       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
-ad9866_adio[1]               : 105       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
-ad9866_adio[0]               : 106       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[8]               : 103       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[9]               : 104       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[10]              : 105       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
+ad9866_adio[11]              : 106       : bidir  : 3.3-V LVCMOS      :         : 6         : Y              
 VCCA2                        : 107       : power  :                   : 2.5V    :           :                
 GNDA2                        : 108       : gnd    :                   :         :           :                
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                

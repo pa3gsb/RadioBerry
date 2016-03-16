@@ -28,25 +28,25 @@ DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
 controlio,
 spivalid);
 
-input clk_10mhz;	
-input ad9866_clk;
+input wire clk_10mhz;	
+input wire ad9866_clk;
 inout [11:0] ad9866_adio;
-output ad9866_rxen;
-output ad9866_rxclk;
-output ad9866_txen;
-output ad9866_txclk;
-output ad9866_sclk;
-output ad9866_sdio;
-input  ad9866_sdo;
-output ad9866_sen_n;
-output ad9866_rst_n;
+output wire ad9866_rxen;
+output wire ad9866_rxclk;
+output wire ad9866_txen;
+output wire ad9866_txclk;
+output wire ad9866_sclk;
+output wire ad9866_sdio;
+input  wire ad9866_sdo;
+output wire ad9866_sen_n;
+output wire ad9866_rst_n;
 output ad9866_mode;
 output [5:0] ad9866_pga;
 
 // SPI connect to Raspberry PI SPI-0.
-input spi_sck;
-input spi_mosi; 
-output spi_miso; 
+input wire spi_sck;
+input wire spi_mosi; 
+output wire spi_miso; 
 input [1:0] spi_ce; 
 output spivalid;
 
@@ -57,18 +57,22 @@ output  wire  DEBUG_LED4;
 
 output wire controlio;
 
+wire FPGA_PTT;
+assign  FPGA_PTT = 1'b0;
+
 // ADC vars...
 wire adc_clock;		
 reg [11:0]	adc;
 
+//ATT
+reg   [4:0] att;           // 0-31 dB attenuator value
+reg 	dither;					// if 0 than 32db additional gain.
+reg 	randomize;				// if randomize is checked (eg in powersdr) the agc value is used for gain
+									// if randomize is not checked (eg in powersdr) the gain value (inversie van s-att) is used for gain
 
 //Debug	
-//assign DEBUG_LED3 = 1'b0;	//Led off
-//assign DEBUG_LED4 = 1'b1;	//Led on
-
-assign DEBUG_LED3 = pll_locked;
-assign DEBUG_LED4 = (rxfreq == 32'd4607000) ? 1'b1:1'b0;
-
+assign DEBUG_LED3 = dither; //1'b1; //pll_locked;
+assign DEBUG_LED4 = randomize; //(rxfreq == 32'd4607000) ? 1'b1:1'b0;
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Receive Testing....compile time setup.
@@ -86,14 +90,11 @@ assign DEBUG_LED4 = (rxfreq == 32'd4607000) ? 1'b1:1'b0;
 //										The AD9866 clock will be used and the actual ADC data will be used.
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire ad9866_present = 1'b0;
+wire ad9866_present = 1'b1;
 wire pll_locked;
 wire test_ad9866_clk;
 
 pllclock pllclock_inst(.inclk0(clk_10mhz), .c0(test_ad9866_clk), .locked(pll_locked));
-
-//assign controlio = adc_clock;
-
 assign adc_clock = ad9866_present ? ad9866_clk : test_ad9866_clk;
 
 reg [3:0] incnt;
@@ -101,7 +102,7 @@ always @ (posedge adc_clock)
   begin
 	if (ad9866_present)
 			adc <= ad9866_adio;
-		else begin
+	else begin
 			// Test sine wave
         case (incnt)
             4'h0 : adc = 12'h000;
@@ -126,37 +127,48 @@ always @ (posedge adc_clock)
 	end
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                         AD9866 Control
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+assign ad9866_mode = 1'b0;				//HALFDUPLEX
+assign ad9866_rst_n = ~reset;
+assign ad9866_adio = 12'bzzzzzzzzzzzz;
+assign ad9866_rxclk = ad9866_clk;
+assign ad9866_txclk = ad9866_clk;
+
+assign ad9866_txen = 1'b0;
+assign ad9866_rxen = 1'b1;		// starting with rx mode...
+
+
+ad9866 ad9866_inst(.reset(reset | spiad9866reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(1'b0),.gain(16'b0));
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 wire [5:0] speed;
 // Decimation rates
 localparam RATE48 = 6'd24;
-localparam RATE96 = 6'd12;
-localparam RATE192 = 6'd06;
-localparam RATE384 = 6'd03;
+localparam RATE96  =  RATE48  >> 1;
+localparam RATE192 =  RATE96  >> 1;
+localparam RATE384 =  RATE192 >> 1;
 
 localparam CICRATE = 6'd08;
 
 assign 	speed =  RATE48;
-
-assign ad9866_rxclk = ad9866_clk;
-assign ad9866_txclk = ad9866_clk;
-
-assign ad9866_txen = 'b0;
-assign ad9866_rxen = 'b1;		// starting with rx mode...
-
-assign ad9866_pga = 6'b011111;
 
 wire [47:0] spi_recv;
 wire spi_done;
 
 always @ (negedge spi_sck)
 begin
-  if (reset)
+  if (reset) begin
 		rxFIFOReadStrobe <= 1'b0;
-		
+		att <= 5'b0;            
+		dither <= 1'b0;  				
+		randomize <=  1'b0;  
+  end
   else	
-		if (!rxFIFOEmpty && spi_done) begin
+		if (!rxFIFOEmpty && spi_done)
 			rxFIFOReadStrobe <= 1'b1;
 		else
 			rxFIFOReadStrobe <= 1'b0;	
@@ -167,11 +179,73 @@ begin
 		if (rxFIFOEmpty && spi_done)
 			spivalid <= 1'b0;
 			
-		if (spi_done)
+		if (spi_done) begin
 			rxfreq <= spi_recv[31:0];
+			att <= spi_recv[36:32];
+			dither <= spi_recv[37];
+			randomize <= spi_recv[38];
+		end	
 end
  
 spi_slave spi_slave_inst(.rstb(!reset),.ten(1'b1),.tdata(rxDataFromFIFO),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi_recv));
+
+//----- GAIN Control
+wire rxclipp = (adc == 12'b011111111111);
+wire rxclipn = (adc == 12'b100000000000);
+wire rxnearclip = (adc[11:8] == 4'b0111) | (adc[11:8] == 4'b1000);
+wire rxgoodlvlp = (adc[11:9] == 3'b011);
+wire rxgoodlvln = (adc[11:9] == 3'b100);
+
+reg agc_nearclip;
+reg agc_goodlvl;
+reg [25:0] agc_delaycnt;
+reg [5:0] agc_value;
+wire agc_clrnearclip;
+wire agc_clrgoodlvl;
+
+always @(posedge adc_clock)
+begin
+    if (agc_clrnearclip) agc_nearclip <= 1'b0;
+    else if (rxnearclip) agc_nearclip <= 1'b1;
+end
+
+always @(posedge adc_clock)
+begin
+    if (agc_clrgoodlvl) agc_goodlvl <= 1'b0;
+    else if (rxgoodlvlp | rxgoodlvln) agc_goodlvl <= 1'b1;
+end
+
+always @(posedge adc_clock)
+begin
+    agc_delaycnt <= agc_delaycnt + 1;
+end
+
+always @(posedge adc_clock)
+begin
+    if (reset) 
+        agc_value <= 6'b011111;
+    // Decrease gain if near clip seen
+    else if ( ((agc_clrnearclip & agc_nearclip & (agc_value != 6'b000000)) | agc_value > gain_value ) & ~FPGA_PTT ) 
+        agc_value <= agc_value - 6'h01;
+    // Increase if not in the sweet spot of seeing agc_nearclip
+    // But no more than ~26dB (38) as that is the place of diminishing returns re the datasheet
+    else if ( agc_clrgoodlvl & ~agc_goodlvl & (agc_value <= gain_value) & ~FPGA_PTT )
+        agc_value <= agc_value + 6'h01;
+end
+
+// tp = 1.0/61.44e6
+// 2**26 * tp = 1.0922 seconds
+// PGA settling time is less than 500 ns
+// Do decrease possible every 2 us (2**7 * tp)
+assign agc_clrnearclip = (agc_delaycnt[6:0] == 7'b1111111);
+// Do increase possible every 68 ms, 1us before/after a possible descrease
+assign agc_clrgoodlvl = (agc_delaycnt[21:0] == 22'b1011111111111110111111);
+
+
+wire [5:0] gain_value;
+assign gain_value = {~dither, ~att};
+
+assign ad9866_pga = randomize ? agc_value : gain_value;
 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -219,8 +293,6 @@ wire [47:0] rxDataFromFIFO;
 wire rxFIFOEmpty;
 reg rxFIFOReadStrobe;
 
-
-assign controlio = rxFIFOEmpty;
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
 							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe),
