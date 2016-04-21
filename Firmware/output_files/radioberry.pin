@@ -79,7 +79,7 @@ RESERVED_INPUT_WITH_WEAK_PULLUP : 8         :        :                   :      
 nSTATUS                      : 9         :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 10        :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 11        :        :                   :         : 1         :                
-~ALTERA_DCLK~ / RESERVED_INPUT : 12        : input  : 3.3-V LVTTL       :         : 1         : N              
+~ALTERA_DCLK~ / RESERVED_INPUT : 12        : input  : 3.3-V LVCMOS      :         : 1         : N              
 spivalid                     : 13        : output : 3.3-V LVCMOS      :         : 1         : Y              
 nCONFIG                      : 14        :        :                   :         : 1         :                
 TDI                          : 15        : input  :                   :         : 1         :                
@@ -98,7 +98,7 @@ GND                          : 27        : gnd    :                   :         
 DEBUG_LED2                   : 28        : output : 3.3-V LVTTL       :         : 2         : Y              
 VCCINT                       : 29        : power  :                   : 1.2V    :           :                
 DEBUG_LED1                   : 30        : output : 3.3-V LVTTL       :         : 2         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 31        :        :                   :         : 2         :                
+ptt_in                       : 31        : input  : 3.3-V LVCMOS      :         : 2         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 32        :        :                   :         : 2         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 33        :        :                   :         : 2         :                
 VCCINT                       : 34        : power  :                   : 1.2V    :           :                
@@ -211,5 +211,5 @@ GND                          : 140       : gnd    :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : 141       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 142       :        :                   :         : 8         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 143       :        :                   :         : 8         :                
-controlio                    : 144       : output : 3.3-V LVCMOS      :         : 8         : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : 144       :        :                   :         : 8         :                
 GND                          : EPAD      :        :                   :         :           :                

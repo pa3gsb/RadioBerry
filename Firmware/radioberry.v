@@ -25,8 +25,8 @@ clk_10mhz,
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,ad9866_pga,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
-controlio,
-spivalid);
+spivalid,
+ptt_in);
 
 input wire clk_10mhz;	
 input wire ad9866_clk;
@@ -48,17 +48,14 @@ input wire spi_sck;
 input wire spi_mosi; 
 output wire spi_miso; 
 input [1:0] spi_ce; 
-output spivalid;
+output wire spivalid;
 
 output  wire  DEBUG_LED1;  
 output  wire  DEBUG_LED2;  
 output  wire  DEBUG_LED3;  
-output  wire  DEBUG_LED4;  
+output  wire  DEBUG_LED4;  // TX indicator...
 
-output wire controlio;
-
-wire FPGA_PTT;
-assign  FPGA_PTT = 1'b0;
+input wire ptt_in;
 
 // ADC vars...
 wire adc_clock;		
@@ -71,8 +68,7 @@ reg 	randomize;				// if randomize is checked (eg in powersdr) the agc value is 
 									// if randomize is not checked (eg in powersdr) the gain value (inversie van s-att) is used for gain
 
 //Debug	
-assign DEBUG_LED3 = dither; //1'b1; //pll_locked;
-assign DEBUG_LED4 = randomize; //(rxfreq == 32'd4607000) ? 1'b1:1'b0;
+assign DEBUG_LED3 =  (rxfreq == 32'd3630000) ? 1'b1:1'b0; 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Receive Testing....compile time setup.
@@ -132,15 +128,23 @@ always @ (posedge adc_clock)
 
 assign ad9866_mode = 1'b0;				//HALFDUPLEX
 assign ad9866_rst_n = ~reset;
-assign ad9866_adio = 12'bzzzzzzzzzzzz;
-assign ad9866_rxclk = ad9866_clk;
-assign ad9866_txclk = ad9866_clk;
+assign ad9866_adio = ptt_in ? DAC[13:2] : 12'bZ;
+assign ad9866_rxclk = adc_clock;	 
+assign ad9866_txclk = adc_clock;	 
 
-assign ad9866_txen = 1'b0;
-assign ad9866_rxen = 1'b1;		// starting with rx mode...
+assign ad9866_rxen = (~ptt_in) ? 1'b1: 1'b0;
+assign ad9866_txen = (ptt_in) ? 1'b1: 1'b0;
 
+wire ad9866rqst;
+reg [5:0] tx_gain;
 
-ad9866 ad9866_inst(.reset(reset | spiad9866reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(1'b0),.gain(16'b0));
+reg [5:0] prev_gain;
+always @ (posedge clk_10mhz)
+    prev_gain <= tx_gain;
+
+assign ad9866rqst = tx_gain != prev_gain;
+
+ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(tx_gain));
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Control
@@ -156,40 +160,28 @@ localparam CICRATE = 6'd08;
 
 assign 	speed =  RATE48;
 
+// SPI data exchange
 wire [47:0] spi_recv;
 wire spi_done;
+assign spivalid = rxFIFOEmpty;
 
-always @ (negedge spi_sck)
-begin
-  if (reset) begin
-		rxFIFOReadStrobe <= 1'b0;
-		att <= 5'b0;            
-		dither <= 1'b0;  				
-		randomize <=  1'b0;  
-  end
-  else	
-		if (!rxFIFOEmpty && spi_done)
-			rxFIFOReadStrobe <= 1'b1;
-		else
-			rxFIFOReadStrobe <= 1'b0;	
-		
-		if (!rxFIFOEmpty && spi_done)
-			spivalid <= 1'b1;
-		
-		if (rxFIFOEmpty && spi_done)
-			spivalid <= 1'b0;
-			
-		if (spi_done) begin
-			rxfreq <= spi_recv[31:0];
-			att <= spi_recv[36:32];
-			dither <= spi_recv[37];
-			randomize <= spi_recv[38];
-		end	
-end
- 
-spi_slave spi_slave_inst(.rstb(!reset),.ten(1'b1),.tdata(rxDataFromFIFO),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi_recv));
+always @ (posedge spi_done)
+begin	
+	if (!ptt_in) begin
+		rxfreq <= spi_recv[31:0];
+		att <= spi_recv[36:32];
+		dither <= spi_recv[37];
+		randomize <= spi_recv[38];
+	end else begin
+		tx_gain <= spi_recv[37:32];
+	end
+end 
 
-//----- GAIN Control
+spi_slave spi_slave_rx_inst(.rstb(!reset),.ten(1'b1),.tdata(rxDataFromFIFO),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi_recv));
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                         GAIN Control
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
 wire rxclipp = (adc == 12'b011111111111);
 wire rxclipn = (adc == 12'b100000000000);
 wire rxnearclip = (adc[11:8] == 4'b0111) | (adc[11:8] == 4'b1000);
@@ -225,11 +217,11 @@ begin
     if (reset) 
         agc_value <= 6'b011111;
     // Decrease gain if near clip seen
-    else if ( ((agc_clrnearclip & agc_nearclip & (agc_value != 6'b000000)) | agc_value > gain_value ) & ~FPGA_PTT ) 
+    else if ( ((agc_clrnearclip & agc_nearclip & (agc_value != 6'b000000)) | agc_value > gain_value ) & ~ptt_in ) 
         agc_value <= agc_value - 6'h01;
     // Increase if not in the sweet spot of seeing agc_nearclip
     // But no more than ~26dB (38) as that is the place of diminishing returns re the datasheet
-    else if ( agc_clrgoodlvl & ~agc_goodlvl & (agc_value <= gain_value) & ~FPGA_PTT )
+    else if ( agc_clrgoodlvl & ~agc_goodlvl & (agc_value <= gain_value) & ~ptt_in )
         agc_value <= agc_value + 6'h01;
 end
 
@@ -289,16 +281,41 @@ receiver #(.CICRATE(CICRATE))
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rxFIFO Handler (IQ Samples)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire [47:0] rxDataFromFIFO;
+reg [47:0] rxDataFromFIFO;
 wire rxFIFOEmpty;
-reg rxFIFOReadStrobe;
 
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
-							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe),
-							.rdclk(spi_sck),.q(rxDataFromFIFO),.rdreq(rxFIFOReadStrobe),.rdempty(rxFIFOEmpty));
+							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rxFIFOEmpty), 
+							.rdclk(spi_sck),.q(rxDataFromFIFO),.rdreq(spi_done));
+
 						
-						
+				
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                          txFIFO Handler ( IQ-Transmit)
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+wire txFIFOFull;
+
+wire spi_tx_done = ptt_in ? spi_done : 1'b0;
+
+txFIFO txFIFO_inst(	.aclr(reset), 
+							.wrclk(spi_sck), .data(spi_recv[31:0]), .wrreq(spi_tx_done), .wrfull(txFIFOFull),
+							.rdclk(adc_clock), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty));
+	
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                        Transmitter module
+//------------------------------------------------------------------------------------------------------------------------------------------------------------							
+wire [31:0] txDataFromFIFO;
+wire txFIFOEmpty;
+wire txFIFOReadStrobe;
+
+transmitter transmitter_inst(.reset(reset), .clk(adc_clock), .frequency(sync_phase_word), 
+							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe),
+							.out_data(DAC), .PTT(ptt_in), .LED(DEBUG_LED4));	
+
+wire [13:0] DAC;
+	
 //------------------------------------------------------------------------------
 //                          Running...
 //------------------------------------------------------------------------------

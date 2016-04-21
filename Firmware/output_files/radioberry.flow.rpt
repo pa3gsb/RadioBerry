@@ -1,5 +1,5 @@
 Flow report for radioberry
-Mon Mar 14 18:44:11 2016
+Thu Apr 21 20:13:30 2016
 Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
 
 
@@ -38,21 +38,21 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Flow Summary                                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Flow Status                        ; Successful - Mon Mar 14 18:43:59 2016         ;
+; Flow Status                        ; Successful - Thu Apr 21 20:13:14 2016         ;
 ; Quartus II 64-Bit Version          ; 12.1 Build 243 01/31/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; radioberry                                    ;
 ; Top-level Entity Name              ; radioberry                                    ;
 ; Family                             ; Cyclone III                                   ;
 ; Device                             ; EP3C25E144C8                                  ;
 ; Timing Models                      ; Final                                         ;
-; Total logic elements               ; 4,622 / 24,624 ( 19 % )                       ;
-;     Total combinational functions  ; 3,543 / 24,624 ( 14 % )                       ;
-;     Dedicated logic registers      ; 3,683 / 24,624 ( 15 % )                       ;
-; Total registers                    ; 3683                                          ;
+; Total logic elements               ; 7,801 / 24,624 ( 32 % )                       ;
+;     Total combinational functions  ; 6,278 / 24,624 ( 25 % )                       ;
+;     Dedicated logic registers      ; 6,055 / 24,624 ( 25 % )                       ;
+; Total registers                    ; 6055                                          ;
 ; Total pins                         ; 41 / 83 ( 49 % )                              ;
 ; Total virtual pins                 ; 0                                             ;
-; Total memory bits                  ; 208,896 / 608,256 ( 34 % )                    ;
-; Embedded Multiplier 9-bit elements ; 40 / 132 ( 30 % )                             ;
+; Total memory bits                  ; 264,704 / 608,256 ( 44 % )                    ;
+; Embedded Multiplier 9-bit elements ; 44 / 132 ( 33 % )                             ;
 ; Total PLLs                         ; 0 / 4 ( 0 % )                                 ;
 +------------------------------------+-----------------------------------------------+
 
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 03/14/2016 18:42:37 ;
+; Start date & time ; 04/21/2016 20:11:06 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -73,15 +73,21 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 55673804953.145797735709104           ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 55673804953.146126226606128           ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; RAM: 2-PORT                           ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; ROM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; FIFO                                  ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; FIFO                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
 ; MISC_FILE                           ; Polyphase_FIR/firram36I_1024_bb.v     ; --            ; --          ; --         ;
 ; MISC_FILE                           ; Polyphase_FIR/firromI_1024_bb.v       ; --            ; --          ; --         ;
+; MISC_FILE                           ; txFIFO_bb.v                           ; --            ; --          ; --         ;
+; MISC_FILE                           ; rxFIFO_bb.v                           ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                     ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                     ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                            ; --            ; --          ; --         ;
@@ -102,11 +108,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:20     ; 1.0                     ; 577 MB              ; 00:00:16                           ;
-; Fitter                    ; 00:00:53     ; 2.6                     ; 1109 MB             ; 00:01:26                           ;
-; Assembler                 ; 00:00:02     ; 1.0                     ; 466 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:10     ; 2.5                     ; 606 MB              ; 00:00:14                           ;
-; Total                     ; 00:01:25     ; --                      ; --                  ; 00:01:58                           ;
+; Analysis & Synthesis      ; 00:00:28     ; 1.4                     ; 623 MB              ; 00:00:25                           ;
+; Fitter                    ; 00:01:29     ; 2.9                     ; 1165 MB             ; 00:02:34                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 487 MB              ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:15     ; 2.6                     ; 649 MB              ; 00:00:23                           ;
+; Total                     ; 00:02:15     ; --                      ; --                  ; 00:03:25                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

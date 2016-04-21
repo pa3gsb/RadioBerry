@@ -37,6 +37,7 @@ public class DSPControlServlet extends HttpServlet{
 			jso = new JSONObject(requestStr);
 			int mode = (Integer)jso.get("mode");
 			Log.info("Mode ", "" + mode);
+						
 			Radio.getInstance().setMode(mode);
 			
 			int low = (Integer)jso.get("low");

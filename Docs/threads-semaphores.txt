@@ -1,0 +1,682 @@
+
+http://pages.cs.wisc.edu/~remzi/Classes/537/Fall2008/Notes/threads-semaphores.txt
+
+** Semaphores **
+
+Simple locks let us build a number of concurrent programs correctly and
+efficiently. Unfortunately, there are some operations that are pretty common
+in multithreaded programs that locks alone cannot support (as we will describe
+below). 
+
+One person who realized this years ago was Edsger Dijkstra, known among other
+things for his famous "shortest paths" algorithm in graph theory [1], an early
+polemic on structured programming entitled "Goto Statements Considered
+Harmful" [2] (what a great title!), and, in the case we will study here, the
+introduction of a powerful and flexible synchronization primitive known as the
+*semaphore* [3]. 
+
+In this note, we will first describe the semaphore, and then show how it can
+be used to solve a number of important synchronization problems. 
+
+[SEMAPHORE: DEFINITION]
+
+A semaphore is as an object with an integer value that we can manipulate with
+two routines (which we will call sem_wait() and sem_post() to follow the POSIX
+standard). Because the initial value of the semaphore determines its behavior,
+before calling any other routine to interact with the semaphore, we must first
+initialize it to some value, as this code below does:
+
+--------------------------------------------------------------------------------
+#include <semaphore.h>
+sem_t s;
+sem_init(&s, 0, 1);
+--------------------------------------------------------------------------------
+                    [FIGURE: INITIALIZING A SEMAPHORE]
+
+In the figure, we declare a semaphore s and initialize it to the value of 1
+(you can ignore the second argument to sem_init() for now; read the man page
+for details). 
+
+After a semaphore is initialized, we can call one of two functions to interact
+with it, sem_wait() or sem_post() [4]. The behavior of these two functions is
+described here:
+
+--------------------------------------------------------------------------------
+int sem_wait(sem_t *s) {
+    wait until value of semaphore s is greater than 0
+    decrement the value of semaphore s by 1
+}
+
+int sem_post(sem_t *s) {
+    increment the value of semaphore s by 1
+    if there are 1 or more threads waiting, wake 1
+}
+--------------------------------------------------------------------------------
+                    [FIGURE: INITIALIZING A SEMAPHORE]
+
+For now, we are not concerned with the implementation of these routines, which
+clearly requires some care; with multiple threads calling into sem_wait() and
+sem_post(), there is the obvious need for managing these critical sections
+with locks and queues similar to how we previously built locks. We will now
+focus on how to *use* these primitives; later we may discuss how they are
+built. 
+
+A couple of notes. First, we can see that sem_wait() will either return right
+away (because the value of the semaphore was 1 or higher when we called
+sem_wait()), or it will cause the caller to suspend execution waiting for a
+subsequent post. Of course, multiple calling threads may call into sem_wait(),
+and thus all be queued waiting to be woken. Once woken, the waiting thread
+will then decrement the value of the semaphore and return to the user.
+
+Second, we can see that sem_post() does not ever suspend the caller. Rather,
+it simply increments the value of the semaphore and then, if there is a thread
+waiting to be woken, wakes 1 of them up. 
+
+You should not worry here about the seeming race conditions possible within
+the semaphore; assume that the modifications they make to the state of the
+semaphore are all performed atomically.
+
+[BINARY SEMAPHORES, A.K.A. LOCKS]
+
+We are now ready to use a semaphore. Our first use will be one with which we
+are already familiar: using a semaphore as a lock. Here is a code snippet:
+
+--------------------------------------------------------------------------------
+sem_t m;
+sem_init(&m, 0, X); // initialize semaphore to X; what should X be?
+
+sem_wait(&m);
+// critical section here
+sem_post(&m);
+--------------------------------------------------------------------------------
+                    [FIGURE: A SEMAPHORE AS A LOCK]
+
+To build a lock, we simply surround the critical section of interest with a
+sem_wait()/sem_post() pair. Critical to making this work, though, is the
+initial value of the semaphore. What should it be?
+
+If we look back at the definition of the sem_wait() and sem_post() routines
+above, we can see that the initial value of the semaphore should be 1. Imagine
+the first thread (thread 0) calling sem_wait(); it will first wait for the
+value of the semaphore to be greater than 0, which it is (the semaphore's
+value is 1). It will thus not wait at all and decrement the value to 0 before
+returning to the caller. That thread is now free to enter the critical
+section. If no other thread tries to acquire the lock while thread 0 is inside
+the critical section, when it calls sem_post(), it will simply restore the
+value of the semaphore to 1 (and not wake any waiting thread, because there
+are no waiting threads).
+
+The more interesting case arises when thread 0 holds the lock (i.e., it has
+called sem_wait() but not yet called sem_post()), and another thread (thread
+1, say) tries to enter the critical section by calling sem_wait(). In this
+case, thread 1 will find that the value of the semaphore is 0, and thus wait
+(putting itself to sleep and relinquishing the processor). When thread 0 runs
+again, it will eventually call sem_post(), incrementing the value of the
+semaphore back to 1, and then wake the waiting thread 0, which will then be
+able to acquire the lock for itself.
+
+In this basic way, we are able to use semaphores as locks. Because the value
+of the semaphore simply alternates between 1 and 0, this usage is sometimes
+known as a *binary semaphore*. 
+
+[SEMAPHORES AS CONDITION VARIABLES]
+
+Semaphores are also useful when a thread wants to halt its own progress
+waiting for something to change. For example, a thread may wish to wait for
+a list to become non-empty, so that it can take an element off of the list. 
+In this pattern of usage, we often find a thread *waiting* for something to
+happen, and a different thread making that something happen and 
+then *signaling* that it has indeed happened, thus waking the waiting
+thread. Because the waiting thread (or threads, really) is waiting for some
+*condition* in the program to change, we are using the semaphore as a
+*condition variable*. We will see condition variables again later,
+particularly when covering monitors. 
+
+A simple example is as follows. Imagine a thread creates another thread and
+then wants to wait for it to complete its execution:
+
+--------------------------------------------------------------------------------
+void *
+child(void *arg) {
+    printf("child\n");
+    // signal here: child is done
+    return NULL;
+}
+
+int
+main(int argc, char *argv[]) {
+    printf("parent: begin\n");
+    pthread_t c;
+    Pthread_create(c, NULL, child, NULL);
+    // wait here for child
+    printf("parent: end\n");
+    return 0;
+}
+--------------------------------------------------------------------------------
+                 [FIGURE: PARENT WAITING FOR CHILD]
+
+What we would like to see here is the following output:
+
+--------------------------------------------------------------------------------
+parent: begin
+child
+parent: end
+--------------------------------------------------------------------------------
+           [FIGURE: OUTPUT FROM PARENT WAITING FOR CHILD]
+
+The question, then, is how to use a semaphore to achieve this effect, and is
+it turns out, it is quite simple, as we see here:
+
+--------------------------------------------------------------------------------
+sem_t s;
+
+void *
+child(void *arg) {
+    printf("child\n");
+    // signal here: child is done
+    sem_post(&s);
+    return NULL;
+}
+
+int
+main(int argc, char *argv[]) {
+    sem_init(&s, 0, X); // what should X be?
+    printf("parent: begin\n");
+    pthread_t c;
+    Pthread_create(c, NULL, child, NULL);
+    // wait here for child
+    sem_wait(&s);
+    printf("parent: end\n");
+    return 0;
+}
+--------------------------------------------------------------------------------
+             [FIGURE: PARENT WAITING FOR CHILD WITH A SEMAPHORE]
+
+As you can see in the code, the parent simply calls sem_wait() and the child
+sem_post() to wait for the condition of the child finishing its execution to
+become true. However, this raises the question: what should the initial value
+of this semaphore be? (think about it here, instead of reading ahead)
+
+The answer, of course, is that the value of the semaphore should be set to is
+the number 0. There are two cases to consider. First, let us assume that the
+parent creates the child but the child has not run yet (i.e., it is sitting in
+a ready queue but not running). In this case, the parent will call sem_wait()
+before the child has called sem_post(), and thus we'd like the parent to wait
+for the child to run. The only way this will happen is if the value of the
+semaphore is not greater than 0; hence, 0 as the initial value makes
+sense. When the child finally runs, it will call sem_post(), incrementing the
+value to 1 and waking the parent, which will then return from sem_wait() and
+complete the program. 
+
+The second case occurs when the child runs to completion before the parent
+gets a chance to call sem_wait(). In this case, the child will first call
+sem_post(), thus incrementing the value of the semaphore from 0 to 1. When the
+parent then gets a chance to run, it will call sem_wait() and find the value
+of the semaphore to be 1; the parent will thus decrement the value and return
+from sem_wait() without waiting, also achieving the desired effect.
+
+[THE PRODUCER/CONSUMER (BOUNDED-BUFFER) PROBLEM]
+
+The final problem we will confront in this note is known as the
+*producer/consumer* problem, or sometimes as the *bounded buffer* problem,
+which was also first posed by Dijkstra [5]. Indeed, it was the
+producer/consumer problem that led to the invention of semaphores! [8]
+
+Imagine one or more producer threads and one or more consumer
+threads. Producers produce data items and wish to place them in a buffer;
+consumers grab data items out of the buffer consume the data in some way. 
+
+This arrangement occurs in many places within real systems. For example, in a
+multithread web server, a producer puts HTTP requests into a work queue (i.e.,
+the bounded buffer); a thread pool of consumers each take a request out of the
+work queue and process the request. Similarly, when you use a piped command in
+a UNIX shell, as follows:
+
+prompt> cat notes.txt | wc -l
+
+This example runs two processes concurrently; "cat file" writes the body of
+the file "notes.txt" to what it thinks is standard output; instead, however,
+the UNIX shell has redirected the output to what is called a UNIX pipe
+(created by the *pipe()* system call). The other end of this pipe is connected
+to the standard input of the process "wc", which simply counts the number of
+lines in the input stream and prints out the result. Thus, the "cat" process
+is the producer, and the "wc" process is the consumer. Between them is a
+bounded buffer.
+
+Because the bounded buffer is a shared resource, we must of course require
+synchronized access to it, lest a race condition arise. To begin to understand
+this problem better, let us examine some actual code:
+
+--------------------------------------------------------------------------------
+int buffer[MAX];
+int fill = 0; 
+int use  = 0;
+
+void put(int value) {
+    buffer[fill] = value;    // line F1
+    fill = (fill + 1) % MAX; // line F2
+}
+
+int get() {
+    int tmp = buffer[use];   // line G1
+    use = (use + 1) % MAX;   // line G2
+    return tmp;
+}
+--------------------------------------------------------------------------------
+                     [FIGURE: THE PUT AND GET ROUTINES]
+
+In this example, we assume that the shared buffer *buffer* is just an array of
+integers (this could easily be generalized to arbitrary objects, of course),
+and that the *fill* and *use* integers are used as indices into the array,
+and are used to track where to both put data (fill) and get data (use).
+
+Let us assume in this simple example that we have just two threads, a producer
+and a consumer, and that the producer just writes some number of integers into
+the buffer which the consumer removes from the buffer and prints:
+
+--------------------------------------------------------------------------------
+void *producer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        put(i);
+    }
+}
+
+void *consumer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        int tmp = get();
+        printf("%d\n", tmp);
+    }
+}
+--------------------------------------------------------------------------------
+                 [FIGURE: THE PRODUCER AND CONSUMER THREADS]
+
+Finally, here is the main body of the program, which simply creates the
+two threads and waits for them to finish.
+
+--------------------------------------------------------------------------------
+int loops = 0;
+
+int main(int argc, char *argv[]) {
+    loops = atoi(argv[1]);
+
+    pthread_t pid, cid;
+    Pthread_create(&pid, NULL, producer, NULL); 
+    Pthread_create(&cid, NULL, consumer, NULL); 
+    Pthread_join(pid, NULL); 
+    Pthread_join(cid, NULL); 
+    return 0;
+}
+--------------------------------------------------------------------------------
+                       [FIGURE: MAIN BODY OF CODE]
+
+If the program is run with loops = 5, what we'd like to get is the producer
+"producing" 0, 1, 2, 3, and 4, and the consumer printing them in that
+order. However, without synchronization, we may not get that. For example,
+imagine if the consumer thread runs first; it will call get() to get data that
+hasn't even been produced yet, and thus not function as desired. Things get
+worse when you add multiple producers or consumers, as there could be race
+conditions in the update of the use or fill indices. Clearly, something is
+missing. 
+
+Our first attempt at solving the problem introduces two semaphores, *empty*
+and *full*, which the threads will use to indicate when a buffer entry has
+been emptied or filled, respectively. Here is the example code:
+
+--------------------------------------------------------------------------------
+sem_t empty;
+sem_t full;
+
+void *producer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&empty);           // line P1
+        put(i);                     // line P2
+        sem_post(&full);            // line P3
+    }
+}
+
+void *consumer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&full);            // line C1
+        int tmp = get();            // line C2
+        sem_post(&empty);           // line C3
+        printf("%d\n", tmp);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    // ...
+    sem_init(&empty, 0, MAX); // MAX buffers are empty to begin with...
+    sem_init(&full, 0, 0);    // ... and 0 are full
+    // ...
+}
+--------------------------------------------------------------------------------
+          [FIGURE: ADDING THE EMPTY AND FULL CONDITION VARIABLES]
+
+In this example, the producer first waits for a buffer to become empty in
+order to put data into it, and the consumer similarly waits for a buffer to
+become filled before using it. Let us first imagine that MAX=1 (there is only
+one buffer in the array), and see if this works.
+
+Imagine again there are two threads, a producer and a consumer. Let us examine
+a specific scenario on a single CPU. Assume the consumer gets to run
+first. Thus, the consumer will hit line C1 in the figure above, calling
+sem_wait(&full). Because full was initialized to the value 0, the call will
+block the consumer and wait for another thread to call sem_post() on the
+semaphore, as desired.
+
+Let's say the producer then runs. It will hit line P1, calling
+sem_wait(&empty). Unlike the consumer, the producer will continue through
+this line, because empty was initialized to the value MAX (in this case,
+1). Thus, empty will be decremented to 0 and the producer will put a data
+value into the first entry of buffer (line P2). The producer will then
+continue on to P3 and call sem_post(&full), changing the value of the full
+semaphore from 0 to 1 and waking the consumer (e.g., move it from blocked to
+ready). 
+
+In this case, one of two things could happen. If the producer continues to
+run, it will loop around and hit line P1 again. This time, however, it would
+block, as the empty semaphore's value is 0. If the producer instead was
+interrupted and the consumer began to run, it would call sem_wait(&full)
+(line C1) and find that the buffer was indeed full and thus consume it.
+In either case, we achieve the desired behavior.
+
+You can try this same example with more threads (e.g., multiple producers, and
+multiple consumers). It should still work, or it is time to go to sleep. 
+
+[A PROBLEM: OFF TO THE RACES]
+
+Let us now imagine that MAX > 1 (say MAX = 10). For this example, let us
+assume that there are multiple producers and multiple consumers. We now have a
+problem: a *race condition*. Do you see where it occurs? (take some time and
+look for it)
+
+If you can't see it, here's a hint: look more closely at the put() and get()
+code.
+
+If you still can't see it, I bet you aren't trying. Come on, spend a minute on
+it at least.
+
+OK, you win. Imagine two producers both calling into put() at roughly the same
+time. Assume producer 1 gets to run first, and just starts to fill the first
+buffer entry (fill = 0 @ line F1). Before the producer gets a chance to
+increment the fill counter to 1, it is interrupted. Producer 2 starts to run,
+and at line F1 it also puts its data into the 0th element of buffer, which
+means that the old data there is overwritten! This is a no-no; we don't want
+any data generated by a producer to be lost. 
+
+[SOLUTION? ADDING MUTUAL EXCLUSION]
+
+As you can see, what we've forgotten here is *mutual exclusion*. The filling
+of a buffer and incrementing of the index into the buffer is a *critical
+section*, and thus must be guarded carefully. So let's use our friend the
+binary semaphore and add some locks. Here is our first try:
+
+--------------------------------------------------------------------------------
+sem_t empty;
+sem_t full;
+sem_t mutex;
+
+void *producer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&mutex);           // line P0 (NEW LINE)
+        sem_wait(&empty);           // line P1
+        put(i);                     // line P2
+        sem_post(&full);            // line P3
+        sem_post(&mutex);           // line P4 (NEW LINE)
+    }
+}
+
+void *consumer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&mutex);           // line C0 (NEW LINE)
+        sem_wait(&full);            // line C1
+        int tmp = get();            // line C2
+        sem_post(&empty);           // line C3
+        sem_post(&mutex);           // line C4 (NEW LINE)
+        printf("%d\n", tmp);
+    }
+}
+
+int main(int argc, char *argv[]) {
+    // ...
+    sem_init(&empty, 0, MAX); // MAX buffers are empty to begin with...
+    sem_init(&full, 0, 0);    // ... and 0 are full
+    sem_init(&mutex, 0, 1);   // mutex = 1 because it is a lock (NEW LINE)
+    // ...
+}
+--------------------------------------------------------------------------------
+            [FIGURE: ADDING MUTUAL EXCLUSION, BUT INCORRECTLY]
+
+Now we've added some locks around the entire put()/get() parts of the code, as
+indicated by the NEW LINE comments. That seems like the right idea, but it
+also doesn't work. Why? Deadlock
+
+[OH OH, DEADLOCK]
+
+Why does deadlock occur? Take a moment to consider it; try to find a case
+where deadlock arises; what sequence of steps must happen for the program to
+deadlock? 
+
+OK, now that you figured it out, here is the answer. Imagine two threads, one
+producer and one consumer. The consumer gets to run first. It acquires the
+mutex (line C0), and then calls sem_wait() on the full semaphore (line C1);
+because there is no data yet, this call causes the consumer to block and thus
+yield the CPU; importantly, though, the consumer still *holds* the lock. 
+
+A producer then runs. It has data to produce and if it were able to run, it
+would be able to wake the consumer thread and all would be
+good. Unfortunately, the first thing it does is call sem_wait on the binary
+mutex semaphore (line P0). The lock is already held. Hence, the producer is
+now stuck waiting too.
+
+There is a simple cycle here. The consumer *holds* the mutex and is *waiting* 
+for the someone to signal full. The producer could *signal* full but is
+*waiting* for the mutex. Thus, the producer and consumer are each stuck
+waiting for each other: a classic deadlock.
+
+[FINALLY, A SOLUTION THAT WORKS]
+
+To solve this problem, we simply must reduce the scope of the lock. Here is
+the final working solution:
+
+--------------------------------------------------------------------------------
+sem_t empty;
+sem_t full;
+sem_t mutex;
+
+void *producer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&empty);           // line P1
+        sem_wait(&mutex);           // line P1.5 (MOVED THE MUTEX TO HERE ...)
+        put(i);                     // line P2
+        sem_post(&mutex);           // line P2.5 (... AND TO HERE)
+        sem_post(&full);            // line P3
+    }
+}
+
+void *consumer(void *arg) {
+    int i;
+    for (i = 0; i < loops; i++) {
+        sem_wait(&full);            // line C1
+        sem_wait(&mutex);           // line C1.5 (MOVED THE MUTEX TO HERE ...)
+        int tmp = get();            // line C2
+        sem_post(&mutex);           // line C2.5 (... AND TO HERE)
+        sem_post(&empty);           // line C3
+        printf("%d\n", tmp);
+    }
+}
+--------------------------------------------------------------------------------
+                [FIGURE: ADDING MUTUAL EXCLUSION CORRECTLY]
+
+As you can see, we simply move the mutex acquire and release to be just around
+the critical section; the full and empty wait and signal code is left outside.
+The result is a simple and working bounded buffer, a commonly-used pattern in
+multithreaded programs. Understand it now; use it later. You will thank me for
+years to come. Or not.
+
+[A READER-WRITER LOCK]
+
+Another classic problem stems from the desire for a more flexible locking
+primitive that admits that different data structure accesses might require
+different kinds of locking. For example, imagine a number of concurrent list
+operations, including inserts and simple lookups. While inserts change the
+state of the list (and thus a traditional critical section makes sense),
+inserts simply *read* the data structure; as long as we can guarantee that no
+insert is on-going, we can allow many lookups to proceed concurrently. The
+special type of lock we will now develop to support this type of operation is
+known as a *reader-writer lock*. The code for such a lock is available here:
+
+--------------------------------------------------------------------------------
+typedef struct _rwlock_t {
+    sem_t writelock;
+    sem_t lock;
+    int   readers;
+} rwlock_t;
+
+void rwlock_init(rwlock_t *lock) {
+    readers = 0;
+    sem_init(&lock, 0, 1);      // binary semaphore
+    sem_init(&writelock, 0, 1); // used to lock out a writer, or all readers
+}
+
+void rwlock_acquire_readlock(rwlock_t *lock) {
+    sem_wait(&lock);
+    readers++;
+    if (readers == 1)
+        sem_wait(&writelock);
+    sem_post(&lock);
+}
+
+void rwlock_release_readlock(rwlock_t *lock) {
+    sem_wait(&lock);
+    readers--;
+    if (readers == 0)
+        sem_post(&writelock);
+    sem_post(&lock);
+}
+
+void rwlock_acquire_writelock(rwlock_t *lock) {
+    sem_wait(&writelock);
+}
+
+void rwlock_release_writelock(rwlock_t *lock) {
+    sem_post(&writelock);
+}
+--------------------------------------------------------------------------------
+                 [FIGURE: A SIMPLE READER-WRITER LOCK]
+
+The code is pretty simple. If some thread wants to update the data structure
+in question, it should call the pair of operations rwlock_acquire_writelock()
+and rwlock_release_writelock(). Internally, these simply use the "writelock"
+semaphore to ensure that only a single writer can acquire the lock and thus
+enter the critical section to update the data structure in question.
+
+More interesting is the rwlock_acquire_readlock() and
+rwlock_release_readlock() pair. When acquiring a read lock, the reader first
+acquires "lock" and then increments the "readers" variable to track how many
+readers are currently inside the data structure. The important step then taken
+within rwlock_acquire_readlock() occurs when the first reader acquires the
+lock; in that case, the reader also acquires the write lock by calling
+sem_wait() on the "writelock" semaphore, and then finally releasing the "lock"
+by calling sem_post(). 
+
+Thus, once a reader has acquired a read lock, more readers will be allowed to
+acquire the read lock too; however, any thread that wishes to acquire the
+write lock will have to wait until *all* readers are finished; the last one to
+exit the critical section will call sem_post() on "writelock" and thus enable
+a waiting writer to acquire the lock itself.
+
+This approach works (as desired), but does have some negatives, especially
+when it comes to fairness. In particular, it would be relatively easy for
+readers to starve writers. More sophisticated solutions to this problem exist;
+perhaps you can think of a better implementation? Hint: think about what you
+would need to do to prevent more readers from entering the lock once a writer
+is waiting.
+
+Finally, it should be noted that reader-writer locks should be used with some
+caution. They often add more overhead (especially with more sophisticated
+implementations), and thus do not end up speeding up performance as compared
+to just using simple and fast locking primitives [7]. Either way, they
+showcase once again how we can use semaphores in an interesting and useful
+way.
+
+[THE DINING PHILOSOPHERS]
+
+If I weren't lazy, I would write a bit about one of the most famous
+concurrency problems posed and solved by Dijkstra, known as the *dining
+philosopher's problem* [9]. However, I am lazy. The problem is famous because
+it is fun and somewhat intellectually interesting; however, its practical
+utility is low. I am a practical kind of guy, and thus have a hard time
+motivating the time spent to understand something that is so clearly
+academic. Look it up on your own if you are interested.
+
+[SUMMARY]
+
+Semaphores are a powerful and flexible primitive for writing concurrent
+programs. Many programmers use them exclusively, shunning simpler locks and
+condition variables, due to their great simplicity and utility. 
+
+In this note, we have presented just a few classic problems and solutions. If
+you are interested in finding out more, there are many other materials you can
+reference. One great (and free reference) is Allen Downey's book on
+concurrency [6]. This book has lots of puzzles you can work on to improve your
+understanding of both semaphores in specific and concurrency in general.
+Becoming a real concurrency expert takes years of effort; going beyond what
+you learn in class is a key component to mastering such a topic.
+
+
+[REFERENCES]
+
+[1] "A Note on Two Problems in Connexion with Graphs", E. W. Dijkstra. 
+Numerische Mathematik 1, 269–271, 1959. 
+Available: http://www-m3.ma.tum.de/twiki/pub/MN0506/WebHome/dijkstra.pdf
+Can you believe people worked on algorithms in 1959? I can't.
+
+[2] "Go-to Statement Considered Harmful", E.W. Dijkstra. 
+Communications of the ACM, volume 11(3): pages 147–148, March 1968.
+Available: http://www.cs.utexas.edu/users/EWD/ewd02xx/EWD215.PDF
+
+[3] "The Structure of the THE Multiprogramming System", E.W. Dijkstra.
+Communications of the ACM, volume 11(5), pages 341–346, 1968. 
+It's pronounced "the T - H - E operating system", not "the THE operating
+system". Interestingly, this paper that introduced semaphores actually was an
+early paper on the art and science of operating system design. Semaphores,
+which Dijkstra developed to aid in the process of writing the heavily
+concurrent OS, are only found in the appendix of the paper, almost as an
+afterthought! Indeed, both the use of semaphores as locks as well as
+semaphores as condition variables are found in the appendix of this paper.
+
+[4] Historically, sem_wait() was first called P() by Dijkstra (for the dutch
+word "to probe") and sem_post() was called V() (for the dutch word "to test"). 
+
+[5] "Information Streams Sharing a Finite Buffer", E.W. Dijkstra.
+Information Processing Letters 1: 179–180, 1972.
+Available: http://www.cs.utexas.edu/users/EWD/ewd03xx/EWD329.PDF
+Did Dijkstra invent everything? No, but close. He even worked on 
+one of the first systems to correctly provide interrupts!
+
+[6] "The Little Book of Semaphores", A.B. Downey.
+Available: http://greenteapress.com/semaphores/
+A great and free book about semaphores.
+
+[7] "Real-world Concurrency", Bryan Cantrill and Jeff Bonwick.
+ACM Queue. Volume 6, No. 5. September 2008.
+Available: http://www.acmqueue.org/modules.php?name=Content&pa=showpage&pid=554
+
+[8] "My recollections of operating system design", E.W. Dijkstra.
+April, 2001. Circulated privately. 
+Available: http://www.cs.utexas.edu/users/EWD/ewd13xx/EWD1303.PDF
+A fascinating read for those of you interested in how the pioneers
+of our field came up with some very basic and fundamental concepts,
+including ideas like "interrupts" and "a stack"!
+
+[9] "Hierarchical ordering of sequential processes", E.W. Dijkstra.
+Available: http://www.cs.utexas.edu/users/EWD/ewd03xx/EWD310.PDF
+The wikipedia page about this problem is also quite informative.

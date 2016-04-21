@@ -1,3 +1,4 @@
+INTENDED_DEVICE_FAMILY="Cyclone III"
 LPM_NUMWORDS=2048
 LPM_SHOWAHEAD=OFF
 LPM_TYPE=dcfifo
@@ -18,4 +19,4 @@ rdreq
 wrclk
 wrreq
 q
-rdempty
+wrempty

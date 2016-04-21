@@ -17,6 +17,7 @@
 
 #include <bcm2835.h>
 
+//#include <asoundlib.h>
 
 void runHermesLite(void);
 void sendPacket(void);
@@ -32,6 +33,9 @@ unsigned char get(void);
 void *spiReader(void *arg);
 void *packetreader(void *arg);
 
+void *spiWriter(void *arg);
+void put_tx_buffer(unsigned char  value);
+unsigned char get_tx_buffer(void);
 
 double timebase = 0.0;
 
@@ -41,15 +45,27 @@ double timebase = 0.0;
 
 sem_t empty;
 sem_t full;
-#define MAX 1800   
-//115200
-int buffer[MAX];
+#define MAX 3600   
+
+unsigned char buffer[MAX];
 int fill = 0; 
 int use  = 0;
+
+#define TX_MAX 3200 
+unsigned char tx_buffer[TX_MAX];
+int fill_tx = 0; 
+int use_tx  = 0;
+unsigned char drive_level;
+unsigned char prev_drive_level;
+int MOX = 0;
+sem_t tx_empty;
+sem_t tx_full;
+sem_t mutex;
 
 static const int CHANNEL = 0;
 int fdspi;
 unsigned char iqdata[6];
+unsigned char tx_iqdata[6];
 
 #define SERVICE_PORT	1024
 
@@ -83,6 +99,8 @@ struct timeval t0;
 	struct timeval t1;
 	struct timeval t10;
 	struct timeval t11;
+	struct timeval t20;
+	struct timeval t21;
 	float elapsed;
 
 float timedifference_msec(struct timeval t0, struct timeval t1)
@@ -93,19 +111,34 @@ float timedifference_msec(struct timeval t0, struct timeval t1)
 int main(int argc, char **argv)
 {
 	sem_init(&empty, 0, MAX); 
-    sem_init(&full, 0, 0);    
+    sem_init(&full, 0, 0); 
+	sem_init(&mutex, 0, 1);	//mutal exlusion
+
+	sem_init(&tx_empty, 0, TX_MAX); 
+    sem_init(&tx_full, 0, 0);    	
 	
 	if (!bcm2835_init()){
 		printf("init done failed \n");
         return 1;
 	}
 	
+	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_40 , BCM2835_GPIO_FSEL_OUTP);
+	bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, LOW);
+
+	bcm2835_spi_begin();
+	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST);      
+	bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);                   
+	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_16); 
+	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);                      
+	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW); 
+	 
+
 	printf("init done \n");
 	
 	pthread_t pid, pid2;
     pthread_create(&pid, NULL, spiReader, NULL);  
 	pthread_create(&pid2, NULL, packetreader, NULL); 
-
+	pthread_create(&pid, NULL, spiWriter, NULL);
 
 	/* create a UDP socket */
 	if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0) {
@@ -159,6 +192,7 @@ void runHermesLite() {
 }
 void *packetreader(void *arg) {
 	while(1) {
+		//usleep(10);
 		readPackets();
 	}
 
@@ -204,6 +238,9 @@ void handlePacket(char* buffer){
 			}
 		}
 	if (isValidFrame(buffer)) {
+	
+		 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
+	
 		if ((buffer[523] & 0xFE)  == 0x14) {
 			att = (buffer[523 + 4] & 0x1F);
 			//printf("att 523 =  %d \n", att);
@@ -215,12 +252,12 @@ void handlePacket(char* buffer){
 			sampleSpeed = (buffer[11 + 1] & 0x03);
 			
 			dither = 0;
-            if ((buffer[11 + 3] & 0x08) == 0x08)
-                dither = 1; 
-                
-            rando = 0;
-            if ((buffer[11 + 3] & 0x10) == 0x10)
-                rando = 1;
+			if ((buffer[11 + 3] & 0x08) == 0x08)
+				dither = 1; 
+				
+			rando = 0;
+			if ((buffer[11 + 3] & 0x10) == 0x10)
+				rando = 1;
 		}
 		
 		if ((buffer[523] & 0xFE)  == 0x00) {
@@ -238,7 +275,13 @@ void handlePacket(char* buffer){
             freq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
                     + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
         }
-	
+
+        // select Command
+        if ((buffer[523] & 0xFE) == 0x12)
+        {
+            drive_level = buffer[524];  
+        }
+		
 		if (holdatt != att) {
 			holdatt = att;
 			printf("att =  %d \n", att);printf("dither =  %d \n", dither);printf("rando =  %d \n", rando);
@@ -248,9 +291,38 @@ void handlePacket(char* buffer){
 			holdfreq = freq;
 			printf("frequency %d en aantal rx %d \n", freq, nrx);
 		}
+		//lees data en vul buffers
+		int frame = 0;
+		for (frame; frame < 2; frame++)
+		{
+			int coarse_pointer = frame * 512 + 8;
+
+			int j = 8;
+			for (j; j < 512; j += 8)
+			{
+				int k = coarse_pointer + j;
+
+				// M  (MSB first) L and R channel 2 * 16 bits
+				//rx_Audio_buffer.Write(datarcv[k + 0]);
+				//rx_Audio_buffer.Write(datarcv[k + 1]);
+				//rx_Audio_buffer.Write(datarcv[k + 2]);
+				//rx_Audio_buffer.Write(datarcv[k + 3]);
+				// send data to audio driver...beter latency......than using VAC!!! TODO
 	
+				// TX IQ
+				//MSB first according to protocol. (I and Q samples 2 * 16 bits)
+				if (MOX) {
+					sem_wait(&tx_empty);
+					int i = 0;
+					for (i; i < 4; i++){
+						put_tx_buffer(buffer[k + 4 + i]);
+					}
+					
+					sem_post(&tx_full);
+				}
+			}
+		}
 	}
-	
 }
 
 void sendPacket() {
@@ -296,16 +368,33 @@ void fillPacketToSend() {
 			for (j; j < (504 / (8 + factor)); j++) {
 				index = 16 + coarse_pointer + (j * (8 + factor));
 
-				// Only (for now) supporting receiving mode....
-				sem_wait(&full);            
-				int i =0;
-				for (i; i< 6; i++){
-					hpsdrdata[index + i] = get(); // MSB comes first!!!!
+				if (!MOX) {
+					sem_wait(&full);            
+					int i =0;
+					for (i; i< 6; i++){
+						hpsdrdata[index + i] = get(); // MSB comes first!!!!
+					}
+					sem_post(&empty); 
+					hpsdrdata[index + 6] = 0x00;	
+					hpsdrdata[index + 7] = 0x00;
+				} else {
+					//required to fill data ?...mic data ... maybe in future reading data from audio usb....or adding TLV codec??
+					
+					//Modulation LF
+                     //hpsdrdata[index + 7 + factor] = tx_Audio_buffer.Read();// LSB; comes first!!!!
+                     //hpsdrdata[index + 6 + factor] = tx_Audio_buffer.Read();
+					int i =0;
+					for (i; i< 6; i++){
+						hpsdrdata[index + i] = 0x00;
+					}
+					hpsdrdata[index + 7] = 0x00;	// LSB
+					hpsdrdata[index + 6] = 0x00;
+					
+					//usleep(1); // sleep required????
 				}
-				sem_post(&empty);  
-				
-				
 			}
+			if (MOX)
+				usleep(650);  // use pin...to indicate status...
 		}
 }
 
@@ -331,66 +420,105 @@ void fillDiscoveryReplyMessage() {
 }
 
 void *spiReader(void *arg) {
-	if (!bcm2835_init()){
-		printf("init done failed \n");
-	}
-	
-	printf("init done \n");
-	
-	bcm2835_spi_begin();
-    bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST);      
-    bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);                   
-    bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_8); 
-    bcm2835_spi_chipSelect(BCM2835_SPI_CS0);                      
-    bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW);      
-	
-	
-	printf("versie %d  \n", bcm2835_version());
-	
 	
 	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_33 , BCM2835_GPIO_FSEL_INPT);		
-	
+
 	int count =0;
 	gettimeofday(&t0, 0);
 	while(1) {
-		iqdata[0] = 0;
-		iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
-		iqdata[2] = ((freq >> 24) & 0xFF);
-		iqdata[3] = ((freq >> 16) & 0xFF);
-		iqdata[4] = ((freq >> 8) & 0xFF);
-		iqdata[5] = (freq & 0xFF);
-				
-		bcm2835_spi_transfern(iqdata, 6);
-		while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == LOW) 
-		{
+	
+		
+		if (!MOX) {
+			sem_wait(&mutex); 
+			
+			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, LOW);
+			
+			while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == HIGH) {};
+		
 			iqdata[0] = 0;
 			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 			iqdata[2] = ((freq >> 24) & 0xFF);
 			iqdata[3] = ((freq >> 16) & 0xFF);
 			iqdata[4] = ((freq >> 8) & 0xFF);
 			iqdata[5] = (freq & 0xFF);
+					
 			bcm2835_spi_transfern(iqdata, 6);
-		};
-		
-		sem_wait(&empty);
-		int i =0;
-		for (i; i< 6; i++){
-				put(iqdata[i]);
+			//firmware: tdata(56'h00010203040506) -> 0-1-2-3-4-5-6 (element 0 contains 0; second element contains 1)
+			sem_wait(&empty);
+			int i =0;
+			for (i; i< 6; i++){
+					put(iqdata[i]);
+			}
+			sem_post(&full);
+			
+			count ++;
+			if (count == 48000) {
+				count = 0;
+				gettimeofday(&t1, 0);
+				elapsed = timedifference_msec(t0, t1);
+				printf("Code rx mode spi executed in %f milliseconds.\n", elapsed);
+				gettimeofday(&t0, 0);
+			}
+			
+			sem_post(&mutex);
 		}
-		sem_post(&full);
-		
-		count ++;
-		if (count == 48000) {
-			count = 0;
-			gettimeofday(&t1, 0);
-			elapsed = timedifference_msec(t0, t1);
-			//printf("Code spi executed in %f milliseconds.\n", elapsed);
-			gettimeofday(&t0, 0);
-		}
-		
 	}
-	bcm2835_spi_end();
-    bcm2835_close();
+	
+}
+
+void *spiWriter(void *arg) {
+
+	int lcount =0;
+	gettimeofday(&t20, 0);
+	
+	while(1) {
+	
+			
+		if (MOX) {
+			sem_wait(&mutex);
+			
+			
+			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, HIGH);
+						
+			sem_wait(&tx_full); 
+					
+			tx_iqdata[0] = 0;
+			tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
+			if (prev_drive_level != drive_level) {
+				printf("drive level %d - corrected drive level %d \n", drive_level, tx_iqdata[1]);
+				prev_drive_level = drive_level; 
+			}
+			int i = 0;
+			for (i; i < 4; i++){			
+				tx_iqdata[2 + i] = get_tx_buffer(); //MSB is first in buffer..
+			}
+			bcm2835_spi_transfern(tx_iqdata, 6);
+			
+			sem_post(&tx_empty); 
+			
+			lcount ++;
+			if (lcount == 48000) {
+				lcount = 0;
+				gettimeofday(&t21, 0);
+				float elapsd = timedifference_msec(t20, t21);
+				printf("Code tx mode spi executed in %f milliseconds.\n", elapsd);
+				gettimeofday(&t20, 0);
+			}
+			
+			sem_post(&mutex);
+		}
+	}
+}
+
+void put_tx_buffer(unsigned char  value) {
+    tx_buffer[fill_tx] = value;    
+    fill_tx = (fill_tx + 1) % TX_MAX; 
+}
+
+unsigned char get_tx_buffer() {
+    int tmp = tx_buffer[use_tx];   
+    use_tx = (use_tx + 1) % TX_MAX;   
+    return tmp;
 }
 
 void put(unsigned char  value) {
@@ -403,44 +531,5 @@ unsigned char get() {
     use = (use + 1) % MAX;   
     return tmp;
 }
-/*
-void init(){
-		int amplitudeDB = -73;
-		amplitude = 1 / pow(sqrt(10.0), - (amplitudeDB / 10.0));
-		
-		int amplitudeNoiseDB = -90;
-		noiseAmplitude = 1 / pow(sqrt(10), - (amplitudeNoiseDB / 10));
 
-		timebase = 0.0;
-}
 
-void generateIQ() {
-
-		int f1 = (int) freq - vfo;
-
-		int idx = 0;
-
-		if (f1 > 24000 || f1 < -24000) {
-			amplitude = 0;
-		} else
-			amplitude = 1 / pow(sqrt(10.0), - (-73 / 10.0));
-			
-			
-			double angle1 = f1 * 2 * 3.14 * timebase;
-			float inlsamples =  0.0; //(noiseAmplitude * (2 * random() - 1) * 0x7fffff);
-			float inrsamples =  0.0; //(noiseAmplitude * (2 * random() - 1) * 0x7fffff);
-			inlsamples +=  (sin(angle1) * 0x7fffff * amplitude);
-			inrsamples +=  (cos(angle1) * 0x7fffff * amplitude);
-			int q = round(inrsamples); // * 0x7fffff
-			int i = round(inlsamples);// * 0x7fffff
-
-			iqdata[0] = (((i >> 16) & 0xff));
-			iqdata[1] = (((i >> 8) & 0xff));
-			iqdata[2] = ((i & 0xff));
-			iqdata[3] = ( ((q >> 16) & 0xff));
-			iqdata[4] = ( ((q >> 8) & 0xff));
-			iqdata[5] = ((q & 0xff));
-			
-			timebase += (1.0/ 48000);
-}
-*/

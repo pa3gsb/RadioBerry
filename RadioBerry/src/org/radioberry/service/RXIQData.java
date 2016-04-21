@@ -32,6 +32,8 @@ public class RXIQData implements Runnable{
 	
 	byte packet[] = new byte[6];
 	
+	byte save[] = new byte[6];
+	
 	int freq;
 	
 	private int inoffset = 0;
@@ -83,7 +85,7 @@ public class RXIQData implements Runnable{
 		
 		// create SPI object instance for SPI for communication
 		try {
-			spi = SpiFactory.getInstance(SpiChannel.CS0, 32000000, SpiMode.MODE_3);
+			spi = SpiFactory.getInstance(SpiChannel.CS0, 16000000, SpiMode.MODE_3);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -93,6 +95,10 @@ public class RXIQData implements Runnable{
 		outrsamples = new float[configuration.buffersize];
 		
 		this.wdsp = WDSP.getInstance();
+		
+		for (int i = 0; i < 6; i++){
+			save[i] = 0;
+		}
 	}
 	
 	public void start() {
@@ -113,14 +119,28 @@ public class RXIQData implements Runnable{
 		while (thread == Thread.currentThread()) {
 			try {
 				//processReceivedData(spi.write(packet));
+				
 				setRXFrequency(this.freq);
+				
 				byte[] rxbuffer = spi.write(packet);
 				while (iPinSPIValid.isState(PinState.LOW)){
 					setRXFrequency(this.freq);
 					rxbuffer = spi.write(packet);
 				}
-				processReceivedData(rxbuffer);
-				System.out.println("freq out = " + freq);
+//				int count=0;
+//				for (int i = 0; i < 6; i++){
+//					if (rxbuffer[i] != save[i]){
+//						count++;
+//					}
+//					save[i] = rxbuffer[i];
+//				}
+//				if (count > 3)
+					processReceivedData(rxbuffer);
+//				else
+//					System.out.print("+");
+				
+//				processReceivedData(rxbuffer);
+				//System.out.println("freq out = " + freq);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -153,6 +173,7 @@ public class RXIQData implements Runnable{
 
 		if (inoffset == configuration.buffersize) {
 
+			//System.out.print("."); //show progress
 			// DSP demodulation
 			wdsp.fexchange2(Channel.RX, inlsamples, inrsamples,
 					outlsamples, outrsamples, error);
@@ -180,22 +201,22 @@ public class RXIQData implements Runnable{
 
 			inoffset = 0;
 
-//			for (int j = 0; j < outlsamples.length; j++) {
-//				
-//				short lsample;
-//                short rsample;
-//                lsample = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
-//                rsample = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
-//				
-//				audiooutput[audiooutputindex++] = (byte) ((lsample >> 8) & 0xFF);
-//				audiooutput[audiooutputindex++] = (byte) (lsample & 0xFF);
-//				audiooutput[audiooutputindex++] = (byte) ((rsample >> 8) & 0xFF);
-//				audiooutput[audiooutputindex++] = (byte) (rsample & 0xFF);
-//				if (audiooutputindex == audiooutput.length) {
-//					LocalAudio.getInstance().writeAudio(audiooutput);
-//					audiooutputindex = 0;
-//				}
-//			}
+			for (int j = 0; j < outlsamples.length; j++) {
+				
+				short lsample;
+                short rsample;
+                lsample = (short) (outlsamples[j] * 32767.0F * configuration.afgain);
+                rsample = (short) (outrsamples[j] * 32767.0F * configuration.afgain);
+				
+				audiooutput[audiooutputindex++] = (byte) ((lsample >> 8) & 0xFF);
+				audiooutput[audiooutputindex++] = (byte) (lsample & 0xFF);
+				audiooutput[audiooutputindex++] = (byte) ((rsample >> 8) & 0xFF);
+				audiooutput[audiooutputindex++] = (byte) (rsample & 0xFF);
+				if (audiooutputindex == audiooutput.length) {
+					LocalAudio.getInstance().writeAudio(audiooutput);
+					audiooutputindex = 0;
+				}
+			}
 
 		}
 	}
@@ -205,6 +226,7 @@ public class RXIQData implements Runnable{
 		
 		this.freq = freq;
 		
+		packet[1] = 0x20;
 		packet[2] = (byte) ((freq >> 24) & 0xFF);
 		packet[3] = (byte) ((freq >> 16) & 0xFF);
 		packet[4] = (byte) ((freq >> 8) & 0xFF);

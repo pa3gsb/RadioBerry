@@ -40,7 +40,7 @@ parameter bit [0:19][8:0] initarray = {
     {1'b0,8'h00}, // Address 0x03, 
     {1'b0,8'h00}, // Address 0x04, 
     {1'b0,8'h00}, // Address 0x05, 
-    {1'b1,8'h04}, // Address 0x06,
+    {1'b0,8'h04}, // Address 0x06,
     {1'b1,8'h21}, // Address 0x07, Initiate DC offset calibration and RX filter on
     {1'b1,8'h4b}, // Address 0x08, RX filter f-3db at ~34 MHz after scaling
     {1'b0,8'h00}, // Address 0x09, 
@@ -55,37 +55,6 @@ parameter bit [0:19][8:0] initarray = {
     {1'b0,8'h00}, // Address 0x12, 
     {1'b0,8'h00}  // Address 0x13,     
 };
-
-
-
-
-//logic [8:0] initarray [0:19];
-
-
-//initial begin
-    // First bit is 1'b1 for write enable to that address
-//    initarray[0]  = {1'b1,8'h80}; // Address 0x00, enable 4 wire SPI
-//    initarray[1]  = {1'b0,8'h00}; // Address 0x01,
-//    initarray[2]  = {1'b0,8'h00}; // Address 0x02, 
-//    initarray[3]  = {1'b0,8'h00}; // Address 0x03, 
-//    initarray[4]  = {1'b0,8'h00}; // Address 0x04, 
-//    initarray[5]  = {1'b0,8'h00}; // Address 0x05, 
-//    initarray[6]  = {1'b0,8'h00}; // Address 0x06,
-//    initarray[7]  = {1'b1,8'h21}; // Address 0x07, Initiate DC offset calibration and RX filter on
-//    initarray[8]  = {1'b1,8'h4b}; // Address 0x08, RX filter f-3db at ~34 MHz after scaling
-//    initarray[9]  = {1'b0,8'h00}; // Address 0x09, 
-//    initarray[10] = {1'b0,8'h00}; // Address 0x0a, 
-//    initarray[11] = {1'b1,8'h20}; // Address 0x0b, RX gain only on PGA
-//    initarray[12] = {1'b1,8'h41}; // Address 0x0c, TX twos complement and interpolation factor 
-//    initarray[13] = {1'b1,8'h01}; // Address 0x0d, RT twos complement 
-//    initarray[14] = {1'b0,8'h01}; // Address 0x0e, Enable/Disable IAMP 
-//    initarray[15] = {1'b0,8'h00}; // Address 0x0f,     
-//    initarray[16] = {1'b0,8'h84}; // Address 0x10, Select TX gain
-//    initarray[17] = {1'b1,8'h00}; // Address 0x11, Select TX gain
-//    initarray[18] = {1'b0,8'h00}; // Address 0x12, 
-//    initarray[19] = {1'b0,8'h00}; // Address 0x13,     
-//end
-
 
 reg [15:0] datain;
 reg start;

@@ -48,11 +48,13 @@ public class SPITest {
 	public static void loop() throws IOException {
 		byte packet[] = new byte[6];
 
-		byte value = (byte) 0x00;
-		for (int i = 0; i < 6; i++) {
-			packet[i] = value;
-			value++;
-		}
+		int freq = 4607000;
+		packet[0] = 0x00;
+		packet[1] = 0x00;
+		packet[2] = (byte) ((freq >> 24) & 0xFF);
+		packet[3] = (byte) ((freq >> 16) & 0xFF);
+		packet[4] = (byte) ((freq >> 8) & 0xFF);
+		packet[5] = (byte) ((freq) & 0xFF);
 
 		byte[] result = spi.write(packet);
 
