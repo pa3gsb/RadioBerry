@@ -76,9 +76,10 @@ int freq = 4706000;
 
 int att = 0;
 int holdatt =128;
+int holddither=128;
 int dither = 0;
 int rando = 0;
-int sampleSpeed;
+int sampleSpeed = 0;
 
 unsigned char SYNC = 0x7F;
 int last_sequence_number = 0;
@@ -191,6 +192,9 @@ void runHermesLite() {
 	}
 }
 void *packetreader(void *arg) {
+
+	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_38, BCM2835_GPIO_FSEL_INPT);
+	
 	while(1) {
 		//usleep(10);
 		readPackets();
@@ -208,6 +212,9 @@ void readPackets() {
 	
 }
 
+		int att11 = 0;
+		int att523 = 0;
+
 void handlePacket(char* buffer){
 
 	if (buffer[2] == 2) {
@@ -217,7 +224,7 @@ void handlePacket(char* buffer){
                             (remaddr.sin_addr.s_addr>>8)&0xFF,
                             (remaddr.sin_addr.s_addr>>16)&0xFF,
                             (remaddr.sin_addr.s_addr>>24)&0xFF);
-		printf("Port %d \n", remaddr.sin_port);
+		printf("Port %d \n", ntohs(remaddr.sin_port));
 		
 		fillDiscoveryReplyMessage();
 		
@@ -226,7 +233,7 @@ void handlePacket(char* buffer){
 		
 	} else if (buffer[2] == 4) {
 			if (buffer[3] == 1 || buffer[3] == 3) {
-				printf("Port %d \n", remaddr.sin_port);
+				printf("Port %d \n", ntohs(remaddr.sin_port));
 				running = 1;
 				printf("SDR Program sends Start command \n");
 				return;
@@ -241,11 +248,16 @@ void handlePacket(char* buffer){
 	
 		 MOX = ((buffer[11] & 0x01)==0x01) ? 1:0;
 	
-		if ((buffer[523] & 0xFE)  == 0x14) {
-			att = (buffer[523 + 4] & 0x1F);
-			//printf("att 523 =  %d \n", att);
+		if ((buffer[11] & 0xFE)  == 0x14) {
+			att = (buffer[11 + 4] & 0x1F);
+			att11 = att;
 		}
 		
+		if ((buffer[523] & 0xFE)  == 0x14) {
+			att = (buffer[523 + 4] & 0x1F);
+			att523 = att;
+		}
+	
 		if ((buffer[11] & 0xFE)  == 0x00) {
 			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
 			
@@ -254,12 +266,29 @@ void handlePacket(char* buffer){
 			dither = 0;
 			if ((buffer[11 + 3] & 0x08) == 0x08)
 				dither = 1; 
-				
+						
 			rando = 0;
 			if ((buffer[11 + 3] & 0x10) == 0x10)
 				rando = 1;
 		}
 		
+		if ((buffer[523] & 0xFE)  == 0x00) {
+			
+			dither = 0;
+			if ((buffer[523 + 3] & 0x08) == 0x08)
+				dither = 1; 
+					
+			rando = 0;
+			if ((buffer[523 + 3] & 0x10) == 0x10)
+				rando = 1;
+		}
+		
+		// Alans radio (without name) support...
+		if (att11 != 0 && att523 == 0)
+			att = att11;
+		if (att11 == 0 && att523 != 0)
+			att = att523;
+			
 		if ((buffer[523] & 0xFE)  == 0x00) {
 			nrx = (((buffer[523 + 4] & 0x38) >> 3) + 1);
 		}
@@ -282,10 +311,11 @@ void handlePacket(char* buffer){
             drive_level = buffer[524];  
         }
 		
-		if (holdatt != att) {
+		if ((holdatt != att) || (holddither != dither)) {
 			holdatt = att;
-			printf("att =  %d \n", att);printf("dither =  %d \n", dither);printf("rando =  %d \n", rando);
-			printf("code =  %x \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
+			holddither = dither;
+			printf("att =  %d ", att);printf("dither =  %d ", dither);printf("rando =  %d ", rando);
+			printf("code =  %d \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
 		}
 		if (holdfreq != freq) {
 			holdfreq = freq;
@@ -312,6 +342,9 @@ void handlePacket(char* buffer){
 				// TX IQ
 				//MSB first according to protocol. (I and Q samples 2 * 16 bits)
 				if (MOX) {
+				
+					while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_38 ) == HIGH) {};	// wait if TX buffer is full.
+					
 					sem_wait(&tx_empty);
 					int i = 0;
 					for (i; i < 4; i++){
@@ -394,7 +427,7 @@ void fillPacketToSend() {
 				}
 			}
 			if (MOX)
-				usleep(650);  // use pin...to indicate status...
+				usleep(620);  // use pin...to indicate status...
 		}
 }
 
@@ -415,7 +448,7 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
 	broadcastReply[i++] =  31;
-	broadcastReply[i++] =  1; // Hermes boardtype public static final
+	broadcastReply[i++] =  10; // Hermes boardtype public static final
 									// int DEVICE_HERMES_LITE = 6;
 }
 
@@ -431,11 +464,11 @@ void *spiReader(void *arg) {
 		if (!MOX) {
 			sem_wait(&mutex); 
 			
-			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, LOW);
+			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, LOW);	// ptt off
 			
-			while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == HIGH) {};
+			while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == HIGH) {}; // wait till rxFIFO buffer is filled with at least one element
 		
-			iqdata[0] = 0;
+			iqdata[0] = (sampleSpeed & 0x03);
 			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 			iqdata[2] = ((freq >> 24) & 0xFF);
 			iqdata[3] = ((freq >> 16) & 0xFF);
@@ -477,9 +510,8 @@ void *spiWriter(void *arg) {
 		if (MOX) {
 			sem_wait(&mutex);
 			
-			
-			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, HIGH);
-						
+			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, HIGH);	// ptt on
+				
 			sem_wait(&tx_full); 
 					
 			tx_iqdata[0] = 0;

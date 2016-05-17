@@ -12,7 +12,20 @@ import org.hermeslite.hardware.IRxHandler;
 import org.hermeslite.service.Configuration;
 
 public class Protocol implements Runnable {
+	
+	
+	class Reading implements Runnable {
+
+		@Override
+		public void run() {
+			readPackets();
+		}
+		
+	}
+	
+	
 	private volatile Thread thread;
+	private volatile Thread readingthread;
 
 	private byte SYNC = 0x7F;
 	int last_sequence_number = 0;
@@ -38,17 +51,20 @@ public class Protocol implements Runnable {
 
 	public void start() {
 		System.out.println("start");
-		// if (thread == null) {
-		// thread = new Thread(this);
-		// thread.setPriority(Thread.MAX_PRIORITY);
-		// thread.start();
-		// }
-		while (true) {
-			readPackets();
-			if (running) {
-				sendPacket();
-			}
+		
+		if (readingthread== null){
+			Reading r = new Reading();
+			readingthread = new Thread(r);
+			readingthread.start();
 		}
+		
+		if (thread == null) {
+			thread = new Thread(this);
+			thread.setPriority(Thread.MAX_PRIORITY);
+			thread.start();
+		}
+		
+		
 	}
 
 	public void stop() {
@@ -58,13 +74,14 @@ public class Protocol implements Runnable {
 			socket.close();
 			socket = null;
 		}
+		readingthread = null;
 		thread = null;
 	}
 
 	@Override
 	public void run() {
 		while (thread == Thread.currentThread()) {
-			readPackets();
+			//readPackets();
 			if (running) {
 				sendPacket();
 			}

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Thu Apr 21 20:11:36 2016
+Sat May 07 10:46:25 2016
 Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
 
 
@@ -167,19 +167,18 @@ Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Editio
 159. Port Connectivity Checks: "transmitter:transmitter_inst|cpl_cordic:cordic_inst"
 160. Port Connectivity Checks: "transmitter:transmitter_inst|CicInterpM5:in2"
 161. Port Connectivity Checks: "transmitter:transmitter_inst"
-162. Port Connectivity Checks: "txFIFO:txFIFO_inst"
-163. Port Connectivity Checks: "receiver:receiver_inst|varcic:varcic_inst_Q1"
-164. Port Connectivity Checks: "receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst"
-165. Port Connectivity Checks: "receiver:receiver_inst|cic:cic_inst_Q2"
-166. Port Connectivity Checks: "receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[2].cic_comb_inst"
-167. Port Connectivity Checks: "receiver:receiver_inst|cic:cic_inst_I2"
-168. Port Connectivity Checks: "receiver:receiver_inst"
-169. Port Connectivity Checks: "spi_slave:spi_slave_rx_inst"
-170. Port Connectivity Checks: "ad9866:ad9866_inst"
-171. Port Connectivity Checks: "pllclock:pllclock_inst"
-172. Elapsed Time Per Partition
-173. Analysis & Synthesis Messages
-174. Analysis & Synthesis Suppressed Messages
+162. Port Connectivity Checks: "receiver:receiver_inst|varcic:varcic_inst_Q1"
+163. Port Connectivity Checks: "receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst"
+164. Port Connectivity Checks: "receiver:receiver_inst|cic:cic_inst_Q2"
+165. Port Connectivity Checks: "receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[2].cic_comb_inst"
+166. Port Connectivity Checks: "receiver:receiver_inst|cic:cic_inst_I2"
+167. Port Connectivity Checks: "receiver:receiver_inst"
+168. Port Connectivity Checks: "spi_slave:spi_slave_rx_inst"
+169. Port Connectivity Checks: "ad9866:ad9866_inst"
+170. Port Connectivity Checks: "pllclock:pllclock_inst"
+171. Elapsed Time Per Partition
+172. Analysis & Synthesis Messages
+173. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -205,16 +204,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 21 20:11:36 2016         ;
+; Analysis & Synthesis Status        ; Successful - Sat May 07 10:46:25 2016         ;
 ; Quartus II 64-Bit Version          ; 12.1 Build 243 01/31/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; radioberry                                    ;
 ; Top-level Entity Name              ; radioberry                                    ;
 ; Family                             ; Cyclone III                                   ;
-; Total logic elements               ; 8,318                                         ;
-;     Total combinational functions  ; 6,278                                         ;
-;     Dedicated logic registers      ; 6,541                                         ;
-; Total registers                    ; 6541                                          ;
-; Total pins                         ; 41                                            ;
+; Total logic elements               ; 8,416                                         ;
+;     Total combinational functions  ; 6,347                                         ;
+;     Dedicated logic registers      ; 6,599                                         ;
+; Total registers                    ; 6599                                          ;
+; Total pins                         ; 42                                            ;
 ; Total virtual pins                 ; 0                                             ;
 ; Total memory bits                  ; 264,704                                       ;
 ; Embedded Multiplier 9-bit elements ; 44                                            ;
@@ -318,12 +317,12 @@ applicable agreement for further details.
 ; Number detected on machine ; 8           ;
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
-; Average used               ; 1.40        ;
+; Average used               ; 1.00        ;
 ; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     1 processor            ; 100.0%      ;
-;     2-4 processors         ;   3.7%      ;
+;     2-4 processors         ; < 0.1%      ;
 ;     5-8 processors         ;   0.0%      ;
 +----------------------------+-------------+
 
@@ -423,28 +422,28 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 8,318  ;
+; Estimated Total logic elements              ; 8,416  ;
 ;                                             ;        ;
-; Total combinational functions               ; 6278   ;
+; Total combinational functions               ; 6347   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 425    ;
-;     -- 3 input functions                    ; 4063   ;
-;     -- <=2 input functions                  ; 1790   ;
+;     -- 4 input functions                    ; 502    ;
+;     -- 3 input functions                    ; 4058   ;
+;     -- <=2 input functions                  ; 1787   ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 1584   ;
+;     -- normal mode                          ; 1653   ;
 ;     -- arithmetic mode                      ; 4694   ;
 ;                                             ;        ;
-; Total registers                             ; 6541   ;
-;     -- Dedicated logic registers            ; 6541   ;
+; Total registers                             ; 6599   ;
+;     -- Dedicated logic registers            ; 6599   ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
-; I/O pins                                    ; 41     ;
+; I/O pins                                    ; 42     ;
 ; Total memory bits                           ; 264704 ;
 ; Embedded Multiplier 9-bit elements          ; 44     ;
-; Maximum fan-out                             ; 6782   ;
-; Total fan-out                               ; 47236  ;
-; Average fan-out                             ; 3.49   ;
+; Maximum fan-out                             ; 6811   ;
+; Total fan-out                               ; 47721  ;
+; Average fan-out                             ; 3.50   ;
 +---------------------------------------------+--------+
 
 
@@ -453,11 +452,11 @@ applicable agreement for further details.
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                           ; Library Name ;
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |radioberry                                                 ; 6278 (131)        ; 6541 (117)   ; 264704      ; 44           ; 0       ; 22        ; 41   ; 0            ; |radioberry                                                                                                                                   ;              ;
-;    |ad9866:ad9866_inst|                                     ; 52 (52)           ; 29 (29)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                                ;              ;
+; |radioberry                                                 ; 6347 (130)        ; 6599 (119)   ; 264704      ; 44           ; 0       ; 22        ; 42   ; 0            ; |radioberry                                                                                                                                   ;              ;
+;    |ad9866:ad9866_inst|                                     ; 47 (47)           ; 29 (29)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                                ;              ;
 ;    |lpm_mult:Mult0|                                         ; 72 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0                                                                                                                    ;              ;
 ;       |mult_gft:auto_generated|                             ; 72 (72)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0|mult_gft:auto_generated                                                                                            ;              ;
-;    |receiver:receiver_inst|                                 ; 3148 (0)          ; 3762 (0)     ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_inst                                                                                                            ;              ;
+;    |receiver:receiver_inst|                                 ; 3216 (0)          ; 3792 (0)     ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_inst                                                                                                            ;              ;
 ;       |cic:cic_inst_I2|                                     ; 203 (35)          ; 255 (16)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|cic:cic_inst_I2                                                                                            ;              ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|             ; 28 (28)           ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst                                                       ;              ;
 ;          |cic_comb:cic_stages[1].cic_comb_inst|             ; 28 (28)           ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[1].cic_comb_inst                                                       ;              ;
@@ -473,7 +472,7 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[1].cic_integrator_inst| ; 28 (28)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[1].cic_integrator_inst                                           ;              ;
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 28 (28)           ; 28 (28)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|cic:cic_inst_Q2|cic_integrator:cic_stages[2].cic_integrator_inst                                           ;              ;
 ;       |cordic:cordic_inst|                                  ; 1038 (1038)       ; 680 (680)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|cordic:cordic_inst                                                                                         ;              ;
-;       |firX8R8:fir2|                                        ; 929 (273)         ; 1469 (61)    ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2                                                                                               ;              ;
+;       |firX8R8:fir2|                                        ; 928 (272)         ; 1469 (61)    ; 110592      ; 32           ; 0       ; 16        ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2                                                                                               ;              ;
 ;          |fir256:A|                                         ; 82 (82)           ; 176 (176)    ; 13824       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A                                                                                      ;              ;
 ;             |firram36:ram|                                  ; 0 (0)             ; 0 (0)        ; 9216        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|firram36:ram                                                                         ;              ;
 ;                |altsyncram:altsyncram_component|            ; 0 (0)             ; 0 (0)        ; 9216        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|firram36:ram|altsyncram:altsyncram_component                                         ;              ;
@@ -562,41 +561,41 @@ applicable agreement for further details.
 ;                |mult_35t:auto_generated|                    ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|lpm_mult:Mult0|mult_35t:auto_generated                                               ;              ;
 ;             |lpm_mult:Mult1|                                ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|lpm_mult:Mult1                                                                       ;              ;
 ;                |mult_35t:auto_generated|                    ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|lpm_mult:Mult1|mult_35t:auto_generated                                               ;              ;
-;       |varcic:varcic_inst_I1|                               ; 410 (40)          ; 568 (33)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1                                                                                      ;              ;
+;       |varcic:varcic_inst_I1|                               ; 445 (75)          ; 583 (33)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1                                                                                      ;              ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[0].cic_comb_inst                                                 ;              ;
 ;          |cic_comb:cic_stages[1].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[1].cic_comb_inst                                                 ;              ;
 ;          |cic_comb:cic_stages[2].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[2].cic_comb_inst                                                 ;              ;
 ;          |cic_comb:cic_stages[3].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[3].cic_comb_inst                                                 ;              ;
-;          |cic_comb:cic_stages[4].cic_comb_inst|             ; 37 (37)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst                                                 ;              ;
+;          |cic_comb:cic_stages[4].cic_comb_inst|             ; 37 (37)           ; 69 (69)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst                                                 ;              ;
 ;          |cic_integrator:cic_stages[0].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[1].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[1].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[2].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[3].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[4].cic_integrator_inst                                     ;              ;
-;       |varcic:varcic_inst_Q1|                               ; 386 (16)          ; 551 (16)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1                                                                                      ;              ;
+;       |varcic:varcic_inst_Q1|                               ; 420 (50)          ; 566 (16)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1                                                                                      ;              ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[0].cic_comb_inst                                                 ;              ;
 ;          |cic_comb:cic_stages[1].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[1].cic_comb_inst                                                 ;              ;
 ;          |cic_comb:cic_stages[2].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[2].cic_comb_inst                                                 ;              ;
 ;          |cic_comb:cic_stages[3].cic_comb_inst|             ; 37 (37)           ; 74 (74)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[3].cic_comb_inst                                                 ;              ;
-;          |cic_comb:cic_stages[4].cic_comb_inst|             ; 37 (37)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst                                                 ;              ;
+;          |cic_comb:cic_stages[4].cic_comb_inst|             ; 37 (37)           ; 69 (69)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst                                                 ;              ;
 ;          |cic_integrator:cic_stages[0].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[0].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[1].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[1].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                                     ;              ;
 ;    |reset_handler:reset_handler_inst|                       ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|reset_handler:reset_handler_inst                                                                                                  ;              ;
-;    |rxFIFO:rxFIFO_inst|                                     ; 60 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst                                                                                                                ;              ;
-;       |dcfifo:dcfifo_component|                             ; 60 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
-;          |dcfifo_bqj1:auto_generated|                       ; 60 (3)            ; 80 (24)      ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated                                                             ;              ;
+;    |rxFIFO:rxFIFO_inst|                                     ; 61 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst                                                                                                                ;              ;
+;       |dcfifo:dcfifo_component|                             ; 61 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
+;          |dcfifo_bqj1:auto_generated|                       ; 61 (3)            ; 80 (24)      ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated                                                             ;              ;
 ;             |a_graycounter_qjc:wrptr_g1p|                   ; 22 (22)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p                                 ;              ;
-;             |a_graycounter_u57:rdptr_g1p|                   ; 27 (27)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p                                 ;              ;
+;             |a_graycounter_u57:rdptr_g1p|                   ; 28 (28)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p                                 ;              ;
 ;             |alt_synch_pipe_sld:ws_dgrp|                    ; 0 (0)             ; 24 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp                                  ;              ;
 ;                |dffpipe_re9:dffpipe10|                      ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe10            ;              ;
 ;             |altsyncram_hl31:fifo_ram|                      ; 0 (0)             ; 0 (0)        ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|altsyncram_hl31:fifo_ram                                    ;              ;
 ;             |cmpr_g66:wrempty_eq_comp|                      ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|cmpr_g66:wrempty_eq_comp                                    ;              ;
-;    |spi_slave:spi_slave_rx_inst|                            ; 64 (64)           ; 133 (133)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx_inst                                                                                                       ;              ;
-;    |transmitter:transmitter_inst|                           ; 2662 (74)         ; 2310 (102)   ; 23040       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst                                                                                                      ;              ;
-;       |CicInterpM5:in2|                                     ; 765 (765)         ; 977 (977)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|CicInterpM5:in2                                                                                      ;              ;
+;    |spi_slave:spi_slave_rx_inst|                            ; 63 (63)           ; 138 (138)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx_inst                                                                                                       ;              ;
+;    |transmitter:transmitter_inst|                           ; 2662 (74)         ; 2309 (102)   ; 23040       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst                                                                                                      ;              ;
+;       |CicInterpM5:in2|                                     ; 765 (765)         ; 976 (976)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|CicInterpM5:in2                                                                                      ;              ;
 ;       |FirInterp8_1024:fi|                                  ; 131 (131)         ; 227 (227)    ; 23040       ; 4            ; 0       ; 2         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi                                                                                   ;              ;
 ;          |firram36I_1024:ram|                               ; 0 (0)             ; 0 (0)        ; 4608        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|firram36I_1024:ram                                                                ;              ;
 ;             |altsyncram:altsyncram_component|               ; 0 (0)             ; 0 (0)        ; 4608        ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|firram36I_1024:ram|altsyncram:altsyncram_component                                ;              ;
@@ -610,15 +609,18 @@ applicable agreement for further details.
 ;             |mult_35t:auto_generated|                       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|lpm_mult:Mult1|mult_35t:auto_generated                                            ;              ;
 ;       |cpl_cordic:cordic_inst|                              ; 1691 (1691)       ; 1003 (1003)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst                                                                               ;              ;
 ;       |pulsegen:pulse_inst|                                 ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|pulsegen:pulse_inst                                                                                  ;              ;
-;    |txFIFO:txFIFO_inst|                                     ; 56 (0)            ; 85 (0)       ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst                                                                                                                ;              ;
-;       |dcfifo:dcfifo_component|                             ; 56 (0)            ; 85 (0)       ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
-;          |dcfifo_tek1:auto_generated|                       ; 56 (3)            ; 85 (33)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated                                                             ;              ;
+;    |txFIFO:txFIFO_inst|                                     ; 63 (0)            ; 107 (0)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst                                                                                                                ;              ;
+;       |dcfifo:dcfifo_component|                             ; 63 (0)            ; 107 (0)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
+;          |dcfifo_tek1:auto_generated|                       ; 63 (4)            ; 107 (33)     ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated                                                             ;              ;
 ;             |a_graycounter_pjc:wrptr_g1p|                   ; 24 (24)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p                                 ;              ;
-;             |a_graycounter_t57:rdptr_g1p|                   ; 23 (23)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p                                 ;              ;
+;             |a_graycounter_t57:rdptr_g1p|                   ; 22 (22)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p                                 ;              ;
+;             |alt_synch_pipe_0md:ws_dgrp|                    ; 0 (0)             ; 22 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp                                  ;              ;
+;                |dffpipe_ve9:dffpipe8|                       ; 0 (0)             ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp|dffpipe_ve9:dffpipe8             ;              ;
 ;             |alt_synch_pipe_vld:rs_dgwp|                    ; 0 (0)             ; 22 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp                                  ;              ;
 ;                |dffpipe_ue9:dffpipe5|                       ; 0 (0)             ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp|dffpipe_ue9:dffpipe5             ;              ;
 ;             |altsyncram_1l31:fifo_ram|                      ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|altsyncram_1l31:fifo_ram                                    ;              ;
 ;             |cmpr_f66:rdempty_eq_comp|                      ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|cmpr_f66:rdempty_eq_comp                                    ;              ;
+;             |cmpr_f66:wrfull_eq_comp|                       ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|cmpr_f66:wrfull_eq_comp                                     ;              ;
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -728,224 +730,223 @@ Encoding Type:  One-Hot
 +--------------+--------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                                                           ;
-+---------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------+
-; Register name                                                                                     ; Reason for Removal                                                       ;
-+---------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------+
-; transmitter:transmitter_inst|FirInterp8_1024:fi|y_real[0]                                         ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|y_imag[0]                                         ; Stuck at GND due to stuck port data_in                                   ;
-; spi_slave:spi_slave_rx_inst|rreg[38..47]                                                          ; Lost fanout                                                              ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|cic_comb:cic_stages[4].cic_comb_inst|out_data[5..19] ; Lost fanout                                                              ;
-; receiver:receiver_inst|varcic:varcic_inst_I1|cic_comb:cic_stages[4].cic_comb_inst|out_data[5..19] ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q0[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x0[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq0[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx0[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[18][22]                                     ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[18][21]                                     ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[17][22]                                     ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[17][21]                                     ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][19]                                      ; Merged with transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][18] ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q0[20..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q0[19]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x0[20..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x0[19]          ;
-; receiver:receiver_inst|cordic:cordic_inst|Z[0][14]                                                ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][15]           ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq0[20..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq0[19]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx0[20..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx0[19]         ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[0]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[0]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[1]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[1]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[2]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[2]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[3]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[3]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[4]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[4]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[5]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[5]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[6]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[6]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[7]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[7]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[8]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[8]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[9]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[9]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[10]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[10]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[11]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[11]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[12]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[12]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[13]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[13]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[14]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[14]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[15]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[15]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[16]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[16]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[17]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[17]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[18]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[18]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[19]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[19]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[20]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[20]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[21]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[21]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[22]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[22]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[23]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[23]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[24]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[24]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[25]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[25]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[26]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[26]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[27]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[27]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[28]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[28]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[29]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[29]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[30]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[30]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[31]                                     ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[31]          ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][4]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][5]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][1]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][6]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][2]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][7]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][3]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][8]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][4]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][9]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][5]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][10]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][6]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][11]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][7]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][12]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][8]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][13]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][9]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][14]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][10]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][15]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][11]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][16]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][12]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][17]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][13]           ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][18]                                      ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][15]           ;
-; receiver:receiver_inst|cordic:cordic_inst|X[0][1]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|X[0][2]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|X[0][3]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|X[0][4]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[0][0]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[0][1]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[0][2]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[0][3]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[0][4]                                                 ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][0]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][1]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][2]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][0]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][1]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][2]                                       ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[0]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[0]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|out_strobe                                           ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|out_strobe      ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[1]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[1]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[2]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[2]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[3]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[3]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[4]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[4]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[5]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[5]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[6]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[6]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[7]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[7]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[8]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[8]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[9]                                         ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[9]    ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[10]                                        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[10]   ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[11]                                        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[11]   ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[12]                                        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[12]   ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[13]                                        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[13]   ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[14]                                        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[14]   ;
-; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[15]                                        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[15]   ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[0]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[0]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|out_strobe                                                 ; Merged with receiver:receiver_inst|cic:cic_inst_I2|out_strobe            ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[1]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[1]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[2]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[2]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[3]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[3]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[4]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[4]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[5]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[5]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[6]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[6]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[7]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[7]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[8]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[8]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[9]                                               ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[9]          ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[10]                                              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[10]         ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[11]                                              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[11]         ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[12]                                              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[12]         ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[13]                                              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[13]         ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[14]                                              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[14]         ;
-; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[15]                                              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[15]         ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][3]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][3]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[0][0]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q1[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x1[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][0]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][1]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][2]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][0]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][1]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][2]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq1[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q2[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx1[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x2[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[2][0]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[2][0]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][4]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][4]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq2[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q3[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx2[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x3[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[1][3]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[1][2]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[1][1]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[1][0]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[1][3]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[1][2]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[1][1]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[1][0]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][3]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][3]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq3[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q4[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx3[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x4[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[2][1]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[2][1]                                       ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq4[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx4[0]                                               ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[2][0]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[2][0]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q5[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x5[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|X[2][1]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; receiver:receiver_inst|cordic:cordic_inst|Y[2][1]                                                 ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|s1[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|y1[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|s2[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|y2[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|s3[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|y3[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|s4[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|y4[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|s5[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|CicInterpM5:in2|y5[0]                                                ; Stuck at GND due to stuck port data_in                                   ;
-; transmitter:transmitter_inst|counter[0]                                                           ; Merged with agc_delaycnt[0]                                              ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q1[21..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q1[20]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x1[21..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x1[20]          ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:H|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[0]        ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:F|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[0]        ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:E|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:E|caddr[0]        ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:D|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:D|caddr[0]        ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:C|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:C|caddr[0]        ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:B|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:B|caddr[0]        ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:A|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:A|caddr[0]        ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq1[21..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq1[20]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx1[21..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx1[20]         ;
-; receiver:receiver_inst|firX8R8:fir2|fir256:G|counter[0]                                           ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:G|caddr[0]        ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q2[22..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q2[21]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x2[22..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x2[21]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq2[22..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq2[21]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx2[22..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx2[21]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q3[23..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q3[22]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x3[23..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x3[22]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq3[23..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq3[22]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx3[23..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx3[22]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q4[24..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q4[23]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x4[24..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x4[23]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dq4[24..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq4[23]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|dx4[24..50]                                          ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx4[23]         ;
-; transmitter:transmitter_inst|CicInterpM5:in2|q5[25..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q5[24]          ;
-; transmitter:transmitter_inst|CicInterpM5:in2|x5[25..50]                                           ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x5[24]          ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~12                                         ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~13                                         ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~14                                         ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~15                                         ; Lost fanout                                                              ;
-; receiver:receiver_inst|cic:cic_inst_I2|sample_no[0]                                               ; Merged with agc_delaycnt[0]                                              ;
-; transmitter:transmitter_inst|CicInterpM5:in2|counter[0]                                           ; Merged with agc_delaycnt[0]                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|Imult[33..35]                                     ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|Rmult[33..35]                                     ; Lost fanout                                                              ;
-; counter[24..26]                                                                                   ; Lost fanout                                                              ;
-; agc_delaycnt[22..25]                                                                              ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|Iaccum[21..23]                                    ; Lost fanout                                                              ;
-; transmitter:transmitter_inst|FirInterp8_1024:fi|Raccum[21..23]                                    ; Lost fanout                                                              ;
-; Total Number of Removed Registers = 871                                                           ;                                                                          ;
-+---------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                        ;
++----------------------------------------------------------------+--------------------------------------------------------------------------+
+; Register name                                                  ; Reason for Removal                                                       ;
++----------------------------------------------------------------+--------------------------------------------------------------------------+
+; transmitter:transmitter_inst|FirInterp8_1024:fi|y_real[0]      ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|y_imag[0]      ; Stuck at GND due to stuck port data_in                                   ;
+; spi_slave:spi_slave_rx_inst|rreg[41..47]                       ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q0[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x0[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq0[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx0[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[18][22]  ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[18][21]  ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[17][22]  ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[17][21]  ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][19]   ; Merged with transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][18] ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q0[20..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q0[19]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x0[20..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x0[19]          ;
+; receiver:receiver_inst|cordic:cordic_inst|Z[0][14]             ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][15]           ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq0[20..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq0[19]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx0[20..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx0[19]         ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[0]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[0]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[1]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[1]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[2]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[2]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[3]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[3]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[4]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[4]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[5]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[5]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[6]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[6]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[7]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[7]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[8]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[8]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[9]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[9]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[10]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[10]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[11]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[11]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[12]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[12]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[13]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[13]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[14]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[14]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[15]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[15]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[16]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[16]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[17]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[17]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[18]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[18]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[19]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[19]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[20]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[20]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[21]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[21]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[22]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[22]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[23]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[23]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[24]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[24]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[25]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[25]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[26]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[26]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[27]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[27]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[28]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[28]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[29]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[29]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[30]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[30]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|phase[31]  ; Merged with receiver:receiver_inst|cordic:cordic_inst|phase[31]          ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][4]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][5]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][1]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][6]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][2]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][7]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][3]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][8]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][4]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][9]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][5]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][10]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][6]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][11]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][7]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][12]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][8]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][13]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][9]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][14]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][10]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][15]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][11]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][16]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][12]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][17]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][13]           ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Z[0][18]   ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][15]           ;
+; receiver:receiver_inst|cordic:cordic_inst|X[0][1]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|X[0][2]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|X[0][3]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|X[0][4]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[0][0]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[0][1]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[0][2]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[0][3]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[0][4]              ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][0]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][1]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][2]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][0]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][1]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][2]    ; Merged with receiver:receiver_inst|cordic:cordic_inst|X[0][0]            ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[0]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[0]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|out_strobe        ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|out_strobe      ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[1]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[1]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[2]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[2]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[3]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[3]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[4]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[4]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[5]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[5]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[6]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[6]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[7]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[7]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[8]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[8]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[9]      ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[9]    ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[10]     ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[10]   ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[11]     ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[11]   ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[12]     ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[12]   ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[13]     ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[13]   ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[14]     ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[14]   ;
+; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[15]     ; Merged with receiver:receiver_inst|varcic:varcic_inst_I1|sample_no[15]   ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[0]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[0]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|out_strobe              ; Merged with receiver:receiver_inst|cic:cic_inst_I2|out_strobe            ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[1]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[1]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[2]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[2]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[3]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[3]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[4]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[4]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[5]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[5]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[6]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[6]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[7]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[7]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[8]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[8]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[9]            ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[9]          ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[10]           ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[10]         ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[11]           ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[11]         ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[12]           ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[12]         ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[13]           ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[13]         ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[14]           ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[14]         ;
+; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[15]           ; Merged with receiver:receiver_inst|cic:cic_inst_I2|sample_no[15]         ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][3]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][3]    ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[0][0]              ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q1[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x1[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][0]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][1]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][2]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][0]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][1]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][2]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq1[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q2[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx1[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x2[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[2][0]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[2][0]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][4]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][4]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq2[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q3[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx2[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x3[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[1][3]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[1][2]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[1][1]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[1][0]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[1][3]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[1][2]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[1][1]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[1][0]              ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[1][3]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[1][3]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq3[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q4[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx3[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x4[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[2][1]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[2][1]    ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq4[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx4[0]            ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[2][0]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[2][0]              ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q5[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x5[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|X[2][1]              ; Stuck at GND due to stuck port data_in                                   ;
+; receiver:receiver_inst|cordic:cordic_inst|Y[2][1]              ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|s1[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|y1[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|s2[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|y2[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|s3[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|y3[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|s4[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|y4[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|s5[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|CicInterpM5:in2|y5[0]             ; Stuck at GND due to stuck port data_in                                   ;
+; transmitter:transmitter_inst|counter[0]                        ; Merged with agc_delaycnt[0]                                              ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q1[21..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q1[20]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x1[21..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x1[20]          ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:H|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[0]        ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:F|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[0]        ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:E|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:E|caddr[0]        ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:D|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:D|caddr[0]        ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:C|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:C|caddr[0]        ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:B|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:B|caddr[0]        ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:A|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:A|caddr[0]        ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq1[21..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq1[20]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx1[21..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx1[20]         ;
+; receiver:receiver_inst|firX8R8:fir2|fir256:G|counter[0]        ; Merged with receiver:receiver_inst|firX8R8:fir2|fir256:G|caddr[0]        ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q2[22..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q2[21]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x2[22..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x2[21]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq2[22..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq2[21]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx2[22..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx2[21]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q3[23..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q3[22]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x3[23..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x3[22]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq3[23..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq3[22]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx3[23..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx3[22]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q4[24..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q4[23]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x4[24..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x4[23]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dq4[24..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dq4[23]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|dx4[24..50]       ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|dx4[23]         ;
+; transmitter:transmitter_inst|CicInterpM5:in2|q5[25..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|q5[24]          ;
+; transmitter:transmitter_inst|CicInterpM5:in2|x5[25..50]        ; Merged with transmitter:transmitter_inst|CicInterpM5:in2|x5[24]          ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~12      ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~13      ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~14      ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|rstate~15      ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|CicInterpM5:in2|counter[0]        ; Merged with agc_delaycnt[0]                                              ;
+; receiver:receiver_inst|cic:cic_inst_I2|sample_no[0]            ; Merged with agc_delaycnt[0]                                              ;
+; transmitter:transmitter_inst|CicInterpM5:in2|counter[1]        ; Merged with transmitter:transmitter_inst|counter[1]                      ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|Imult[33..35]  ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|Rmult[33..35]  ; Lost fanout                                                              ;
+; counter[24..26]                                                ; Lost fanout                                                              ;
+; agc_delaycnt[22..25]                                           ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|Iaccum[21..23] ; Lost fanout                                                              ;
+; transmitter:transmitter_inst|FirInterp8_1024:fi|Raccum[21..23] ; Lost fanout                                                              ;
+; Total Number of Removed Registers = 839                        ;                                                                          ;
++----------------------------------------------------------------+--------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -993,9 +994,7 @@ Encoding Type:  One-Hot
 ;                                                             ;                           ; transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[2][1]                 ;
 ; spi_slave:spi_slave_rx_inst|rreg[47]                        ; Lost Fanouts              ; spi_slave:spi_slave_rx_inst|rreg[46], spi_slave:spi_slave_rx_inst|rreg[45], ;
 ;                                                             ;                           ; spi_slave:spi_slave_rx_inst|rreg[44], spi_slave:spi_slave_rx_inst|rreg[43], ;
-;                                                             ;                           ; spi_slave:spi_slave_rx_inst|rreg[42], spi_slave:spi_slave_rx_inst|rreg[41], ;
-;                                                             ;                           ; spi_slave:spi_slave_rx_inst|rreg[40], spi_slave:spi_slave_rx_inst|rreg[39], ;
-;                                                             ;                           ; spi_slave:spi_slave_rx_inst|rreg[38]                                        ;
+;                                                             ;                           ; spi_slave:spi_slave_rx_inst|rreg[42], spi_slave:spi_slave_rx_inst|rreg[41]  ;
 ; transmitter:transmitter_inst|FirInterp8_1024:fi|y_real[0]   ; Stuck at GND              ; transmitter:transmitter_inst|CicInterpM5:in2|x0[0],                         ;
 ;                                                             ; due to stuck port data_in ; transmitter:transmitter_inst|CicInterpM5:in2|dx0[0]                         ;
 ; transmitter:transmitter_inst|FirInterp8_1024:fi|y_imag[0]   ; Stuck at GND              ; transmitter:transmitter_inst|CicInterpM5:in2|q0[0],                         ;
@@ -1018,12 +1017,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6541  ;
-; Number of registers using Synchronous Clear  ; 1013  ;
+; Total registers                              ; 6599  ;
+; Number of registers using Synchronous Clear  ; 1029  ;
 ; Number of registers using Synchronous Load   ; 533   ;
-; Number of registers using Asynchronous Clear ; 327   ;
+; Number of registers using Asynchronous Clear ; 354   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 3856  ;
+; Number of registers using Clock Enable       ; 3893  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -1033,22 +1032,22 @@ Encoding Type:  One-Hot
 +--------------------------------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                                            ; Fan out ;
 +--------------------------------------------------------------------------------------------------------------+---------+
-; ad9866:ad9866_inst|sen_n                                                                                     ; 19      ;
-; reset_handler:reset_handler_inst|reset                                                                       ; 441     ;
+; ad9866:ad9866_inst|sen_n                                                                                     ; 16      ;
+; reset_handler:reset_handler_inst|reset                                                                       ; 468     ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p|counter6a0 ; 6       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p|counter8a0 ; 6       ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p|parity7    ; 4       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p|parity9    ; 4       ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p|counter3a0 ; 7       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p|counter5a0 ; 7       ;
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p|parity4    ; 4       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p|parity6    ; 4       ;
 ; spi_slave:spi_slave_rx_inst|treg[7]                                                                          ; 1       ;
 ; spi_slave:spi_slave_rx_inst|treg[6]                                                                          ; 1       ;
 ; spi_slave:spi_slave_rx_inst|treg[5]                                                                          ; 1       ;
 ; spi_slave:spi_slave_rx_inst|treg[4]                                                                          ; 1       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p|counter5a0 ; 7       ;
 ; spi_slave:spi_slave_rx_inst|treg[3]                                                                          ; 1       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p|counter8a0 ; 6       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p|parity6    ; 4       ;
 ; spi_slave:spi_slave_rx_inst|treg[2]                                                                          ; 1       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p|parity9    ; 4       ;
 ; spi_slave:spi_slave_rx_inst|treg[1]                                                                          ; 1       ;
 ; spi_slave:spi_slave_rx_inst|treg[0]                                                                          ; 1       ;
 ; Total number of inverted registers = 18                                                                      ;         ;
@@ -1060,46 +1059,47 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|tx_IQ_data[17]                  ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|tx_IQ_data[29]                  ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][15] ;
-; 3:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|cordic:cordic_inst|X[0][11]           ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][8]  ;
 ; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|Raccum[23]      ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|Rmult[27]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|Rmult[15]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|Imult[23]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|Raccum[16]      ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|Rmult[18]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|Raccum[4]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|Rmult[30]       ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|caddr[3]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|raddr[2]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|counter[1]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|raddr[6]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|counter[2]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|raddr[7]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|counter[5]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|raddr[6]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|counter[2]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|raddr[3]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[4]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|raddr[4]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|counter[6]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|raddr[0]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[7]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|raddr[0]        ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_bitcount[2]                          ;
-; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |radioberry|agc_value[5]                                                 ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|Rmult[16]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|Iaccum[14]      ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|Raccum[7]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|Raccum[14]      ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|Raccum[14]      ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|Raccum[20]      ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|Iaccum[7]       ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|counter[8]      ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|raddr[3]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|caddr[4]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|raddr[0]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|caddr[7]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|raddr[0]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|caddr[0]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|raddr[2]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|counter[5]      ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|raddr[5]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[2]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|raddr[5]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|caddr[4]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|raddr[2]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[0]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|raddr[7]        ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_bitcount[1]                          ;
+; 4:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |radioberry|agc_value[0]                                                 ;
 ; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|wstate[4]                ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut1_pc[1]                                ;
-; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[14]                             ;
-; 4:1                ; 108 bits  ; 216 LEs       ; 108 LEs              ; 108 LEs                ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|Raccum[1]    ;
-; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Iacc[9]                  ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut1_pc[3]                                ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[15]                             ;
+; 4:1                ; 108 bits  ; 216 LEs       ; 108 LEs              ; 108 LEs                ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|Iaccum[23]   ;
+; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Iacc[12]                 ;
 ; 7:1                ; 7 bits    ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[10]                             ;
 ; 7:1                ; 5 bits    ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[0]                              ;
 ; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|caddr[6]     ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|raddr[5]     ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|raddr[6]     ;
+; 8:1                ; 34 bits   ; 170 LEs       ; 68 LEs               ; 102 LEs                ; No         ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|Selector16      ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|dut2_state                                ;
-; 7:1                ; 48 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; No         ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Add3                     ;
+; 7:1                ; 48 bits   ; 192 LEs       ; 192 LEs              ; 0 LEs                  ; No         ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Add2                     ;
 ; 3:1                ; 48 bits   ; 96 LEs        ; 0 LEs                ; 96 LEs                 ; No         ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Add2                     ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 
@@ -4805,15 +4805,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "txFIFO:txFIFO_inst"                                                                   ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-; Port   ; Type   ; Severity ; Details                                                                             ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-; wrfull ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-
-
 +--------------------------------------------------------------------------+
 ; Port Connectivity Checks: "receiver:receiver_inst|varcic:varcic_inst_Q1" ;
 +------------+--------+----------+-----------------------------------------+
@@ -4862,13 +4853,11 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 +----------------------------------------------------+
 ; Port Connectivity Checks: "receiver:receiver_inst" ;
-+------------+-------+----------+--------------------+
-; Port       ; Type  ; Severity ; Details            ;
-+------------+-------+----------+--------------------+
-; rate[4..3] ; Input ; Info     ; Stuck at VCC       ;
-; rate[2..0] ; Input ; Info     ; Stuck at GND       ;
-; rate[5]    ; Input ; Info     ; Stuck at GND       ;
-+------------+-------+----------+--------------------+
++---------+-------+----------+-----------------------+
+; Port    ; Type  ; Severity ; Details               ;
++---------+-------+----------+-----------------------+
+; rate[5] ; Input ; Info     ; Stuck at GND          ;
++---------+-------+----------+-----------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
@@ -4878,7 +4867,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------+--------+----------+-------------------------------------------------------------------------------------+
 ; ten           ; Input  ; Info     ; Stuck at VCC                                                                        ;
 ; mlb           ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; rdata[47..39] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; rdata[47..42] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; rdata[39]     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +---------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -4906,7 +4896,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:19     ;
+; Top            ; 00:00:23     ;
 +----------------+--------------+
 
 
@@ -4916,7 +4906,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Thu Apr 21 20:11:05 2016
+    Info: Processing started: Sat May 07 10:45:43 2016
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RadioBerry -c radioberry
 Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file debounce.v
@@ -4970,9 +4960,9 @@ Info (12021): Found 1 design units, including 1 entities, in source file txfifo.
 Info (12021): Found 1 design units, including 1 entities, in source file rxfifo.v
     Info (12023): Found entity 1: rxFIFO
 Info (12127): Elaborating entity "radioberry" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at radioberry.v(185): object "rxclipp" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at radioberry.v(186): object "rxclipn" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at radioberry.v(212): truncated value with size 32 to match size of target (26)
+Warning (10036): Verilog HDL or VHDL warning at radioberry.v(201): object "rxclipp" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at radioberry.v(202): object "rxclipn" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at radioberry.v(228): truncated value with size 32 to match size of target (26)
 Warning (12125): Using design file pllclock.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info (12023): Found entity 1: pllclock
 Info (12128): Elaborating entity "pllclock" for hierarchy "pllclock:pllclock_inst"
@@ -5467,24 +5457,24 @@ Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal 
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "ad9866_mode" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 67 registers lost all their fanouts during netlist optimizations.
+Info (17049): 34 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/dev/RadioBerry/Firmware/output_files/radioberry.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "spi_ce[1]"
-Info (21057): Implemented 8978 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 9076 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
-    Info (21059): Implemented 21 output pins
+    Info (21059): Implemented 22 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 8327 logic cells
+    Info (21061): Implemented 8424 logic cells
     Info (21064): Implemented 566 RAM segments
     Info (21062): Implemented 44 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 24 warnings
-    Info: Peak virtual memory: 623 megabytes
-    Info: Processing ended: Thu Apr 21 20:11:36 2016
-    Info: Elapsed time: 00:00:31
-    Info: Total CPU time (on all processors): 00:00:28
+    Info: Peak virtual memory: 620 megabytes
+    Info: Processing ended: Sat May 07 10:46:25 2016
+    Info: Elapsed time: 00:00:42
+    Info: Total CPU time (on all processors): 00:00:30
 
 
 +------------------------------------------+

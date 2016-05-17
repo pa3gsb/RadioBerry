@@ -25,7 +25,8 @@ clk_10mhz,
 ad9866_clk, ad9866_adio,ad9866_rxen,ad9866_rxclk,ad9866_txen,ad9866_txclk,ad9866_sclk,ad9866_sdio,ad9866_sdo,ad9866_sen_n,ad9866_rst_n,ad9866_mode,ad9866_pga,	
 spi_sck, spi_mosi, spi_miso, spi_ce,   
 DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
-spivalid,
+rxFIFOEmpty,
+txFIFOFull,
 ptt_in);
 
 input wire clk_10mhz;	
@@ -48,7 +49,8 @@ input wire spi_sck;
 input wire spi_mosi; 
 output wire spi_miso; 
 input [1:0] spi_ce; 
-output wire spivalid;
+output wire rxFIFOEmpty;
+output wire txFIFOFull;
 
 output  wire  DEBUG_LED1;  
 output  wire  DEBUG_LED2;  
@@ -147,23 +149,11 @@ assign ad9866rqst = tx_gain != prev_gain;
 ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(tx_gain));
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                         Control
+//                         SPI Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire [5:0] speed;
-// Decimation rates
-localparam RATE48 = 6'd24;
-localparam RATE96  =  RATE48  >> 1;
-localparam RATE192 =  RATE96  >> 1;
-localparam RATE384 =  RATE192 >> 1;
 
-localparam CICRATE = 6'd08;
-
-assign 	speed =  RATE48;
-
-// SPI data exchange
 wire [47:0] spi_recv;
 wire spi_done;
-assign spivalid = rxFIFOEmpty;
 
 always @ (posedge spi_done)
 begin	
@@ -172,12 +162,38 @@ begin
 		att <= spi_recv[36:32];
 		dither <= spi_recv[37];
 		randomize <= spi_recv[38];
+		speed <= spi_recv[41:40];
 	end else begin
 		tx_gain <= spi_recv[37:32];
 	end
 end 
 
 spi_slave spi_slave_rx_inst(.rstb(!reset),.ten(1'b1),.tdata(rxDataFromFIFO),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi_recv));
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                         Decimation Rate Control
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+// Decimation rates
+
+reg [1:0] speed;	// selected decimation rate in external program,
+
+localparam RATE48 = 6'd24;
+localparam RATE96  =  RATE48  >> 1;
+localparam RATE192 =  RATE96  >> 1;
+localparam RATE384 =  RATE192 >> 1;
+reg [5:0] rate;
+
+always @ (speed)
+ begin 
+	  case (speed)
+	  0: rate <= RATE48;     
+	  1: rate <= RATE96;     
+	  2: rate <= RATE192;     
+	  3: rate <= RATE384;           
+	  default: rate <= RATE48;        
+	  endcase
+ end 
+
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         GAIN Control
@@ -269,9 +285,11 @@ wire	[23:0] rx_I;
 wire	[23:0] rx_Q;
 wire	rx_strobe;
 
+localparam CICRATE = 6'd08;
+
 receiver #(.CICRATE(CICRATE)) 
 		receiver_inst(	.clock(adc_clock),
-						.rate(speed), 
+						.rate(rate), 
 						.frequency(sync_phase_word),
 						.out_strobe(rx_strobe),
 						.in_data(adc),
@@ -282,8 +300,6 @@ receiver #(.CICRATE(CICRATE))
 //                          rxFIFO Handler (IQ Samples)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 reg [47:0] rxDataFromFIFO;
-wire rxFIFOEmpty;
-
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
 							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rxFIFOEmpty), 
@@ -294,8 +310,6 @@ rxFIFO rxFIFO_inst(	.aclr(reset),
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire txFIFOFull;
-
 wire spi_tx_done = ptt_in ? spi_done : 1'b0;
 
 txFIFO txFIFO_inst(	.aclr(reset), 

@@ -38,7 +38,8 @@ DEBUG_LED1 <= counter[23].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED2 <= counter[22].DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED3 <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
 DEBUG_LED4 <= transmitter:transmitter_inst.LED
-spivalid <= rxFIFO:rxFIFO_inst.wrempty
+rxFIFOEmpty <= rxFIFO:rxFIFO_inst.wrempty
+txFIFOFull <= txFIFO:txFIFO_inst.wrfull
 ptt_in => ptt_in.IN1
 
 
