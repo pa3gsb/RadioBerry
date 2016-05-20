@@ -25,11 +25,15 @@ namespace CSharp_NoiseFloor
         private SDRCATCommand sdrCATCommand;
         private ControlGenerator controlGenerator;
 
-        public Process(int startf, int stopf, int step)
+        double power;
+
+        public Process(int startf, int stopf, int step, double power)
         {
             this.startf = startf;
             this.stopf = stopf;
             this.stepf = step;
+
+            this.power = power;
         }
 
 
@@ -112,7 +116,7 @@ namespace CSharp_NoiseFloor
                 Thread.Sleep(100);
                 String value = ctrlSDR.getCommand(sdrCATCommand.getRxMeter()).Replace("ZZRM1", "").Replace("dBm;", "");
                
-                nf_measurement[actual] = nf_measurement[actual] + " , " +value;
+                nf_measurement[actual] = nf_measurement[actual] + " ; " +value;
 
                 actual = actual + stepf;
             }
@@ -123,17 +127,43 @@ namespace CSharp_NoiseFloor
         {
             List<string> measurements = new List<string>();
             // Copy to list
+            string context = "NoiseFloor Measurement (Signal power out = " + power + " dBm)";
+            measurements.Add(context);
+            context = "Frequency ; Level (No Signal) ; Signal Level ; Noise Floor (dBm)";
+            measurements.Add(context);
             foreach(var item in nf_measurement) {
-                measurements.Add(item.Key + " , " + item.Value);
+                measurements.Add(item.Key + " ; " + item.Value + " ; " + calculateNoisFloor(item.Value));
             }
-
             //Convert list to array and write to file
             string path = @"c:\temp\measurement.txt";
              if (File.Exists(path)) {
                  File.Delete(path);
              }
+             
              File.WriteAllLines(path, measurements.ToArray(), Encoding.UTF8);
+           
         }
 
+        private string  calculateNoisFloor(String values)
+        {
+            string result = "";
+            
+            string noSignalLevel = "";
+            int index = values.IndexOf(";");
+            noSignalLevel = values.Substring(0, index);
+            noSignalLevel = noSignalLevel.Trim();
+            double s1 = Double.Parse(noSignalLevel);
+
+            string signalLevel = "";
+            signalLevel = values.Substring(++index);
+            signalLevel = signalLevel.Trim();
+            double s2 = Double.Parse(signalLevel);
+
+            double nf = s1 - (s2 - this.power);
+
+            result = nf.ToString();
+
+            return result;
+        }
     }
 }

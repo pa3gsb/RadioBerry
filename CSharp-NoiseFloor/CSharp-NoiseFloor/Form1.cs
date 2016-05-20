@@ -20,6 +20,8 @@ namespace CSharp_NoiseFloor
         private Process objProcess;
         private int stepf;
 
+        
+
         public Form1()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace CSharp_NoiseFloor
             button2.Enabled = false;
             if (objProcess == null)
             {
-                objProcess = new Process(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text), stepf);
+                objProcess = new Process(Convert.ToInt32(textBox1.Text), Convert.ToInt32(textBox2.Text), stepf, Double.Parse(textBox3.Text));
 
                 thread = new Thread(new ThreadStart(startNFMeasurement));
                 thread.Name = "NF Measurement Loop";
