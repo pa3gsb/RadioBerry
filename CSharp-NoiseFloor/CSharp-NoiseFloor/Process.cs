@@ -127,9 +127,9 @@ namespace CSharp_NoiseFloor
         {
             List<string> measurements = new List<string>();
             // Copy to list
-            string context = "NoiseFloor Measurement (Signal power out = " + power + " dBm)";
+            string context = "#NoiseFloor Measurement (Signal power out = " + power + " dBm)";
             measurements.Add(context);
-            context = "Frequency ; Level (No Signal) ; Signal Level ; Noise Floor (dBm)";
+            context = "#Frequency ; Level (No Signal) ; Signal Level ; Noise Floor (dBm)";
             measurements.Add(context);
             foreach(var item in nf_measurement) {
                 measurements.Add(item.Key + " ; " + item.Value + " ; " + calculateNoisFloor(item.Value));
@@ -140,7 +140,7 @@ namespace CSharp_NoiseFloor
                  File.Delete(path);
              }
              
-             File.WriteAllLines(path, measurements.ToArray(), Encoding.UTF8);
+             File.WriteAllLines(path, measurements.ToArray(), Encoding.ASCII);
            
         }
 

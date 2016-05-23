@@ -1,5 +1,5 @@
-﻿NoiseFloor Measurement (Signal power out = -72 dBm)
-Frequency ; Level (No Signal) ; Signal Level ; Noise Floor (dBm)
+#NoiseFloor Measurement (Signal power out = -72 dBm)
+#Frequency ; Level (No Signal) ; Signal Level ; Noise Floor (dBm)
 1000000 ; -101,1  ; -46,6  ; -126,5
 1500000 ; -102,5  ; -46,7  ; -127,8
 2000000 ; -103,2  ; -46,8  ; -128,4
