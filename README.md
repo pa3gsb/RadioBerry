@@ -14,10 +14,10 @@ RadioBerry - Ham Radio cape for Raspberry PI
 	- using AD9866 (12 bit)  for RX and TX modes.
 	
 ![RadioBerry](Gallery/Radioberry1.png)
-![RadioBerry](Gallery/Radioberry2.jpg)
-![RadioBerry](Gallery/Radioberry3.jpg)
-![RadioBerry](Gallery/Radioberry4.jpg)
-![RadioBerry](Gallery/Radioberry5.jpg)
+![RadioBerry](Gallery/Radioberry2.png)
+![RadioBerry](Gallery/Radioberry3.png)
+![RadioBerry](Gallery/Radioberry4.png)
+![RadioBerry](Gallery/Radioberry5.png)
 	
 	
 ## Radioberry Configurations:
@@ -40,7 +40,7 @@ RadioBerry - Ham Radio cape for Raspberry PI
 
 Using a SDR program via the OPENHPSDR protocol and a network connection.
 
-![RadioBerry](Gallery/'Powersdr running with radioberry'.png)
+![RadioBerry](Gallery/Powersdr.png)
 
 Starting hermes lite (c-program) using the following command:  sudo ./hermeslite
 
