@@ -40,7 +40,7 @@ RadioBerry - Ham Radio cape for Raspberry PI
 
 Using a SDR program via the OPENHPSDR protocol and a network connection.
 
-![RadioBerry](Gallery/Powersdr.png)
+![RadioBerry](Gallery/Powersdr.PNG)
 
 Starting hermes lite (c-program) using the following command:  sudo ./hermeslite
 
