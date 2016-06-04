@@ -93,6 +93,8 @@ int fd;									/* our socket */
 
 struct sockaddr_in myaddr;				/* our address */
 struct sockaddr_in remaddr;				/* remote address */
+struct sockaddr_in s_remaddr;
+
 socklen_t addrlen = sizeof(remaddr);	/* length of addresses */
 int recvlen;							/* # bytes received */
 
@@ -224,7 +226,7 @@ void handlePacket(char* buffer){
                             (remaddr.sin_addr.s_addr>>8)&0xFF,
                             (remaddr.sin_addr.s_addr>>16)&0xFF,
                             (remaddr.sin_addr.s_addr>>24)&0xFF);
-		printf("Port %d \n", ntohs(remaddr.sin_port));
+		printf("Discovery Port %d \n", ntohs(remaddr.sin_port));
 		
 		fillDiscoveryReplyMessage();
 		
@@ -233,9 +235,21 @@ void handlePacket(char* buffer){
 		
 	} else if (buffer[2] == 4) {
 			if (buffer[3] == 1 || buffer[3] == 3) {
-				printf("Port %d \n", ntohs(remaddr.sin_port));
+				printf("Start Port %d \n", ntohs(remaddr.sin_port));
 				running = 1;
 				printf("SDR Program sends Start command \n");
+				
+				//memcpy(&childA,&childB, sizeof(child));
+				memcpy(&remaddr, &s_remaddr, sizeof(remaddr));
+				
+				printf("IP-address %d.%d.%d.%d  \n", 
+							s_remaddr.sin_addr.s_addr&0xFF,
+                            (s_remaddr.sin_addr.s_addr>>8)&0xFF,
+                            (s_remaddr.sin_addr.s_addr>>16)&0xFF,
+                            (s_remaddr.sin_addr.s_addr>>24)&0xFF);
+				printf("Discovery Port %d \n", ntohs(s_remaddr.sin_port));
+				
+				
 				return;
 			} else {
 				running = 0;
@@ -363,6 +377,9 @@ void sendPacket() {
 	
 	if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&remaddr, addrlen) < 0)
 			printf("error sendto");
+//	if (sendto(fd, hpsdrdata, sizeof(hpsdrdata), 0, (struct sockaddr *)&s_remaddr, addrlen) < 0)
+//			printf("error sendto");		
+			
 }
 
 
@@ -448,7 +465,7 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
 	broadcastReply[i++] =  31;
-	broadcastReply[i++] =  10; // Hermes boardtype public static final
+	broadcastReply[i++] =  0x0A; // Hermes boardtype public static final
 									// int DEVICE_HERMES_LITE = 6;
 }
 
