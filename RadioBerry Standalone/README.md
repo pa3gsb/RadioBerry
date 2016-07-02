@@ -1,2 +1,4 @@
-# pihpsdr
-Raspberry Pi 2 (and Odroid C1+) standalone code for HPSDR (new Ethernet protocol)
+# radioberry
+Using raspberry pi 2 or 3 as a standalone trx system.
+
+under construction...
