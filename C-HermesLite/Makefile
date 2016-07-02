@@ -1,17 +1,40 @@
 CC=gcc
-CFLAGS = -g 
-# uncomment this for SunOS
-# LIBS = -lsocket -lnsl
+LINK=gcc
 
-LIBS    = -lbcm2835 -lwiringPi -lwiringPiDev -lpthread -lm
+OPTIONS=-g 
 
-all: hermeslite
+LIBS=-lrt -lm -lbcm2835 -lwiringPi -lwiringPiDev -lpthread -lpulse-simple -lpulse
 
-hermeslite: hermeslite.o 
-	$(CC) -o hermeslite hermeslite.o $(LIBS)
+COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
+
+PROGRAM=hermeslite
+
+SOURCES= \
+hermeslite.c \
+audio.c 
+
+HEADERS= \
+port.h \
+audio.h
 
 
-hermeslite.o: hermeslite.c port.h
+OBJS= \
+hermeslite.o \
+audio.o 
+
+all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
+
+prebuild:
+	rm -f version.o
+
+$(PROGRAM): $(OBJS) 
+	$(LINK) -o $(PROGRAM) $(OBJS) $(LIBS)
+
+.c.o:
+	$(COMPILE) -c -o $@ $<
+
 
 clean:
-	rm -f hermeslite hermeslite.o hermeslite.o 
+	-rm -f *.o
+	-rm -f $(PROGRAM)
+

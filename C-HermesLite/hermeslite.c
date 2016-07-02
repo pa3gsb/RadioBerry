@@ -17,8 +17,6 @@
 
 #include <bcm2835.h>
 
-//#include <asoundlib.h>
-
 void runHermesLite(void);
 void sendPacket(void);
 void handlePacket(char* buffer);
@@ -66,6 +64,8 @@ static const int CHANNEL = 0;
 int fdspi;
 unsigned char iqdata[6];
 unsigned char tx_iqdata[6];
+unsigned char audiooutputbuffer[4096];
+int audiocounter = 0;
 
 #define SERVICE_PORT	1024
 
@@ -137,6 +137,8 @@ int main(int argc, char **argv)
 
 	printf("init done \n");
 	
+	audio_init();
+		
 	pthread_t pid, pid2;
     pthread_create(&pid, NULL, spiReader, NULL);  
 	pthread_create(&pid2, NULL, packetreader, NULL); 
@@ -195,6 +197,8 @@ void runHermesLite() {
 void *packetreader(void *arg) {
 
 	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_38, BCM2835_GPIO_FSEL_INPT);
+	
+	
 	
 	while(1) {
 		//usleep(10);
@@ -334,11 +338,15 @@ void handlePacket(char* buffer){
 				int k = coarse_pointer + j;
 
 				// M  (MSB first) L and R channel 2 * 16 bits
-				//rx_Audio_buffer.Write(datarcv[k + 0]);
-				//rx_Audio_buffer.Write(datarcv[k + 1]);
-				//rx_Audio_buffer.Write(datarcv[k + 2]);
-				//rx_Audio_buffer.Write(datarcv[k + 3]);
-				// send data to audio driver...beter latency......than using VAC!!! TODO
+				// send data to audio driver...beter latency......than using VAC.
+				audiooutputbuffer[audiocounter++] = buffer[k + 0];
+				audiooutputbuffer[audiocounter++] = buffer[k + 1];
+				audiooutputbuffer[audiocounter++] = buffer[k + 2];
+				audiooutputbuffer[audiocounter++] = buffer[k + 3];
+				if (audiocounter ==  1024) {
+					audio_write(audiooutputbuffer, 1024);
+					audiocounter = 0;
+				}
 	
 				// TX IQ
 				//MSB first according to protocol. (I and Q samples 2 * 16 bits)
