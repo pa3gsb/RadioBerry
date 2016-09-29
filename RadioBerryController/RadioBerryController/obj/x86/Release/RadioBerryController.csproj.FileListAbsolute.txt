@@ -1,0 +1,12 @@
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\bin\Release\libMPSSE.dll
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\bin\Release\libMPSSE.a
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\bin\Release\RadioBerryController.exe
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\bin\Release\RadioBerryController.pdb
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\bin\Release\FTD2XX_NET.dll
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\bin\Release\FTD2XX_NET.xml
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\obj\x86\Release\RadioBerryController.csprojResolveAssemblyReference.cache
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\obj\x86\Release\RadioBerryController.Form1.resources
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\obj\x86\Release\RadioBerryController.Properties.Resources.resources
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\obj\x86\Release\RadioBerryController.csproj.GenerateResource.Cache
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\obj\x86\Release\RadioBerryController.exe
+C:\dev\RadioBerry\RadioBerryController\RadioBerryController\obj\x86\Release\RadioBerryController.pdb

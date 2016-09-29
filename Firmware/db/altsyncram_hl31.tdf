@@ -38,7 +38,7 @@ SUBDESIGN altsyncram_hl31
 	wren_a	:	input;
 ) 
 VARIABLE 
-	ram_block9a0 : cycloneiii_ram_block
+	ram_block7a0 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -70,7 +70,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a1 : cycloneiii_ram_block
+	ram_block7a1 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -102,7 +102,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a2 : cycloneiii_ram_block
+	ram_block7a2 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -134,7 +134,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a3 : cycloneiii_ram_block
+	ram_block7a3 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -166,7 +166,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a4 : cycloneiii_ram_block
+	ram_block7a4 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -198,7 +198,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a5 : cycloneiii_ram_block
+	ram_block7a5 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -230,7 +230,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a6 : cycloneiii_ram_block
+	ram_block7a6 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -262,7 +262,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a7 : cycloneiii_ram_block
+	ram_block7a7 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -294,7 +294,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a8 : cycloneiii_ram_block
+	ram_block7a8 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -326,7 +326,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a9 : cycloneiii_ram_block
+	ram_block7a9 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -358,7 +358,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a10 : cycloneiii_ram_block
+	ram_block7a10 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -390,7 +390,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a11 : cycloneiii_ram_block
+	ram_block7a11 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -422,7 +422,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a12 : cycloneiii_ram_block
+	ram_block7a12 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -454,7 +454,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a13 : cycloneiii_ram_block
+	ram_block7a13 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -486,7 +486,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a14 : cycloneiii_ram_block
+	ram_block7a14 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -518,7 +518,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a15 : cycloneiii_ram_block
+	ram_block7a15 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -550,7 +550,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a16 : cycloneiii_ram_block
+	ram_block7a16 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -582,7 +582,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a17 : cycloneiii_ram_block
+	ram_block7a17 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -614,7 +614,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a18 : cycloneiii_ram_block
+	ram_block7a18 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -646,7 +646,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a19 : cycloneiii_ram_block
+	ram_block7a19 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -678,7 +678,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a20 : cycloneiii_ram_block
+	ram_block7a20 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -710,7 +710,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a21 : cycloneiii_ram_block
+	ram_block7a21 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -742,7 +742,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a22 : cycloneiii_ram_block
+	ram_block7a22 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -774,7 +774,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a23 : cycloneiii_ram_block
+	ram_block7a23 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -806,7 +806,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a24 : cycloneiii_ram_block
+	ram_block7a24 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -838,7 +838,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a25 : cycloneiii_ram_block
+	ram_block7a25 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -870,7 +870,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a26 : cycloneiii_ram_block
+	ram_block7a26 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -902,7 +902,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a27 : cycloneiii_ram_block
+	ram_block7a27 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -934,7 +934,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a28 : cycloneiii_ram_block
+	ram_block7a28 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -966,7 +966,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a29 : cycloneiii_ram_block
+	ram_block7a29 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -998,7 +998,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a30 : cycloneiii_ram_block
+	ram_block7a30 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1030,7 +1030,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a31 : cycloneiii_ram_block
+	ram_block7a31 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1062,7 +1062,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a32 : cycloneiii_ram_block
+	ram_block7a32 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1094,7 +1094,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a33 : cycloneiii_ram_block
+	ram_block7a33 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1126,7 +1126,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a34 : cycloneiii_ram_block
+	ram_block7a34 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1158,7 +1158,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a35 : cycloneiii_ram_block
+	ram_block7a35 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1190,7 +1190,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a36 : cycloneiii_ram_block
+	ram_block7a36 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1222,7 +1222,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a37 : cycloneiii_ram_block
+	ram_block7a37 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1254,7 +1254,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a38 : cycloneiii_ram_block
+	ram_block7a38 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1286,7 +1286,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a39 : cycloneiii_ram_block
+	ram_block7a39 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1318,7 +1318,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a40 : cycloneiii_ram_block
+	ram_block7a40 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1350,7 +1350,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a41 : cycloneiii_ram_block
+	ram_block7a41 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1382,7 +1382,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a42 : cycloneiii_ram_block
+	ram_block7a42 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1414,7 +1414,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a43 : cycloneiii_ram_block
+	ram_block7a43 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1446,7 +1446,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a44 : cycloneiii_ram_block
+	ram_block7a44 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1478,7 +1478,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a45 : cycloneiii_ram_block
+	ram_block7a45 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1510,7 +1510,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a46 : cycloneiii_ram_block
+	ram_block7a46 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1542,7 +1542,7 @@ VARIABLE
 			PORT_B_READ_ENABLE_CLOCK = "clock1",
 			RAM_BLOCK_TYPE = "AUTO"
 		);
-	ram_block9a47 : cycloneiii_ram_block
+	ram_block7a47 : cycloneiii_ram_block
 		WITH (
 			CLK0_CORE_CLOCK_ENABLE = "ena0",
 			CLK0_INPUT_CLOCK_ENABLE = "none",
@@ -1578,66 +1578,66 @@ VARIABLE
 	address_b_wire[10..0]	: WIRE;
 
 BEGIN 
-	ram_block9a[47..0].clk0 = clock0;
-	ram_block9a[47..0].clk1 = clock1;
-	ram_block9a[47..0].clr1 = aclr1;
-	ram_block9a[47..0].ena0 = wren_a;
-	ram_block9a[47..0].ena1 = clocken1;
-	ram_block9a[47..0].portaaddr[] = ( address_a_wire[10..0]);
-	ram_block9a[0].portadatain[] = ( data_a[0..0]);
-	ram_block9a[1].portadatain[] = ( data_a[1..1]);
-	ram_block9a[2].portadatain[] = ( data_a[2..2]);
-	ram_block9a[3].portadatain[] = ( data_a[3..3]);
-	ram_block9a[4].portadatain[] = ( data_a[4..4]);
-	ram_block9a[5].portadatain[] = ( data_a[5..5]);
-	ram_block9a[6].portadatain[] = ( data_a[6..6]);
-	ram_block9a[7].portadatain[] = ( data_a[7..7]);
-	ram_block9a[8].portadatain[] = ( data_a[8..8]);
-	ram_block9a[9].portadatain[] = ( data_a[9..9]);
-	ram_block9a[10].portadatain[] = ( data_a[10..10]);
-	ram_block9a[11].portadatain[] = ( data_a[11..11]);
-	ram_block9a[12].portadatain[] = ( data_a[12..12]);
-	ram_block9a[13].portadatain[] = ( data_a[13..13]);
-	ram_block9a[14].portadatain[] = ( data_a[14..14]);
-	ram_block9a[15].portadatain[] = ( data_a[15..15]);
-	ram_block9a[16].portadatain[] = ( data_a[16..16]);
-	ram_block9a[17].portadatain[] = ( data_a[17..17]);
-	ram_block9a[18].portadatain[] = ( data_a[18..18]);
-	ram_block9a[19].portadatain[] = ( data_a[19..19]);
-	ram_block9a[20].portadatain[] = ( data_a[20..20]);
-	ram_block9a[21].portadatain[] = ( data_a[21..21]);
-	ram_block9a[22].portadatain[] = ( data_a[22..22]);
-	ram_block9a[23].portadatain[] = ( data_a[23..23]);
-	ram_block9a[24].portadatain[] = ( data_a[24..24]);
-	ram_block9a[25].portadatain[] = ( data_a[25..25]);
-	ram_block9a[26].portadatain[] = ( data_a[26..26]);
-	ram_block9a[27].portadatain[] = ( data_a[27..27]);
-	ram_block9a[28].portadatain[] = ( data_a[28..28]);
-	ram_block9a[29].portadatain[] = ( data_a[29..29]);
-	ram_block9a[30].portadatain[] = ( data_a[30..30]);
-	ram_block9a[31].portadatain[] = ( data_a[31..31]);
-	ram_block9a[32].portadatain[] = ( data_a[32..32]);
-	ram_block9a[33].portadatain[] = ( data_a[33..33]);
-	ram_block9a[34].portadatain[] = ( data_a[34..34]);
-	ram_block9a[35].portadatain[] = ( data_a[35..35]);
-	ram_block9a[36].portadatain[] = ( data_a[36..36]);
-	ram_block9a[37].portadatain[] = ( data_a[37..37]);
-	ram_block9a[38].portadatain[] = ( data_a[38..38]);
-	ram_block9a[39].portadatain[] = ( data_a[39..39]);
-	ram_block9a[40].portadatain[] = ( data_a[40..40]);
-	ram_block9a[41].portadatain[] = ( data_a[41..41]);
-	ram_block9a[42].portadatain[] = ( data_a[42..42]);
-	ram_block9a[43].portadatain[] = ( data_a[43..43]);
-	ram_block9a[44].portadatain[] = ( data_a[44..44]);
-	ram_block9a[45].portadatain[] = ( data_a[45..45]);
-	ram_block9a[46].portadatain[] = ( data_a[46..46]);
-	ram_block9a[47].portadatain[] = ( data_a[47..47]);
-	ram_block9a[47..0].portawe = wren_a;
-	ram_block9a[47..0].portbaddr[] = ( address_b_wire[10..0]);
-	ram_block9a[47..0].portbaddrstall = addressstall_b;
-	ram_block9a[47..0].portbre = B"111111111111111111111111111111111111111111111111";
+	ram_block7a[47..0].clk0 = clock0;
+	ram_block7a[47..0].clk1 = clock1;
+	ram_block7a[47..0].clr1 = aclr1;
+	ram_block7a[47..0].ena0 = wren_a;
+	ram_block7a[47..0].ena1 = clocken1;
+	ram_block7a[47..0].portaaddr[] = ( address_a_wire[10..0]);
+	ram_block7a[0].portadatain[] = ( data_a[0..0]);
+	ram_block7a[1].portadatain[] = ( data_a[1..1]);
+	ram_block7a[2].portadatain[] = ( data_a[2..2]);
+	ram_block7a[3].portadatain[] = ( data_a[3..3]);
+	ram_block7a[4].portadatain[] = ( data_a[4..4]);
+	ram_block7a[5].portadatain[] = ( data_a[5..5]);
+	ram_block7a[6].portadatain[] = ( data_a[6..6]);
+	ram_block7a[7].portadatain[] = ( data_a[7..7]);
+	ram_block7a[8].portadatain[] = ( data_a[8..8]);
+	ram_block7a[9].portadatain[] = ( data_a[9..9]);
+	ram_block7a[10].portadatain[] = ( data_a[10..10]);
+	ram_block7a[11].portadatain[] = ( data_a[11..11]);
+	ram_block7a[12].portadatain[] = ( data_a[12..12]);
+	ram_block7a[13].portadatain[] = ( data_a[13..13]);
+	ram_block7a[14].portadatain[] = ( data_a[14..14]);
+	ram_block7a[15].portadatain[] = ( data_a[15..15]);
+	ram_block7a[16].portadatain[] = ( data_a[16..16]);
+	ram_block7a[17].portadatain[] = ( data_a[17..17]);
+	ram_block7a[18].portadatain[] = ( data_a[18..18]);
+	ram_block7a[19].portadatain[] = ( data_a[19..19]);
+	ram_block7a[20].portadatain[] = ( data_a[20..20]);
+	ram_block7a[21].portadatain[] = ( data_a[21..21]);
+	ram_block7a[22].portadatain[] = ( data_a[22..22]);
+	ram_block7a[23].portadatain[] = ( data_a[23..23]);
+	ram_block7a[24].portadatain[] = ( data_a[24..24]);
+	ram_block7a[25].portadatain[] = ( data_a[25..25]);
+	ram_block7a[26].portadatain[] = ( data_a[26..26]);
+	ram_block7a[27].portadatain[] = ( data_a[27..27]);
+	ram_block7a[28].portadatain[] = ( data_a[28..28]);
+	ram_block7a[29].portadatain[] = ( data_a[29..29]);
+	ram_block7a[30].portadatain[] = ( data_a[30..30]);
+	ram_block7a[31].portadatain[] = ( data_a[31..31]);
+	ram_block7a[32].portadatain[] = ( data_a[32..32]);
+	ram_block7a[33].portadatain[] = ( data_a[33..33]);
+	ram_block7a[34].portadatain[] = ( data_a[34..34]);
+	ram_block7a[35].portadatain[] = ( data_a[35..35]);
+	ram_block7a[36].portadatain[] = ( data_a[36..36]);
+	ram_block7a[37].portadatain[] = ( data_a[37..37]);
+	ram_block7a[38].portadatain[] = ( data_a[38..38]);
+	ram_block7a[39].portadatain[] = ( data_a[39..39]);
+	ram_block7a[40].portadatain[] = ( data_a[40..40]);
+	ram_block7a[41].portadatain[] = ( data_a[41..41]);
+	ram_block7a[42].portadatain[] = ( data_a[42..42]);
+	ram_block7a[43].portadatain[] = ( data_a[43..43]);
+	ram_block7a[44].portadatain[] = ( data_a[44..44]);
+	ram_block7a[45].portadatain[] = ( data_a[45..45]);
+	ram_block7a[46].portadatain[] = ( data_a[46..46]);
+	ram_block7a[47].portadatain[] = ( data_a[47..47]);
+	ram_block7a[47..0].portawe = wren_a;
+	ram_block7a[47..0].portbaddr[] = ( address_b_wire[10..0]);
+	ram_block7a[47..0].portbaddrstall = addressstall_b;
+	ram_block7a[47..0].portbre = B"111111111111111111111111111111111111111111111111";
 	address_a_wire[] = address_a[];
 	address_b_wire[] = address_b[];
-	q_b[] = ( ram_block9a[47..0].portbdataout[0..0]);
+	q_b[] = ( ram_block7a[47..0].portbdataout[0..0]);
 END;
 --VALID FILE

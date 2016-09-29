@@ -21,3 +21,4 @@
 void old_protocol_stop();
 void old_protocol_init(int rx,int pixels);
 void schedule_frequency_changed();
+void *old_protocol_process_local_mic(unsigned char *buffer,int le);

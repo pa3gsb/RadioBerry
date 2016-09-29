@@ -17,8 +17,22 @@
 *
 */
 
-extern int audio;
-extern int audio_buffer_size;
+#ifndef _AUDIO_H
+#define _AUDIO_H
 
-void audio_init();
-void audio_write(double *buffer,int samples);
+extern char *input_devices[];
+extern int n_input_devices;
+extern int n_selected_input_device;
+
+extern char *output_devices[];
+extern int n_output_devices;
+extern int n_selected_output_device;
+
+extern int audio_open_output();
+extern int audio_open_input();
+extern void audio_close_output();
+extern void audio_close_input();
+extern int audio_write(short left_sample,short right_sample);
+extern void audio_get_cards();
+
+#endif

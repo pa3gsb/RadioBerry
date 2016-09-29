@@ -46,3 +46,22 @@ https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configurin
 
 c code controlling the ports:
 http://elinux.org/RPi_GPIO_Code_Samples
+
+
+
+
+Hotspot
+http://elinux.org/RPI-Wireless-Hotspot
+
+Pulseaudio
+https://wiki.archlinux.org/index.php/PulseAudio/Examples#Set_default_input_sources
+
+https://rootprompt.apatsch.net/2013/02/20/raspberry-pi-network-audio-player-pulseaudio-dlna-and-bluetooth-a2dp-part-1-pulseaudio/
+
+
+Remember
+Simplicity is a prerequisite for reliability. Edsger W. Dijkstra
+
+
+http://www.ftdichip.com/Support/SoftwareExamples/MPSSE.htm
+http://www.ftdichip.com/Support/SoftwareExamples/CodeExamples/CSharp.htm

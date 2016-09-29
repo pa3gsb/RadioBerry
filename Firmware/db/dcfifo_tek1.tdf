@@ -23,15 +23,15 @@ FUNCTION a_graycounter_pjc (aclr, clock, cnt_en)
 RETURNS ( q[10..0]);
 FUNCTION altsyncram_1l31 (aclr1, address_a[9..0], address_b[9..0], addressstall_b, clock0, clock1, clocken1, data_a[31..0], wren_a)
 RETURNS ( q_b[31..0]);
-FUNCTION alt_synch_pipe_vld (clock, clrn, d[10..0])
+FUNCTION alt_synch_pipe_rld (clock, clrn, d[10..0])
 RETURNS ( q[10..0]);
-FUNCTION alt_synch_pipe_0md (clock, clrn, d[10..0])
+FUNCTION alt_synch_pipe_tld (clock, clrn, d[10..0])
 RETURNS ( q[10..0]);
 FUNCTION cmpr_f66 (dataa[10..0], datab[10..0])
 RETURNS ( aeb);
 
---synthesis_resources = reg 77 
-OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF;REMOVE_DUPLICATE_REGISTERS=OFF;SYNCHRONIZER_IDENTIFICATION=OFF;SYNCHRONIZATION_REGISTER_CHAIN_LENGTH = 2;suppress_da_rule_internal=d101;suppress_da_rule_internal=d102;suppress_da_rule_internal=d103;{-to wrptr_g} suppress_da_rule_internal=S102;{-to wrptr_g} POWER_UP_LEVEL=LOW;-name CUT ON -from rdptr_g -to ws_dgrp|dffpipe_ve9:dffpipe8|dffe9a;-name SDC_STATEMENT ""set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_ve9:dffpipe8|dffe9a* "";-name CUT ON -from delayed_wrptr_g -to rs_dgwp|dffpipe_ue9:dffpipe5|dffe6a;-name SDC_STATEMENT ""set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_ue9:dffpipe5|dffe6a* """;
+--synthesis_resources = M9K 4 reg 107 
+OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF;REMOVE_DUPLICATE_REGISTERS=OFF;SYNCHRONIZER_IDENTIFICATION=OFF;SYNCHRONIZATION_REGISTER_CHAIN_LENGTH = 2;suppress_da_rule_internal=d101;suppress_da_rule_internal=d102;suppress_da_rule_internal=d103;{-to wrptr_g} suppress_da_rule_internal=S102;{-to wrptr_g} POWER_UP_LEVEL=LOW;-name CUT ON -from rdptr_g -to ws_dgrp|dffpipe_se9:dffpipe15|dffe16a;-name SDC_STATEMENT ""set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_se9:dffpipe15|dffe16a* "";-name CUT ON -from delayed_wrptr_g -to rs_dgwp|dffpipe_qe9:dffpipe12|dffe13a;-name SDC_STATEMENT ""set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_qe9:dffpipe12|dffe13a* """;
 
 SUBDESIGN dcfifo_tek1
 ( 
@@ -55,8 +55,8 @@ VARIABLE
 		WITH (
 			power_up = "low"
 		);
-	rs_dgwp : alt_synch_pipe_vld;
-	ws_dgrp : alt_synch_pipe_0md;
+	rs_dgwp : alt_synch_pipe_rld;
+	ws_dgrp : alt_synch_pipe_tld;
 	rdempty_eq_comp : cmpr_f66;
 	wrfull_eq_comp : cmpr_f66;
 	int_rdempty	: WIRE;

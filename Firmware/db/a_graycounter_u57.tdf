@@ -19,7 +19,7 @@
 
 
 --synthesis_resources = reg 16 
-OPTIONS ALTERA_INTERNAL_OPTION = "{-to counter3a0} POWER_UP_LEVEL=HIGH;{-to parity4} POWER_UP_LEVEL=HIGH";
+OPTIONS ALTERA_INTERNAL_OPTION = "{-to counter1a0} POWER_UP_LEVEL=HIGH;{-to parity2} POWER_UP_LEVEL=HIGH";
 
 SUBDESIGN a_graycounter_u57
 ( 
@@ -29,48 +29,48 @@ SUBDESIGN a_graycounter_u57
 	q[11..0]	:	output;
 ) 
 VARIABLE 
-	counter3a0 : dffeas
+	counter1a0 : dffeas
 		WITH (
 			power_up = "high"
 		);
-	counter3a1 : dffeas;
-	counter3a2 : dffeas;
-	counter3a3 : dffeas;
-	counter3a4 : dffeas;
-	counter3a5 : dffeas;
-	counter3a6 : dffeas;
-	counter3a7 : dffeas;
-	counter3a8 : dffeas;
-	counter3a9 : dffeas;
-	counter3a10 : dffeas;
-	counter3a11 : dffeas;
-	parity4 : dffeas
+	counter1a1 : dffeas;
+	counter1a2 : dffeas;
+	counter1a3 : dffeas;
+	counter1a4 : dffeas;
+	counter1a5 : dffeas;
+	counter1a6 : dffeas;
+	counter1a7 : dffeas;
+	counter1a8 : dffeas;
+	counter1a9 : dffeas;
+	counter1a10 : dffeas;
+	counter1a11 : dffeas;
+	parity2 : dffeas
 		WITH (
 			power_up = "high"
 		);
-	sub_parity5a[2..0] : dffeas;
+	sub_parity3a[2..0] : dffeas;
 	cntr_cout[11..0]	: WIRE;
 	parity_cout	: WIRE;
 	sclr	: NODE;
 	updown	: NODE;
 
 BEGIN 
-	counter3a[11..0].clk = clock;
-	counter3a[11..1].clrn = (! aclr);
-	counter3a[11..0].d = ( (counter3a[11].q $ cntr_cout[10..10]), (counter3a[10].q $ (counter3a[9].q & cntr_cout[9..9])), (counter3a[9].q $ (counter3a[8].q & cntr_cout[8..8])), (counter3a[8].q $ (counter3a[7].q & cntr_cout[7..7])), (counter3a[7].q $ (counter3a[6].q & cntr_cout[6..6])), (counter3a[6].q $ (counter3a[5].q & cntr_cout[5..5])), (counter3a[5].q $ (counter3a[4].q & cntr_cout[4..4])), (counter3a[4].q $ (counter3a[3].q & cntr_cout[3..3])), (counter3a[3].q $ (counter3a[2].q & cntr_cout[2..2])), (counter3a[2].q $ (counter3a[1].q & cntr_cout[1..1])), (counter3a[1].q $ (counter3a[0].q & cntr_cout[0..0])), ((cnt_en & (counter3a[0].q $ (! parity_cout))) # ((! cnt_en) & counter3a[0].q)));
-	counter3a[0].prn = (! aclr);
-	counter3a[11..0].sclr = sclr;
-	parity4.clk = clock;
-	parity4.d = ((cnt_en & ((sub_parity5a[0..0].q $ sub_parity5a[1..1].q) $ sub_parity5a[2..2].q)) # ((! cnt_en) & parity4.q));
-	parity4.prn = (! aclr);
-	parity4.sclr = sclr;
-	sub_parity5a[].clk = ( clock, clock, clock);
-	sub_parity5a[].clrn = ( (! aclr), (! aclr), (! aclr));
-	sub_parity5a[].d = ( ((cnt_en & (((counter3a[8..8].q $ counter3a[9..9].q) $ counter3a[10..10].q) $ counter3a[11..11].q)) # ((! cnt_en) & sub_parity5a[2].q)), ((cnt_en & (((counter3a[4..4].q $ counter3a[5..5].q) $ counter3a[6..6].q) $ counter3a[7..7].q)) # ((! cnt_en) & sub_parity5a[1].q)), ((cnt_en & (((counter3a[0..0].q $ counter3a[1..1].q) $ counter3a[2..2].q) $ counter3a[3..3].q)) # ((! cnt_en) & sub_parity5a[0].q)));
-	sub_parity5a[].sclr = ( sclr, sclr, sclr);
-	cntr_cout[] = ( B"0", (cntr_cout[9..9] & (! counter3a[9].q)), (cntr_cout[8..8] & (! counter3a[8].q)), (cntr_cout[7..7] & (! counter3a[7].q)), (cntr_cout[6..6] & (! counter3a[6].q)), (cntr_cout[5..5] & (! counter3a[5].q)), (cntr_cout[4..4] & (! counter3a[4].q)), (cntr_cout[3..3] & (! counter3a[3].q)), (cntr_cout[2..2] & (! counter3a[2].q)), (cntr_cout[1..1] & (! counter3a[1].q)), (cntr_cout[0..0] & (! counter3a[0].q)), (cnt_en & parity_cout));
-	parity_cout = (((! parity4.q) $ updown) & cnt_en);
-	q[] = counter3a[11..0].q;
+	counter1a[11..0].clk = clock;
+	counter1a[11..1].clrn = (! aclr);
+	counter1a[11..0].d = ( (counter1a[11].q $ cntr_cout[10..10]), (counter1a[10].q $ (counter1a[9].q & cntr_cout[9..9])), (counter1a[9].q $ (counter1a[8].q & cntr_cout[8..8])), (counter1a[8].q $ (counter1a[7].q & cntr_cout[7..7])), (counter1a[7].q $ (counter1a[6].q & cntr_cout[6..6])), (counter1a[6].q $ (counter1a[5].q & cntr_cout[5..5])), (counter1a[5].q $ (counter1a[4].q & cntr_cout[4..4])), (counter1a[4].q $ (counter1a[3].q & cntr_cout[3..3])), (counter1a[3].q $ (counter1a[2].q & cntr_cout[2..2])), (counter1a[2].q $ (counter1a[1].q & cntr_cout[1..1])), (counter1a[1].q $ (counter1a[0].q & cntr_cout[0..0])), ((cnt_en & (counter1a[0].q $ (! parity_cout))) # ((! cnt_en) & counter1a[0].q)));
+	counter1a[0].prn = (! aclr);
+	counter1a[11..0].sclr = sclr;
+	parity2.clk = clock;
+	parity2.d = ((cnt_en & ((sub_parity3a[0..0].q $ sub_parity3a[1..1].q) $ sub_parity3a[2..2].q)) # ((! cnt_en) & parity2.q));
+	parity2.prn = (! aclr);
+	parity2.sclr = sclr;
+	sub_parity3a[].clk = ( clock, clock, clock);
+	sub_parity3a[].clrn = ( (! aclr), (! aclr), (! aclr));
+	sub_parity3a[].d = ( ((cnt_en & (((counter1a[8..8].q $ counter1a[9..9].q) $ counter1a[10..10].q) $ counter1a[11..11].q)) # ((! cnt_en) & sub_parity3a[2].q)), ((cnt_en & (((counter1a[4..4].q $ counter1a[5..5].q) $ counter1a[6..6].q) $ counter1a[7..7].q)) # ((! cnt_en) & sub_parity3a[1].q)), ((cnt_en & (((counter1a[0..0].q $ counter1a[1..1].q) $ counter1a[2..2].q) $ counter1a[3..3].q)) # ((! cnt_en) & sub_parity3a[0].q)));
+	sub_parity3a[].sclr = ( sclr, sclr, sclr);
+	cntr_cout[] = ( B"0", (cntr_cout[9..9] & (! counter1a[9].q)), (cntr_cout[8..8] & (! counter1a[8].q)), (cntr_cout[7..7] & (! counter1a[7].q)), (cntr_cout[6..6] & (! counter1a[6].q)), (cntr_cout[5..5] & (! counter1a[5].q)), (cntr_cout[4..4] & (! counter1a[4].q)), (cntr_cout[3..3] & (! counter1a[3].q)), (cntr_cout[2..2] & (! counter1a[2].q)), (cntr_cout[1..1] & (! counter1a[1].q)), (cntr_cout[0..0] & (! counter1a[0].q)), (cnt_en & parity_cout));
+	parity_cout = (((! parity2.q) $ updown) & cnt_en);
+	q[] = counter1a[11..0].q;
 	sclr = GND;
 	updown = VCC;
 END;

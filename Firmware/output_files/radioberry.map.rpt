@@ -1,5 +1,5 @@
 Analysis & Synthesis report for radioberry
-Sat May 07 10:46:25 2016
+Thu Aug 11 14:00:29 2016
 Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
 
 
@@ -45,18 +45,18 @@ Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Editio
  37. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p
  38. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|altsyncram_hl31:fifo_ram
  39. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp
- 40. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe10
+ 40. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe8
  41. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp
- 42. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe10
+ 42. Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe8
  43. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component
- 44. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated
- 45. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p
- 46. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p
- 47. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|altsyncram_1l31:fifo_ram
- 48. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp
- 49. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp|dffpipe_ue9:dffpipe5
- 50. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp
- 51. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp|dffpipe_ve9:dffpipe8
+ 44. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated
+ 45. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_u57:rdptr_g1p
+ 46. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_qjc:wrptr_g1p
+ 47. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|altsyncram_3l31:fifo_ram
+ 48. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp
+ 49. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp|dffpipe_te9:dffpipe4
+ 50. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_sld:ws_dgrp
+ 51. Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe8
  52. Source assignments for transmitter:transmitter_inst|FirInterp8_1024:fi|firromI_1024:rom|altsyncram:altsyncram_component|altsyncram_02b1:auto_generated
  53. Source assignments for transmitter:transmitter_inst|FirInterp8_1024:fi|firram36I_1024:ram|altsyncram:altsyncram_component|altsyncram_hhn1:auto_generated
  54. Parameter Settings for User Entity Instance: pllclock:pllclock_inst|altpll:altpll_component
@@ -204,18 +204,18 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat May 07 10:46:25 2016         ;
+; Analysis & Synthesis Status        ; Successful - Thu Aug 11 14:00:29 2016         ;
 ; Quartus II 64-Bit Version          ; 12.1 Build 243 01/31/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; radioberry                                    ;
 ; Top-level Entity Name              ; radioberry                                    ;
 ; Family                             ; Cyclone III                                   ;
-; Total logic elements               ; 8,416                                         ;
-;     Total combinational functions  ; 6,347                                         ;
-;     Dedicated logic registers      ; 6,599                                         ;
-; Total registers                    ; 6599                                          ;
+; Total logic elements               ; 8,396                                         ;
+;     Total combinational functions  ; 6,344                                         ;
+;     Dedicated logic registers      ; 6,584                                         ;
+; Total registers                    ; 6584                                          ;
 ; Total pins                         ; 42                                            ;
 ; Total virtual pins                 ; 0                                             ;
-; Total memory bits                  ; 264,704                                       ;
+; Total memory bits                  ; 297,472                                       ;
 ; Embedded Multiplier 9-bit elements ; 44                                            ;
 ; Total PLLs                         ; 0                                             ;
 +------------------------------------+-----------------------------------------------+
@@ -396,15 +396,10 @@ applicable agreement for further details.
 ; db/alt_synch_pipe_sld.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/alt_synch_pipe_sld.tdf                    ;         ;
 ; db/dffpipe_re9.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/dffpipe_re9.tdf                           ;         ;
 ; db/cmpr_g66.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/cmpr_g66.tdf                              ;         ;
-; db/dcfifo_tek1.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/dcfifo_tek1.tdf                           ;         ;
-; db/a_graycounter_t57.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/a_graycounter_t57.tdf                     ;         ;
-; db/a_graycounter_pjc.tdf         ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/a_graycounter_pjc.tdf                     ;         ;
-; db/altsyncram_1l31.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/altsyncram_1l31.tdf                       ;         ;
-; db/alt_synch_pipe_vld.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/alt_synch_pipe_vld.tdf                    ;         ;
-; db/dffpipe_ue9.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/dffpipe_ue9.tdf                           ;         ;
-; db/alt_synch_pipe_0md.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/alt_synch_pipe_0md.tdf                    ;         ;
-; db/dffpipe_ve9.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/dffpipe_ve9.tdf                           ;         ;
-; db/cmpr_f66.tdf                  ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/cmpr_f66.tdf                              ;         ;
+; db/dcfifo_jek1.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/dcfifo_jek1.tdf                           ;         ;
+; db/altsyncram_3l31.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/altsyncram_3l31.tdf                       ;         ;
+; db/alt_synch_pipe_uld.tdf        ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/alt_synch_pipe_uld.tdf                    ;         ;
+; db/dffpipe_te9.tdf               ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/dffpipe_te9.tdf                           ;         ;
 ; db/altsyncram_02b1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/altsyncram_02b1.tdf                       ;         ;
 ; polyphase_fir/coefi8_1024.mif    ; yes             ; Auto-Found Memory Initialization File  ; C:/dev/RadioBerry/Firmware/polyphase_fir/coefi8_1024.mif                ;         ;
 ; db/altsyncram_hhn1.tdf           ; yes             ; Auto-Generated Megafunction            ; C:/dev/RadioBerry/Firmware/db/altsyncram_hhn1.tdf                       ;         ;
@@ -422,27 +417,27 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 8,416  ;
+; Estimated Total logic elements              ; 8,396  ;
 ;                                             ;        ;
-; Total combinational functions               ; 6347   ;
+; Total combinational functions               ; 6344   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 502    ;
-;     -- 3 input functions                    ; 4058   ;
-;     -- <=2 input functions                  ; 1787   ;
+;     -- 4 input functions                    ; 500    ;
+;     -- 3 input functions                    ; 4055   ;
+;     -- <=2 input functions                  ; 1789   ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 1653   ;
+;     -- normal mode                          ; 1650   ;
 ;     -- arithmetic mode                      ; 4694   ;
 ;                                             ;        ;
-; Total registers                             ; 6599   ;
-;     -- Dedicated logic registers            ; 6599   ;
+; Total registers                             ; 6584   ;
+;     -- Dedicated logic registers            ; 6584   ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
 ; I/O pins                                    ; 42     ;
-; Total memory bits                           ; 264704 ;
+; Total memory bits                           ; 297472 ;
 ; Embedded Multiplier 9-bit elements          ; 44     ;
-; Maximum fan-out                             ; 6811   ;
-; Total fan-out                               ; 47721  ;
+; Maximum fan-out                             ; 6815   ;
+; Total fan-out                               ; 47729  ;
 ; Average fan-out                             ; 3.50   ;
 +---------------------------------------------+--------+
 
@@ -452,7 +447,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                           ; Library Name ;
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |radioberry                                                 ; 6347 (130)        ; 6599 (119)   ; 264704      ; 44           ; 0       ; 22        ; 42   ; 0            ; |radioberry                                                                                                                                   ;              ;
+; |radioberry                                                 ; 6344 (130)        ; 6584 (119)   ; 297472      ; 44           ; 0       ; 22        ; 42   ; 0            ; |radioberry                                                                                                                                   ;              ;
 ;    |ad9866:ad9866_inst|                                     ; 47 (47)           ; 29 (29)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|ad9866:ad9866_inst                                                                                                                ;              ;
 ;    |lpm_mult:Mult0|                                         ; 72 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0                                                                                                                    ;              ;
 ;       |mult_gft:auto_generated|                             ; 72 (72)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |radioberry|lpm_mult:Mult0|mult_gft:auto_generated                                                                                            ;              ;
@@ -584,13 +579,13 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                                     ;              ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst| ; 37 (37)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                                     ;              ;
 ;    |reset_handler:reset_handler_inst|                       ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|reset_handler:reset_handler_inst                                                                                                  ;              ;
-;    |rxFIFO:rxFIFO_inst|                                     ; 61 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst                                                                                                                ;              ;
-;       |dcfifo:dcfifo_component|                             ; 61 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
-;          |dcfifo_bqj1:auto_generated|                       ; 61 (3)            ; 80 (24)      ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated                                                             ;              ;
+;    |rxFIFO:rxFIFO_inst|                                     ; 60 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst                                                                                                                ;              ;
+;       |dcfifo:dcfifo_component|                             ; 60 (0)            ; 80 (0)       ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
+;          |dcfifo_bqj1:auto_generated|                       ; 60 (3)            ; 80 (24)      ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated                                                             ;              ;
 ;             |a_graycounter_qjc:wrptr_g1p|                   ; 22 (22)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p                                 ;              ;
-;             |a_graycounter_u57:rdptr_g1p|                   ; 28 (28)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p                                 ;              ;
+;             |a_graycounter_u57:rdptr_g1p|                   ; 27 (27)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p                                 ;              ;
 ;             |alt_synch_pipe_sld:ws_dgrp|                    ; 0 (0)             ; 24 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp                                  ;              ;
-;                |dffpipe_re9:dffpipe10|                      ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe10            ;              ;
+;                |dffpipe_re9:dffpipe8|                       ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe8             ;              ;
 ;             |altsyncram_hl31:fifo_ram|                      ; 0 (0)             ; 0 (0)        ; 98304       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|altsyncram_hl31:fifo_ram                                    ;              ;
 ;             |cmpr_g66:wrempty_eq_comp|                      ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|cmpr_g66:wrempty_eq_comp                                    ;              ;
 ;    |spi_slave:spi_slave_rx_inst|                            ; 63 (63)           ; 138 (138)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|spi_slave:spi_slave_rx_inst                                                                                                       ;              ;
@@ -609,18 +604,16 @@ applicable agreement for further details.
 ;             |mult_35t:auto_generated|                       ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|lpm_mult:Mult1|mult_35t:auto_generated                                            ;              ;
 ;       |cpl_cordic:cordic_inst|                              ; 1691 (1691)       ; 1003 (1003)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst                                                                               ;              ;
 ;       |pulsegen:pulse_inst|                                 ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|transmitter:transmitter_inst|pulsegen:pulse_inst                                                                                  ;              ;
-;    |txFIFO:txFIFO_inst|                                     ; 63 (0)            ; 107 (0)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst                                                                                                                ;              ;
-;       |dcfifo:dcfifo_component|                             ; 63 (0)            ; 107 (0)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
-;          |dcfifo_tek1:auto_generated|                       ; 63 (4)            ; 107 (33)     ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated                                                             ;              ;
-;             |a_graycounter_pjc:wrptr_g1p|                   ; 24 (24)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p                                 ;              ;
-;             |a_graycounter_t57:rdptr_g1p|                   ; 22 (22)           ; 15 (15)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p                                 ;              ;
-;             |alt_synch_pipe_0md:ws_dgrp|                    ; 0 (0)             ; 22 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp                                  ;              ;
-;                |dffpipe_ve9:dffpipe8|                       ; 0 (0)             ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp|dffpipe_ve9:dffpipe8             ;              ;
-;             |alt_synch_pipe_vld:rs_dgwp|                    ; 0 (0)             ; 22 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp                                  ;              ;
-;                |dffpipe_ue9:dffpipe5|                       ; 0 (0)             ; 22 (22)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp|dffpipe_ue9:dffpipe5             ;              ;
-;             |altsyncram_1l31:fifo_ram|                      ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|altsyncram_1l31:fifo_ram                                    ;              ;
-;             |cmpr_f66:rdempty_eq_comp|                      ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|cmpr_f66:rdempty_eq_comp                                    ;              ;
-;             |cmpr_f66:wrfull_eq_comp|                       ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|cmpr_f66:wrfull_eq_comp                                     ;              ;
+;    |txFIFO:txFIFO_inst|                                     ; 61 (0)            ; 92 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst                                                                                                                ;              ;
+;       |dcfifo:dcfifo_component|                             ; 61 (0)            ; 92 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component                                                                                        ;              ;
+;          |dcfifo_jek1:auto_generated|                       ; 61 (3)            ; 92 (36)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated                                                             ;              ;
+;             |a_graycounter_qjc:wrptr_g1p|                   ; 25 (25)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_qjc:wrptr_g1p                                 ;              ;
+;             |a_graycounter_u57:rdptr_g1p|                   ; 24 (24)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_u57:rdptr_g1p                                 ;              ;
+;             |alt_synch_pipe_uld:rs_dgwp|                    ; 0 (0)             ; 24 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp                                  ;              ;
+;                |dffpipe_te9:dffpipe4|                       ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp|dffpipe_te9:dffpipe4             ;              ;
+;             |altsyncram_3l31:fifo_ram|                      ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|altsyncram_3l31:fifo_ram                                    ;              ;
+;             |cmpr_g66:rdempty_eq_comp|                      ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|cmpr_g66:rdempty_eq_comp                                    ;              ;
+;             |cmpr_g66:rdfull_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|cmpr_g66:rdfull_eq_comp                                     ;              ;
 +-------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -649,7 +642,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|altsyncram_hl31:fifo_ram|ALTSYNCRAM                                    ; AUTO ; Simple Dual Port ; 2048         ; 48           ; 2048         ; 48           ; 98304 ; None                            ;
 ; transmitter:transmitter_inst|FirInterp8_1024:fi|firram36I_1024:ram|altsyncram:altsyncram_component|altsyncram_hhn1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 128          ; 36           ; 128          ; 36           ; 4608  ; None                            ;
 ; transmitter:transmitter_inst|FirInterp8_1024:fi|firromI_1024:rom|altsyncram:altsyncram_component|altsyncram_02b1:auto_generated|ALTSYNCRAM   ; AUTO ; ROM              ; 1024         ; 18           ; --           ; --           ; 18432 ; ./Polyphase_FIR/coefI8_1024.mif ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|altsyncram_1l31:fifo_ram|ALTSYNCRAM                                    ; AUTO ; Simple Dual Port ; 1024         ; 32           ; 1024         ; 32           ; 32768 ; None                            ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|altsyncram_3l31:fifo_ram|ALTSYNCRAM                                    ; AUTO ; Simple Dual Port ; 2048         ; 32           ; 2048         ; 32           ; 65536 ; None                            ;
 +----------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+---------------------------------+
 
 
@@ -1017,12 +1010,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6599  ;
+; Total registers                              ; 6584  ;
 ; Number of registers using Synchronous Clear  ; 1029  ;
 ; Number of registers using Synchronous Load   ; 533   ;
-; Number of registers using Asynchronous Clear ; 354   ;
+; Number of registers using Asynchronous Clear ; 339   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 3893  ;
+; Number of registers using Clock Enable       ; 3895  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -1033,15 +1026,15 @@ Encoding Type:  One-Hot
 ; Inverted Register                                                                                            ; Fan out ;
 +--------------------------------------------------------------------------------------------------------------+---------+
 ; ad9866:ad9866_inst|sen_n                                                                                     ; 16      ;
-; reset_handler:reset_handler_inst|reset                                                                       ; 468     ;
-; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p|counter6a0 ; 6       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p|counter8a0 ; 6       ;
-; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p|parity7    ; 4       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p|parity9    ; 4       ;
-; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p|counter3a0 ; 7       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p|counter5a0 ; 7       ;
-; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p|parity4    ; 4       ;
-; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p|parity6    ; 4       ;
+; reset_handler:reset_handler_inst|reset                                                                       ; 453     ;
+; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p|counter4a0 ; 6       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_u57:rdptr_g1p|counter1a0 ; 7       ;
+; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_qjc:wrptr_g1p|parity5    ; 4       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_u57:rdptr_g1p|parity2    ; 4       ;
+; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p|counter1a0 ; 7       ;
+; rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|a_graycounter_u57:rdptr_g1p|parity2    ; 4       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_qjc:wrptr_g1p|counter4a0 ; 6       ;
+; txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_qjc:wrptr_g1p|parity5    ; 4       ;
 ; spi_slave:spi_slave_rx_inst|treg[7]                                                                          ; 1       ;
 ; spi_slave:spi_slave_rx_inst|treg[6]                                                                          ; 1       ;
 ; spi_slave:spi_slave_rx_inst|treg[5]                                                                          ; 1       ;
@@ -1059,31 +1052,31 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|tx_IQ_data[29]                  ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][15] ;
-; 3:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][8]  ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|Raccum[23]      ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|tx_IQ_data[16]                  ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|Y[0][16] ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |radioberry|transmitter:transmitter_inst|cpl_cordic:cordic_inst|X[0][9]  ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|Iaccum[1]       ;
 ; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|Rmult[16]       ;
 ; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|Iaccum[14]      ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|Raccum[7]       ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|Raccum[14]      ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|Raccum[14]      ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|Rmult[25]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|Imult[26]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|Rmult[31]       ;
 ; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|Raccum[20]      ;
-; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|Iaccum[7]       ;
+; 3:1                ; 98 bits   ; 196 LEs       ; 98 LEs               ; 98 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|Imult[32]       ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|counter[8]      ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:A|raddr[3]        ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|caddr[4]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|raddr[0]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|raddr[6]        ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|caddr[7]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|raddr[0]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|raddr[5]        ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|caddr[0]        ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:D|raddr[2]        ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|counter[5]      ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|raddr[5]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[2]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|raddr[5]        ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|caddr[4]        ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|raddr[2]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:E|raddr[4]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|caddr[6]        ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:F|raddr[3]        ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|counter[6]      ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:G|raddr[0]        ;
 ; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|caddr[0]        ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|raddr[7]        ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_bitcount[1]                          ;
@@ -1093,9 +1086,9 @@ Encoding Type:  One-Hot
 ; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[15]                             ;
 ; 4:1                ; 108 bits  ; 216 LEs       ; 108 LEs              ; 108 LEs                ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|Iaccum[23]   ;
 ; 7:1                ; 48 bits   ; 192 LEs       ; 48 LEs               ; 144 LEs                ; Yes        ; |radioberry|receiver:receiver_inst|firX8R8:fir2|Iacc[12]                 ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[10]                             ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[8]                              ;
 ; 7:1                ; 5 bits    ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |radioberry|ad9866:ad9866_inst|dut2_data[0]                              ;
-; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|caddr[6]     ;
+; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|caddr[5]     ;
 ; 7:1                ; 7 bits    ; 28 LEs        ; 7 LEs                ; 21 LEs                 ; Yes        ; |radioberry|transmitter:transmitter_inst|FirInterp8_1024:fi|raddr[6]     ;
 ; 8:1                ; 34 bits   ; 170 LEs       ; 68 LEs               ; 102 LEs                ; No         ; |radioberry|receiver:receiver_inst|varcic:varcic_inst_I1|Selector16      ;
 ; 5:1                ; 2 bits    ; 6 LEs         ; 4 LEs                ; 2 LEs                  ; No         ; |radioberry|ad9866:ad9866_inst|dut2_state                                ;
@@ -1275,8 +1268,8 @@ Encoding Type:  One-Hot
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                       ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter3a0                                                                               ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; parity4                                                                                  ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; counter1a0                                                                               ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; parity2                                                                                  ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 
 
@@ -1285,8 +1278,8 @@ Encoding Type:  One-Hot
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                       ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter6a0                                                                               ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; parity7                                                                                  ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; counter4a0                                                                               ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; parity5                                                                                  ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 
 
@@ -1309,13 +1302,13 @@ Encoding Type:  One-Hot
 +-----------------------------+------------------------+------+-----------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe10 ;
-+---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                           ;
-+---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                            ;
-+---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe8 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
@@ -1328,13 +1321,13 @@ Encoding Type:  One-Hot
 +-----------------------------+------------------------+------+-----------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe10 ;
-+---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                           ;
-+---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                            ;
-+---------------------------------+-------+------+----------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe8 ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                          ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                           ;
++---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
 
 
 +-------------------------------------------------------------------+
@@ -1347,7 +1340,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated ;
 +---------------------------------------+-------+------+---------------------------------------+
 ; Assignment                            ; Value ; From ; To                                    ;
 +---------------------------------------+-------+------+---------------------------------------+
@@ -1360,27 +1353,27 @@ Encoding Type:  One-Hot
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_u57:rdptr_g1p ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                       ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter5a0                                                                               ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; parity6                                                                                  ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; counter1a0                                                                               ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; parity2                                                                                  ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|a_graycounter_qjc:wrptr_g1p ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                       ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
-; POWER_UP_LEVEL ; HIGH  ; -    ; counter8a0                                                                               ;
-; POWER_UP_LEVEL ; HIGH  ; -    ; parity9                                                                                  ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; counter4a0                                                                               ;
+; POWER_UP_LEVEL ; HIGH  ; -    ; parity5                                                                                  ;
 +----------------+-------+------+------------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|altsyncram_1l31:fifo_ram ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|altsyncram_3l31:fifo_ram ;
 +---------------------------------+--------------------+------+---------------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                      ;
 +---------------------------------+--------------------+------+---------------------------------------------------------+
@@ -1389,7 +1382,7 @@ Encoding Type:  One-Hot
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp ;
 +-----------------------------+------------------------+------+-----------------------------------------------------------+
 ; Assignment                  ; Value                  ; From ; To                                                        ;
 +-----------------------------+------------------------+------+-----------------------------------------------------------+
@@ -1399,7 +1392,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp|dffpipe_ue9:dffpipe5 ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp|dffpipe_te9:dffpipe4 ;
 +---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                          ;
 +---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
@@ -1408,7 +1401,7 @@ Encoding Type:  One-Hot
 
 
 +-------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_sld:ws_dgrp ;
 +-----------------------------+------------------------+------+-----------------------------------------------------------+
 ; Assignment                  ; Value                  ; From ; To                                                        ;
 +-----------------------------+------------------------+------+-----------------------------------------------------------+
@@ -1418,7 +1411,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp|dffpipe_ve9:dffpipe8 ;
+; Source assignments for txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_sld:ws_dgrp|dffpipe_re9:dffpipe8 ;
 +---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                          ;
 +---------------------------------+-------+------+---------------------------------------------------------------------------------------------+
@@ -3446,8 +3439,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS     ; ON          ; AUTO_CASCADE                                    ;
 ; IGNORE_CASCADE_BUFFERS  ; OFF         ; IGNORE_CASCADE                                  ;
 ; LPM_WIDTH               ; 32          ; Signed Integer                                  ;
-; LPM_NUMWORDS            ; 1024        ; Signed Integer                                  ;
-; LPM_WIDTHU              ; 10          ; Signed Integer                                  ;
+; LPM_NUMWORDS            ; 2048        ; Signed Integer                                  ;
+; LPM_WIDTHU              ; 11          ; Signed Integer                                  ;
 ; LPM_SHOWAHEAD           ; OFF         ; Untyped                                         ;
 ; UNDERFLOW_CHECKING      ; OFF         ; Untyped                                         ;
 ; OVERFLOW_CHECKING       ; OFF         ; Untyped                                         ;
@@ -3463,7 +3456,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; ADD_USEDW_MSB_BIT       ; OFF         ; Untyped                                         ;
 ; WRITE_ACLR_SYNCH        ; OFF         ; Untyped                                         ;
 ; READ_ACLR_SYNCH         ; OFF         ; Untyped                                         ;
-; CBXI_PARAMETER          ; dcfifo_tek1 ; Untyped                                         ;
+; CBXI_PARAMETER          ; dcfifo_jek1 ; Untyped                                         ;
 +-------------------------+-------------+-------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -4552,7 +4545,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Entity Instance            ; txFIFO:txFIFO_inst|dcfifo:dcfifo_component ;
 ;     -- FIFO Type           ; Dual Clock                                 ;
 ;     -- LPM_WIDTH           ; 32                                         ;
-;     -- LPM_NUMWORDS        ; 1024                                       ;
+;     -- LPM_NUMWORDS        ; 2048                                       ;
 ;     -- LPM_SHOWAHEAD       ; OFF                                        ;
 ;     -- USE_EAB             ; ON                                         ;
 +----------------------------+--------------------------------------------+
@@ -4906,7 +4899,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat May 07 10:45:43 2016
+    Info: Processing started: Thu Aug 11 13:59:55 2016
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off RadioBerry -c radioberry
 Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
 Info (12021): Found 1 design units, including 1 entities, in source file debounce.v
@@ -5287,7 +5280,7 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/alt_
 Info (12128): Elaborating entity "alt_synch_pipe_sld" for hierarchy "rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp"
 Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_re9.tdf
     Info (12023): Found entity 1: dffpipe_re9
-Info (12128): Elaborating entity "dffpipe_re9" for hierarchy "rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe10"
+Info (12128): Elaborating entity "dffpipe_re9" for hierarchy "rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|alt_synch_pipe_sld:rs_dgwp|dffpipe_re9:dffpipe8"
 Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_g66.tdf
     Info (12023): Found entity 1: cmpr_g66
 Info (12128): Elaborating entity "cmpr_g66" for hierarchy "rxFIFO:rxFIFO_inst|dcfifo:dcfifo_component|dcfifo_bqj1:auto_generated|cmpr_g66:rdempty_eq_comp"
@@ -5297,11 +5290,11 @@ Info (12128): Elaborating entity "dcfifo" for hierarchy "txFIFO:txFIFO_inst|dcfi
 Info (12130): Elaborated megafunction instantiation "txFIFO:txFIFO_inst|dcfifo:dcfifo_component"
 Info (12133): Instantiated megafunction "txFIFO:txFIFO_inst|dcfifo:dcfifo_component" with the following parameter:
     Info (12134): Parameter "intended_device_family" = "Cyclone III"
-    Info (12134): Parameter "lpm_numwords" = "1024"
+    Info (12134): Parameter "lpm_numwords" = "2048"
     Info (12134): Parameter "lpm_showahead" = "OFF"
     Info (12134): Parameter "lpm_type" = "dcfifo"
     Info (12134): Parameter "lpm_width" = "32"
-    Info (12134): Parameter "lpm_widthu" = "10"
+    Info (12134): Parameter "lpm_widthu" = "11"
     Info (12134): Parameter "overflow_checking" = "OFF"
     Info (12134): Parameter "rdsync_delaypipe" = "4"
     Info (12134): Parameter "read_aclr_synch" = "OFF"
@@ -5309,33 +5302,18 @@ Info (12133): Instantiated megafunction "txFIFO:txFIFO_inst|dcfifo:dcfifo_compon
     Info (12134): Parameter "use_eab" = "ON"
     Info (12134): Parameter "write_aclr_synch" = "OFF"
     Info (12134): Parameter "wrsync_delaypipe" = "4"
-Info (12021): Found 1 design units, including 1 entities, in source file db/dcfifo_tek1.tdf
-    Info (12023): Found entity 1: dcfifo_tek1
-Info (12128): Elaborating entity "dcfifo_tek1" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated"
-Info (12021): Found 1 design units, including 1 entities, in source file db/a_graycounter_t57.tdf
-    Info (12023): Found entity 1: a_graycounter_t57
-Info (12128): Elaborating entity "a_graycounter_t57" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_t57:rdptr_g1p"
-Info (12021): Found 1 design units, including 1 entities, in source file db/a_graycounter_pjc.tdf
-    Info (12023): Found entity 1: a_graycounter_pjc
-Info (12128): Elaborating entity "a_graycounter_pjc" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|a_graycounter_pjc:wrptr_g1p"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_1l31.tdf
-    Info (12023): Found entity 1: altsyncram_1l31
-Info (12128): Elaborating entity "altsyncram_1l31" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|altsyncram_1l31:fifo_ram"
-Info (12021): Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_vld.tdf
-    Info (12023): Found entity 1: alt_synch_pipe_vld
-Info (12128): Elaborating entity "alt_synch_pipe_vld" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp"
-Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_ue9.tdf
-    Info (12023): Found entity 1: dffpipe_ue9
-Info (12128): Elaborating entity "dffpipe_ue9" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_vld:rs_dgwp|dffpipe_ue9:dffpipe5"
-Info (12021): Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_0md.tdf
-    Info (12023): Found entity 1: alt_synch_pipe_0md
-Info (12128): Elaborating entity "alt_synch_pipe_0md" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp"
-Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_ve9.tdf
-    Info (12023): Found entity 1: dffpipe_ve9
-Info (12128): Elaborating entity "dffpipe_ve9" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|alt_synch_pipe_0md:ws_dgrp|dffpipe_ve9:dffpipe8"
-Info (12021): Found 1 design units, including 1 entities, in source file db/cmpr_f66.tdf
-    Info (12023): Found entity 1: cmpr_f66
-Info (12128): Elaborating entity "cmpr_f66" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_tek1:auto_generated|cmpr_f66:rdempty_eq_comp"
+Info (12021): Found 1 design units, including 1 entities, in source file db/dcfifo_jek1.tdf
+    Info (12023): Found entity 1: dcfifo_jek1
+Info (12128): Elaborating entity "dcfifo_jek1" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_3l31.tdf
+    Info (12023): Found entity 1: altsyncram_3l31
+Info (12128): Elaborating entity "altsyncram_3l31" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|altsyncram_3l31:fifo_ram"
+Info (12021): Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_uld.tdf
+    Info (12023): Found entity 1: alt_synch_pipe_uld
+Info (12128): Elaborating entity "alt_synch_pipe_uld" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp"
+Info (12021): Found 1 design units, including 1 entities, in source file db/dffpipe_te9.tdf
+    Info (12023): Found entity 1: dffpipe_te9
+Info (12128): Elaborating entity "dffpipe_te9" for hierarchy "txFIFO:txFIFO_inst|dcfifo:dcfifo_component|dcfifo_jek1:auto_generated|alt_synch_pipe_uld:rs_dgwp|dffpipe_te9:dffpipe4"
 Info (12128): Elaborating entity "transmitter" for hierarchy "transmitter:transmitter_inst"
 Info (12128): Elaborating entity "pulsegen" for hierarchy "transmitter:transmitter_inst|pulsegen:pulse_inst"
 Info (12128): Elaborating entity "FirInterp8_1024" for hierarchy "transmitter:transmitter_inst|FirInterp8_1024:fi"
@@ -5463,18 +5441,18 @@ Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "spi_ce[1]"
-Info (21057): Implemented 9076 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 9056 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 8 input pins
     Info (21059): Implemented 22 output pins
     Info (21060): Implemented 12 bidirectional pins
-    Info (21061): Implemented 8424 logic cells
+    Info (21061): Implemented 8404 logic cells
     Info (21064): Implemented 566 RAM segments
     Info (21062): Implemented 44 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 24 warnings
-    Info: Peak virtual memory: 620 megabytes
-    Info: Processing ended: Sat May 07 10:46:25 2016
-    Info: Elapsed time: 00:00:42
-    Info: Total CPU time (on all processors): 00:00:30
+    Info: Peak virtual memory: 609 megabytes
+    Info: Processing ended: Thu Aug 11 14:00:29 2016
+    Info: Elapsed time: 00:00:34
+    Info: Total CPU time (on all processors): 00:00:29
 
 
 +------------------------------------------+

@@ -27,15 +27,16 @@ OPTIONS=-g -D $(UNAME_N) $(LIMESDR_OPTIONS) $(FREEDV_OPTIONS) -O3
 GTKINCLUDES=`pkg-config --cflags gtk+-3.0`
 GTKLIBS=`pkg-config --libs gtk+-3.0`
 
+AUDIO_LIBS=-lasound
 
 ifeq ($(UNAME_N),raspberrypi)
-GPIOLIBS=-lwiringPi -lpigpio
+GPIOLIBS= -lbcm2835 -lwiringPi -lpigpio -lpulse-simple -lpulse
 endif
 ifeq ($(UNAME_N),odroid)
 GPIOLIBS=-lwiringPi
 endif
-LIBS=-lrt -lm -lwdsp -lpthread $(GTKLIBS) $(GPIOLIBS) $(SOAPYSDRLIBS) $(FREEDVLIBS)
-INCLUDES=$(GTKINCLUDES)
+LIBS=-lrt -lm -lwdsp -lpthread $(AUDIO_LIBS) $(GTKLIBS) $(GPIOLIBS) $(SOAPYSDRLIBS) $(FREEDVLIBS) 
+INCLUDES=$(GTKINCLUDES)  
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
@@ -65,7 +66,9 @@ sliders.c \
 version.c \
 vfo.c \
 waterfall.c \
-wdsp_init.c
+wdsp_init.c \
+radioberry.c \
+audio.c 
 
 
 HEADERS= \
@@ -95,7 +98,9 @@ version.h \
 vfo.h \
 waterfall.h \
 wdsp_init.h \
-xvtr.h
+xvtr.h \
+radioberry.h \
+audio.h 
 
 
 OBJS= \
@@ -122,7 +127,9 @@ toolbar.o \
 sliders.o \
 vfo.o \
 waterfall.o \
-wdsp_init.o
+wdsp_init.o \
+radioberry.o \
+audio.o 
 
 all: prebuild $(PROGRAM) $(HEADERS) $(LIMESDR_HEADERS) $(SOURCES) $(LIMESDR_SOURCES) $(FREEDV_SOURCES)
 

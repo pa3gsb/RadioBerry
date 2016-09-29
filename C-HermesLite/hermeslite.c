@@ -344,7 +344,7 @@ void handlePacket(char* buffer){
 				audiooutputbuffer[audiocounter++] = buffer[k + 2];
 				audiooutputbuffer[audiocounter++] = buffer[k + 3];
 				if (audiocounter ==  1024) {
-					audio_write(audiooutputbuffer, 1024);
+					//audio_write(audiooutputbuffer, 1024);
 					audiocounter = 0;
 				}
 	

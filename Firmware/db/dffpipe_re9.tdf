@@ -29,26 +29,26 @@ SUBDESIGN dffpipe_re9
 	q[11..0]	:	output;
 ) 
 VARIABLE 
-	dffe11a[11..0] : dffe;
-	dffe12a[11..0] : dffe;
+	dffe10a[11..0] : dffe;
+	dffe9a[11..0] : dffe;
 	ena	: NODE;
 	prn	: NODE;
 	sclr	: NODE;
 
 BEGIN 
-	dffe11a[].clk = clock;
-	dffe11a[].clrn = clrn;
-	dffe11a[].d = (d[] & (! sclr));
-	dffe11a[].ena = ena;
-	dffe11a[].prn = prn;
-	dffe12a[].clk = clock;
-	dffe12a[].clrn = clrn;
-	dffe12a[].d = (dffe11a[].q & (! sclr));
-	dffe12a[].ena = ena;
-	dffe12a[].prn = prn;
+	dffe10a[].clk = clock;
+	dffe10a[].clrn = clrn;
+	dffe10a[].d = (dffe9a[].q & (! sclr));
+	dffe10a[].ena = ena;
+	dffe10a[].prn = prn;
+	dffe9a[].clk = clock;
+	dffe9a[].clrn = clrn;
+	dffe9a[].d = (d[] & (! sclr));
+	dffe9a[].ena = ena;
+	dffe9a[].prn = prn;
 	ena = VCC;
 	prn = VCC;
-	q[] = dffe12a[].q;
+	q[] = dffe10a[].q;
 	sclr = GND;
 END;
 --VALID FILE

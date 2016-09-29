@@ -28,7 +28,7 @@ RETURNS ( q[11..0]);
 FUNCTION cmpr_g66 (dataa[11..0], datab[11..0])
 RETURNS ( aeb);
 
---synthesis_resources = reg 36 
+--synthesis_resources = M9K 12 reg 116 
 OPTIONS ALTERA_INTERNAL_OPTION = "AUTO_SHIFT_REGISTER_RECOGNITION=OFF;REMOVE_DUPLICATE_REGISTERS=OFF;SYNCHRONIZER_IDENTIFICATION=OFF;SYNCHRONIZATION_REGISTER_CHAIN_LENGTH = 2;suppress_da_rule_internal=d101;suppress_da_rule_internal=d102;suppress_da_rule_internal=d103;{-to wrptr_g} suppress_da_rule_internal=S102;{-to wrptr_g} POWER_UP_LEVEL=LOW";
 
 SUBDESIGN dcfifo_bqj1

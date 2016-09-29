@@ -133,7 +133,7 @@ void wdsp_init(int rx,int pixels,int protocol) {
     fprintf(stderr,"wdsp_init: %d\n",rx);
    
    micOutputRate=48000;
-    if(protocol==ORIGINAL_PROTOCOL) {
+    if(protocol==ORIGINAL_PROTOCOL || protocol==RADIOBERRY_PROTOCOL) {
         micOutputRate=48000;
     } else {
         micOutputRate=192000;

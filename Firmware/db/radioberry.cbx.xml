@@ -2,7 +2,7 @@
 <LOG_ROOT>
 	<PROJECT NAME="radioberry">
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:H|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_tek1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|txFIFO:txFIFO_inst|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_jek1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|lpm_mult:Mult0" CBX_FILE_NAME="mult_gft.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:B|firram36:ram|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_nhn1.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_inst|firX8R8:fir2|fir256:C|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>

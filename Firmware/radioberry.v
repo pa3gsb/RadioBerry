@@ -313,8 +313,8 @@ rxFIFO rxFIFO_inst(	.aclr(reset),
 wire spi_tx_done = ptt_in ? spi_done : 1'b0;
 
 txFIFO txFIFO_inst(	.aclr(reset), 
-							.wrclk(spi_sck), .data(spi_recv[31:0]), .wrreq(spi_tx_done), .wrfull(txFIFOFull),
-							.rdclk(adc_clock), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty));
+							.wrclk(spi_sck), .data(spi_recv[31:0]), .wrreq(spi_tx_done),
+							.rdclk(adc_clock), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty), .rdfull(txFIFOFull));
 	
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------

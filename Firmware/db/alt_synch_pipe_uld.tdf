@@ -31,12 +31,12 @@ SUBDESIGN alt_synch_pipe_uld
 	q[11..0]	:	output;
 ) 
 VARIABLE 
-	dffpipe3 : dffpipe_te9;
+	dffpipe4 : dffpipe_te9;
 
 BEGIN 
-	dffpipe3.clock = clock;
-	dffpipe3.clrn = clrn;
-	dffpipe3.d[] = d[];
-	q[] = dffpipe3.q[];
+	dffpipe4.clock = clock;
+	dffpipe4.clrn = clrn;
+	dffpipe4.d[] = d[];
+	q[] = dffpipe4.q[];
 END;
 --VALID FILE
