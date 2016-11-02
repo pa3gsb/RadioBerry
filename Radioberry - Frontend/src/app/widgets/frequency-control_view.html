@@ -1,0 +1,15 @@
+<!--style="display:none" beide componenten eventueel niet laten zien-->
+<div >
+	<input id="freq" type="number" step="1000" ng-min="1000" ng-max="60000000" ng-model="$ctrl.radio.frequency">Frequency</input>
+	<div id="freqstep"> <select  name="Frequency Step" ng-model="$ctrl.radio.frequencystep">
+					<option value="1">1 Hz</option>
+					<option value="10">10 Hz</option>
+					<option value="100">100 Hz</option>
+					<option value="1000" >1 KHz</option>
+					<option value="10000">10 KHz</option>
+					<option value="100000">100 KHz</option>
+					<option value="1000000">1 MHz</option>
+					<option value="10000000">10 MHz</option>
+	</select> </div>
+	
+</div>

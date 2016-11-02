@@ -25,8 +25,8 @@ public class RadioBerryLoader {
 		new SI570().setFrequency(73728000);	
 		// Load FPGA firmware
 		//new FPGALoader().load();  Performance issue...created a C program!!! and called here:
-		ProcessBuilder pb = new ProcessBuilder("/home/pi/firmwareloader/loadFPGA");
-		pb.start();
+//		ProcessBuilder pb = new ProcessBuilder("/home/pi/firmwareloader/loadFPGA");
+//		pb.start();
 	}
 	
 }
