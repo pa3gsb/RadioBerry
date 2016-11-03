@@ -137,7 +137,7 @@ int main(int argc, char **argv)
 
 	printf("init done \n");
 	
-	audio_init();
+	//audio_init();
 		
 	pthread_t pid, pid2;
     pthread_create(&pid, NULL, spiReader, NULL);  
@@ -218,7 +218,9 @@ void readPackets() {
 }
 
 		int att11 = 0;
+		int prevatt11 = 0;
 		int att523 = 0;
+		int prevatt523 = 0;
 
 void handlePacket(char* buffer){
 
@@ -287,12 +289,19 @@ void handlePacket(char* buffer){
 			if ((buffer[523 + 3] & 0x10) == 0x10)
 				rando = 1;
 		}
-		
-		// Alans radio (without name) support...
-		if (att11 != 0 && att523 == 0)
+		// Powersdr and Alans software are following a different patttern
+		// this program does not known which package is calling 
+		// by looking which value is changing... that will be the att value
+		if (prevatt11 != att11) 
+		{
 			att = att11;
-		if (att11 == 0 && att523 != 0)
+			prevatt11 = att11;
+		}
+		if (prevatt523 != att523) 
+		{
 			att = att523;
+			prevatt523 = att523;
+		}
 			
 		if ((buffer[523] & 0xFE)  == 0x00) {
 			nrx = (((buffer[523 + 4] & 0x38) >> 3) + 1);
@@ -321,6 +330,7 @@ void handlePacket(char* buffer){
 			holddither = dither;
 			printf("att =  %d ", att);printf("dither =  %d ", dither);printf("rando =  %d ", rando);
 			printf("code =  %d \n", (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F)));
+			printf("att11 = %d and att523 = %d\n", att11, att523);
 		}
 		if (holdfreq != freq) {
 			holdfreq = freq;
@@ -457,7 +467,7 @@ void fillDiscoveryReplyMessage() {
 	broadcastReply[i++] =  0x04;
 	broadcastReply[i++] =  0x05;
 	broadcastReply[i++] =  31;
-	broadcastReply[i++] =  0x10; // Hermes boardtype public static final
+	broadcastReply[i++] =  6; //0x10; // Hermes boardtype public static final
 									// int DEVICE_HERMES_LITE = 6;
 }
 
