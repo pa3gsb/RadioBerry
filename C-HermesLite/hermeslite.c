@@ -365,10 +365,10 @@ void handlePacket(char* buffer){
 					while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_38 ) == HIGH) {};	// wait if TX buffer is full.
 					
 					sem_wait(&tx_empty);
-					put_tx_buffer(buffer[k + 4 + 2]);
-					put_tx_buffer(buffer[k + 4 + 3]);
-					put_tx_buffer(buffer[k + 4 + 0]);
-					put_tx_buffer(buffer[k + 4 + 1]);
+					int i = 0;
+					for (i; i < 4; i++){
+						put_tx_buffer(buffer[k + 4 + i]);			
+					}
 					sem_post(&tx_full);
 				}
 			}
@@ -444,8 +444,12 @@ void fillPacketToSend() {
 					//usleep(1); // sleep required????
 				}
 			}
-			if (MOX)
-				usleep(620);  // use pin...to indicate status...
+			if (MOX){
+				if (sampleSpeed ==0)
+					usleep(620);  // use pin...to indicate status...
+				if (sampleSpeed == 1)
+					usleep(260); 
+			}
 		}
 }
 

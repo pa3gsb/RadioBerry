@@ -41,6 +41,7 @@ DEBUG_LED4 <= transmitter:transmitter_inst.LED
 rxFIFOEmpty <= rxFIFO:rxFIFO_inst.wrempty
 txFIFOFull <= txFIFO:txFIFO_inst.rdfull
 ptt_in => ptt_in.IN1
+ptt_out <= ptt_in.DB_MAX_OUTPUT_PORT_TYPE
 
 
 |radioberry|pllclock:pllclock_inst

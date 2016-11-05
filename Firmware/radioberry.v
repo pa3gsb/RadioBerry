@@ -27,7 +27,8 @@ spi_sck, spi_mosi, spi_miso, spi_ce,
 DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
 rxFIFOEmpty,
 txFIFOFull,
-ptt_in);
+ptt_in,
+ptt_out);
 
 input wire clk_10mhz;	
 input wire ad9866_clk;
@@ -58,6 +59,7 @@ output  wire  DEBUG_LED3;
 output  wire  DEBUG_LED4;  // TX indicator...
 
 input wire ptt_in;
+output wire ptt_out;
 
 // ADC vars...
 wire adc_clock;		
@@ -136,6 +138,8 @@ assign ad9866_txclk = adc_clock;
 
 assign ad9866_rxen = (~ptt_in) ? 1'b1: 1'b0;
 assign ad9866_txen = (ptt_in) ? 1'b1: 1'b0;
+
+assign ptt_out = ptt_in;
 
 wire ad9866rqst;
 reg [5:0] tx_gain;

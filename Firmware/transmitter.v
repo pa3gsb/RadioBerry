@@ -50,8 +50,8 @@ reg signed [15:0]fir_q;
 always @ (posedge clk)
 begin 
 	if (req1) begin 
-		fir_i = tx_IQ_data[15:0];
-		fir_q = tx_IQ_data[31:16];
+		fir_i = tx_IQ_data[31:16];
+		fir_q = tx_IQ_data[15:0];
 	end 
 end
 
