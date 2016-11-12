@@ -10,6 +10,10 @@ angular
             
             console.log(self.radio);
         
+            self.setFreq = function () {
+                RadiostateService.updateRadioState(self.radio);
+            };
+
             var freq = $window.document.getElementById("freq");
             if (freq.addEventListener) {
                 // Internet Explorer, Opera, Google Chrome and Safari

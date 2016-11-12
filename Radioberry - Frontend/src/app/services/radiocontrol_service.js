@@ -2,7 +2,7 @@ angular
     .module('app')
     .service('RadiostateService', ['$http', function ($http) {
 
-        var urlBase = '/api/xxxx';
+        var urlBase = '/radioberry/control.do';
 
         var radioState;
 
@@ -12,21 +12,14 @@ angular
             radioState = JSON.parse(localStorage.getItem("radiostate"));
         }
 
-
         this.getRadioState = function () {
-            //return $http.get(urlBase);
             return radioState;
         };
 
         this.updateRadioState = function (radio) {
-            //return $http.post(urlBase, radio);
-            console.log('update radio state ');
-
+            $http.post(urlBase, radio);
             localStorage.setItem("radiostate", JSON.stringify(radio));
-
             return radio;
         };
-
-        //return radioState;
 
     }]);

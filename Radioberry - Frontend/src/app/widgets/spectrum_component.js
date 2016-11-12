@@ -109,7 +109,7 @@ angular
                             strFreq = strFreq.replace(/,/g, ".");
                             canvasCtx.fillText(strFreq, x, 15);
                             freqMarkers[freqMarkers.length] = x;
-                            console.log(strFreq + " pos: " + x);
+                            //console.log(strFreq + " pos: " + x);
 
                             if ((6000 * j) == 24000) {
                                 sdrspectrumcenter = x;
@@ -137,19 +137,9 @@ angular
                     canvasCtx.stroke();
                 };
                 draw();
-
-
-
-
-            }
-
-
+            };
             //using interval
             $interval(createData, 50);
-
-
-
-
-
         }
     });
+	

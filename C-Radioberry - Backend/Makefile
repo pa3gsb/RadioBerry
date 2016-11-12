@@ -5,20 +5,28 @@ OPTIONS=-g
 
 PROGRAM=radioberry
 
-LIBS=-lrt -lm -lbcm2835 -lwiringPi -lwiringPiDev -lpthread
+LIBS=-lrt -lm -lwdsp -lbcm2835 -lwiringPi -lwiringPiDev -lpthread
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
 SOURCES= \
+radio.c \
+main.c \
 frozen.c \
 mongoose.c \
 radioberry.c 
 
 HEADERS= \
+agc.h \
+channel.h \
+mode.h \
+radio.h \
 frozen.h \
 mongoose.h 
 
 OBJS= \
+radio.o \
+main.o \
 frozen.o \
 mongoose.o \
 radioberry.o

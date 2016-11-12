@@ -83,6 +83,9 @@ static void handle_hello1(struct mg_connection *nc, int ev, void *ev_data) {
 ////"frequency":parseInt(1008000), "mode":parseInt(6), "agc":parseInt(0), "low":parseInt(-4000), "high":parseInt(4000), "agc_gain":parseFloat(85)};
 static void handle_radiocontrol(struct mg_connection *nc, int ev, void *ev_data) {
  
+	printf("radiocontrol url called \n");
+	
+
 	struct http_message *hm = (struct http_message *) ev_data;
 	char buf[255] = {0};
 	memcpy(buf, hm->body.p,
@@ -92,24 +95,24 @@ static void handle_radiocontrol(struct mg_connection *nc, int ev, void *ev_data)
 	struct json_token tokens[10];
 	int tokens_size = sizeof(tokens) / sizeof(tokens[0]);
 	int i= parse_json(buf, strlen(buf), tokens, tokens_size);
-	//printf("parse status %d \n", i);
+	
 
 	const struct json_token *result;
 	result = find_json_token(tokens, "frequency");
-	//printf("Value of token is: [%.*s]\n", result->len, result->ptr);
 	char freqToken[10];
 	sprintf(freqToken, "%.*s", result->len, result->ptr);
 	int freq;
 	sscanf(freqToken, "%d", &freq);
 	printf("Frequency %d\n", freq);
 
+	printf("radiocontrol send \n");
 	/* Send headers */
 	mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
 	mg_send_http_chunk(nc, "", 0); // Tell the client we're finished
 	nc->flags |= MG_F_SEND_AND_CLOSE;
 }
 
-int main(void) {
+int mainx(void) {
   struct mg_mgr mgr;
   struct mg_connection *nc;
 

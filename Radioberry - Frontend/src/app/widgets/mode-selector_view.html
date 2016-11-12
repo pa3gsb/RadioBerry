@@ -1,0 +1,5 @@
+    <div>
+        <select name="radiomode" ng-model="$ctrl.selectedMode" ng-change="$ctrl.setMode()" 
+             ng-options="mod.mode for mod in $ctrl.mode track by mod.code">
+        </select>
+    </div>
