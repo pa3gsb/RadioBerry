@@ -8,6 +8,7 @@ import org.radioberry.service.Generator;
 import org.radioberry.service.RXIQData;
 import org.radioberry.utility.Channel;
 import org.radioberry.utility.Display;
+import org.radioberry.utility.Log;
 import org.radioberry.utility.Modes;
 
 
@@ -155,11 +156,13 @@ public class Radio {
 		int[] error = new int[1];
 		int[] success = new int[1];
 
+		Log.info("Radio","XCreateAnalyzer...");
 		// rx spectrum
 		wdsp.XCreateAnalyzer(Display.RX, success, 262144, 1, 1, "");
 		if (success[0] != 0) {
 			// Log.i("Metis", "XCreateAnalyzer Display.RX failed:" +
 			// success[0]);
+			   Log.info("Radio","XCreateAnalyzer Display.RX failed:" + success[0]);
 		}
 		int flp[] = { 0 };
 		double KEEP_TIME = 0.1;

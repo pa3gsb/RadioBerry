@@ -4,10 +4,13 @@
 #include <unistd.h>
 #include <math.h>
 
+#include "wdsp.h" 
+
 #include "radio.h"
 #include "channel.h"
 #include "mode.h"
 #include "agc.h"
+
 
 #define MIN(x,y) (x<y?x:y)
 #define MAX(x,y) (x<y?y:x)
@@ -37,7 +40,6 @@ static double agc_gain=80.0;
 static double agc_slope=35.0;
 static double agc_hang_threshold=0.0;
 
-static double volume=0.2;
 
 static int nr=0;
 static int nr2=0;
@@ -78,6 +80,7 @@ void createReceiveChannel() {
 void initReceiveChannel() {
     setRXMode(modeAM);
     SetRXABandpassFreqs(CHANNEL_RX, (double)filterLow, (double)filterHigh);
+	setFilter(filterLow, filterHigh);
     setAGCMode(AGC_MEDIUM);
 
     SetRXAAMDSBMode(CHANNEL_RX, 0);
@@ -94,7 +97,12 @@ void initReceiveChannel() {
     SetRXAANFRun(CHANNEL_RX, anf);
     SetRXASNBARun(CHANNEL_RX, snb);
 
-    SetRXAPanelGain1(CHANNEL_RX, volume);
+    SetRXAPanelGain1(CHANNEL_RX, 0.9);//volume
+	
+	SetRXAShiftFreq(CHANNEL_RX, 0.0);
+    SetRXAShiftRun(CHANNEL_RX, 0);
+	
+	SetChannelState(CHANNEL_RX,1,0);
 }
 
 void calculate_display_average() {
@@ -190,9 +198,9 @@ void init_radio() {
 		fprintf(stderr,"creating wsdp (fftw3) wisdom files..........\n");
 		WDSPwisdom (wisdom_directory);
 	} else fprintf(stderr,"wisdom files already exist \n");
-		
+
 	createReceiveChannel();
-	
+	createRXAnalyzer();	
 	initReceiveChannel();
 }
 
@@ -200,8 +208,11 @@ void setRXMode(int mode) {
   SetRXAMode(CHANNEL_RX, mode);
 }
 
+void setAGCGain(int gain) {
+	agc_gain = gain;
+}
+
 void set_agc(int rx, int agc_mode) {
-  
   SetRXAAGCMode(rx, agc_mode);
   SetRXAAGCSlope(rx,agc_slope);
   SetRXAAGCTop(rx,agc_gain);
@@ -268,6 +279,12 @@ void setFilter(int low,int high) {
     SetRXASNBAOutputBandwidth(CHANNEL_RX, (double)filterLow, (double)filterHigh);
 
     //SetTXABandpassFreqs(CHANNEL_TX, fl,fh);
+}
+
+void stopRadio(){
+	DestroyAnalyzer(CHANNEL_RX);
+	SetChannelState(CHANNEL_RX,0,0);
+	CloseChannel(CHANNEL_RX);
 }
 
 // end of radio.c

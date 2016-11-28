@@ -1,5 +1,5 @@
 /* Copyright (C)
-* 2016 - Johan Maas, PA3GSB
+* 2016 - John Melton, G0ORX/N6LYT
 *
 * This program is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public License
@@ -17,24 +17,22 @@
 *
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#ifndef _AUDIO_H
+#define _AUDIO_H
 
-#include "radio.h"
-#include "radioberry-backend.h"
+extern char *input_devices[];
+extern int n_input_devices;
+extern int n_selected_input_device;
 
-int main (int   argc, char *argv[])
-{
-	init_radio();
-	
-	radioberry_protocol_init();
-	
-	startRadioberryServer();
-	
-	while(1){
-	//fprintf(stderr,"running...\n");
-	}
-}
- 
+extern char *output_devices[];
+extern int n_output_devices;
+extern int n_selected_output_device;
+
+extern int audio_open_output();
+extern int audio_open_input();
+extern void audio_close_output();
+extern void audio_close_input();
+extern int audio_write(short left_sample,short right_sample);
+extern void audio_get_cards();
+
+#endif

@@ -3,9 +3,11 @@ LINK=gcc
 
 OPTIONS=-g 
 
-PROGRAM=radioberry
+PROGRAM=radioberry-backend
 
-LIBS=-lrt -lm -lwdsp -lbcm2835 -lwiringPi -lwiringPiDev -lpthread
+AUDIO_LIBS=-lasound
+
+LIBS=-lrt -lm -lwdsp -lbcm2835 -lpthread  $(AUDIO_LIBS)
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
@@ -14,22 +16,31 @@ radio.c \
 main.c \
 frozen.c \
 mongoose.c \
+radioberry-backend.c \
+audio.c \
 radioberry.c 
+
 
 HEADERS= \
 agc.h \
 channel.h \
 mode.h \
+radioberry-backend.h \
 radio.h \
 frozen.h \
-mongoose.h 
+mongoose.h \
+radioberry.h \
+audio.h
 
 OBJS= \
 radio.o \
 main.o \
 frozen.o \
 mongoose.o \
-radioberry.o
+audio.o \
+radioberry-backend.o \
+radioberry.o 
+
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 

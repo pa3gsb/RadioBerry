@@ -1,7 +1,6 @@
 package org.radioberry.spi;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import com.pi4j.io.spi.SpiChannel;
 import com.pi4j.io.spi.SpiDevice;

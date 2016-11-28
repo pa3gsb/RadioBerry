@@ -38,9 +38,8 @@ public class FPGALoader {
 
 	public void load() throws Exception {
 		System.out.println("");
-		System.out.println("XXXXXXXXXXX-----------------XXXXXXXXXXXXXXXX");
+		System.out.println("XXXXXXXXXXXXXXXX-----Load Radioberry Firmware-----XXXXXXXXXXXXXXXX");
 		System.out.println("");
-		System.out.println("PS serial loading FPGA");
 
 		startDeviceInitialisation();
 		
@@ -49,7 +48,7 @@ public class FPGALoader {
 			System.out.println("check if loading succeed");
 			if (isLoadingSucceeded()) {
 				startDeviceInitialisation();
-				System.out.println("Loading firmware FPGA ended.");
+				System.out.println("Loading firmware FPGA succesfully ended.");
 				return;
 			}
 		}
