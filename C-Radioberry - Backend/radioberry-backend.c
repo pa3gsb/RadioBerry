@@ -9,6 +9,7 @@
 #include "frozen.h"
 
 #include "radioberry.h"
+#include "radio.h"
 
 static sig_atomic_t s_signal_received = 0;
 static const char *s_http_port = "8000";
@@ -81,36 +82,50 @@ static void handle_hello1(struct mg_connection *nc, int ev, void *ev_data) {
 	nc->flags |= MG_F_SEND_AND_CLOSE;
 }
 
-
-////"frequency":parseInt(1008000), "mode":parseInt(6), "agc":parseInt(0), "low":parseInt(-4000), "high":parseInt(4000), "agc_gain":parseFloat(85)};
 static void handle_radiocontrol(struct mg_connection *nc, int ev, void *ev_data) {
- 
-	printf("radiocontrol url called \n");
 	
-
 	struct http_message *hm = (struct http_message *) ev_data;
 	char buf[255] = {0};
 	memcpy(buf, hm->body.p,
 	   sizeof(buf) - 1 < hm->body.len ? sizeof(buf) - 1 : hm->body.len);
 	printf("%s\n", buf);
 
-	struct json_token tokens[10];
-	int tokens_size = sizeof(tokens) / sizeof(tokens[0]);
-	int i= parse_json(buf, strlen(buf), tokens, tokens_size);
-	
-
-	const struct json_token *result;
-	result = find_json_token(tokens, "frequency");
-	char freqToken[10];
-	sprintf(freqToken, "%.*s", result->len, result->ptr);
 	int freq;
-	sscanf(freqToken, "%d", &freq);
-	printf("Frequency %d\n", freq);
-	
-	//set the radioberry freq.
+	json_scanf(buf, strlen(buf), "{frequency: %d}", &freq);
+	printf("Result frequency: %d\n", freq);
 	setRX_Frequency(freq);
-
-	printf("radiocontrol send \n");
+	
+	int agcmode;
+	json_scanf(buf, strlen(buf), "{agcmode: %d}", &agcmode);
+	printf("Result agcmode: %d\n", agcmode);
+	setAGCMode(agcmode);
+	
+	int agcgain;
+	json_scanf(buf, strlen(buf), "{agcgain: %d}", &agcgain);
+	printf("Result agcgain: %d\n", agcgain);
+	setAGCGain(agcgain);
+	
+	int mode;
+	json_scanf(buf, strlen(buf), "{mode: %d}", &mode);
+	printf("Result mode: %d\n", mode);
+	setRXMode(mode);
+	
+	int att;
+	json_scanf(buf, strlen(buf), "{att: %d}", &att);
+	printf("Result att: %d\n", att);
+	setRX_Attenuation(att);
+	
+	int low, high;
+	json_scanf(buf, strlen(buf), "{low: %d}", &low);
+	json_scanf(buf, strlen(buf), "{high: %d}", &high);
+	printf("Result low: %d and high: %d\n", low, high);
+	setFilter(low, high);
+	
+	int volume;
+	json_scanf(buf, strlen(buf), "{volume: %d}", &volume);
+	printf("Result volume: %d\n", volume);
+	setVolume(volume / 100.0);
+	
 	/* Send headers */
 	mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
 	mg_send_http_chunk(nc, "", 0); // Tell the client we're finished

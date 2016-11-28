@@ -90,7 +90,7 @@ double volume=0.99;
 int rx_dither=0;
 int rx_random=0;
 int rx_preamp=0;
-int attenuation=0;
+int att=0;
 long rx_frequency=1008000;
 
 static int rxcount =0;
@@ -99,8 +99,8 @@ static int txcount =0;
 int local_audio = 0;
 int local_microphone = 0;
 
-void setVolume(double volume){
-	volume = volume;
+void setVolume(double vol){
+	volume = vol;
 }
 void setRX_Dither(int dither){
 	rx_dither = dither;
@@ -109,7 +109,7 @@ void setRX_Random(int random){
 	rx_random = random;
 }
 void setRX_Attenuation(int attenuation){
-	attenuation = attenuation;
+	att = attenuation;
 }
 void setRX_Frequency(int freq){
 	rx_frequency = freq;
@@ -360,7 +360,7 @@ void spiReader() {
 	while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == HIGH) {}; // wait till rxFIFO buffer is filled with at least one element
 
 	iqdata[0] = (sampleSpeed & 0x03);
-	iqdata[1] = (((rx_random << 6) & 0x40) | ((rx_dither <<5) & 0x20) |  (attenuation & 0x1F));
+	iqdata[1] = (((rx_random << 6) & 0x40) | ((rx_dither <<5) & 0x20) |  (att & 0x1F));
 	iqdata[2] = ((rx_frequency >> 24) & 0xFF);
 	iqdata[3] = ((rx_frequency >> 16) & 0xFF);
 	iqdata[4] = ((rx_frequency >> 8) & 0xFF);

@@ -210,6 +210,7 @@ void setRXMode(int mode) {
 
 void setAGCGain(int gain) {
 	agc_gain = gain;
+	SetRXAAGCTop(CHANNEL_RX, agc_gain);
 }
 
 void set_agc(int rx, int agc_mode) {

@@ -4,7 +4,7 @@ angular
 
        $scope.radioState = RadiostateService.getRadioState();
 
-       $scope.modeList = [
+       $scope.modes = [
             {"mode": "LSB", "code": 0},
             {"mode": "USB", "code": 1},
             {"mode": "DSB", "code": 2},
