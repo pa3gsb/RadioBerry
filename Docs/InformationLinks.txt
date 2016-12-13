@@ -65,3 +65,8 @@ Simplicity is a prerequisite for reliability. Edsger W. Dijkstra
 
 http://www.ftdichip.com/Support/SoftwareExamples/MPSSE.htm
 http://www.ftdichip.com/Support/SoftwareExamples/CodeExamples/CSharp.htm
+
+
+JSON in c 
+- frozen
+- https://linuxprograms.wordpress.com/2010/05/20/json-c-libjson-tutorial/

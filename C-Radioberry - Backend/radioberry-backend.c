@@ -1,15 +1,20 @@
 /*
  * Radioberry 
  * 
- * Webserver + wdsp + frontend.
+ * Webserver ; handles commands and 
  *
  */
-
+ 
 #include "mongoose.h"
 #include "frozen.h"
 
 #include "radioberry.h"
 #include "radio.h"
+
+#include "radioberry-backend.h"
+
+
+static struct mg_connection *nc;
 
 static sig_atomic_t s_signal_received = 0;
 static const char *s_http_port = "8000";
@@ -37,6 +42,18 @@ static void broadcast(struct mg_connection *nc, const struct mg_str msg) {
     if (c == nc) continue; /* Don't send to the sender. */
     mg_send_websocket_frame(c, WEBSOCKET_OP_TEXT, buf, strlen(buf));
   }
+}
+
+void broadcast_spectrum_data(const char *data) {
+	struct mg_connection *c;
+	char addr[32];
+	mg_sock_addr_to_str(&nc->sa, addr, sizeof(addr),
+                      MG_SOCK_STRINGIFY_IP | MG_SOCK_STRINGIFY_PORT);
+	for (c = mg_next(nc->mgr, NULL); c != NULL; c = mg_next(nc->mgr, c)) {
+		if (c == nc) continue;
+		mg_send_websocket_frame(c, WEBSOCKET_OP_TEXT, data, strlen(data));
+	}
+	
 }
 
 static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
@@ -67,22 +84,9 @@ static void ev_handler(struct mg_connection *nc, int ev, void *ev_data) {
   }
 }
 
-static void handle_hello1(struct mg_connection *nc, int ev, void *ev_data) {
-  
-  /* Send headers */
-  mg_printf(nc, "%s", "HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n");
-
-  /* Compute the result and send it back as a JSON object */
-//  result = strtod(n1, NULL) + strtod(n2, NULL);
-//  mg_printf_http_chunk(nc, "{ \"result\": %lf }", result);
-//  mg_send_http_chunk(nc, "", 0); /* Send empty chunk, the end of response */
- 
-  mg_printf_http_chunk(nc, "%s", "my response!");
-  mg_send_http_chunk(nc, "", 0); // Tell the client we're finished
-	nc->flags |= MG_F_SEND_AND_CLOSE;
-}
-
 static void handle_radiocontrol(struct mg_connection *nc, int ev, void *ev_data) {
+	
+	//todo replace this with json-c iso frozen...
 	
 	struct http_message *hm = (struct http_message *) ev_data;
 	char buf[255] = {0};
@@ -131,10 +135,9 @@ static void handle_radiocontrol(struct mg_connection *nc, int ev, void *ev_data)
 	mg_send_http_chunk(nc, "", 0); // Tell the client we're finished
 	nc->flags |= MG_F_SEND_AND_CLOSE;
 }
-
+	
 int startRadioberryServer(void) {
   struct mg_mgr mgr;
-  struct mg_connection *nc;
 
   signal(SIGTERM, signal_handler);
   signal(SIGINT, signal_handler);
@@ -147,11 +150,10 @@ int startRadioberryServer(void) {
   s_http_server_opts.document_root = ".";
   mg_set_protocol_http_websocket(nc);
   
-  mg_register_http_endpoint(nc, "/hello1", handle_hello1);
   mg_register_http_endpoint(nc, "/radioberry/control.do", handle_radiocontrol);
   
-
   printf("Started on port %s\n", s_http_port);
+  
   while (s_signal_received == 0) {
     mg_mgr_poll(&mgr, 200);
   }

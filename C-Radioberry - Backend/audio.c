@@ -48,6 +48,9 @@ static snd_pcm_t *record_handle=NULL;
 
 #define MIC_BUFFER_SIZE (AUDIO_SAMPLE_SIZE*AUDIO_CHANNELS*mic_buffer_size)
 
+#define TRUE 1;
+#define FALSE 0;
+
 static unsigned char *audio_buffer=NULL;
 static int audio_offset=0;
 

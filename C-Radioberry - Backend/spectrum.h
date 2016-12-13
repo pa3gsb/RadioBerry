@@ -1,0 +1,2 @@
+static int SPECTRUM_WIDTH= 1280;
+static int SPECTRUM_UPDATES_PER_SECOND=10;

@@ -5,11 +5,9 @@ OPTIONS=-g
 
 PROGRAM=radioberry-backend
 
-AUDIO_LIBS=-lasound
+LIBS=-lrt -lm -lwdsp -lbcm2835 -lpthread  -lasound  -ljson
 
-LIBS=-lrt -lm -lwdsp -lbcm2835 -lpthread  $(AUDIO_LIBS)
-
-COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
+COMPILE=$(CC) $(OPTIONS)   
 
 SOURCES= \
 radio.c \
@@ -18,6 +16,7 @@ frozen.c \
 mongoose.c \
 radioberry-backend.c \
 audio.c \
+spectrum.c \
 radioberry.c 
 
 
@@ -30,7 +29,8 @@ radio.h \
 frozen.h \
 mongoose.h \
 radioberry.h \
-audio.h
+audio.h \
+spectrum.h
 
 OBJS= \
 radio.o \
@@ -39,6 +39,7 @@ frozen.o \
 mongoose.o \
 audio.o \
 radioberry-backend.o \
+spectrum.o \
 radioberry.o 
 
 

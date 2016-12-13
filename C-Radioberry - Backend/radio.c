@@ -6,6 +6,7 @@
 
 #include "wdsp.h" 
 
+#include "spectrum.h"
 #include "radio.h"
 #include "channel.h"
 #include "mode.h"
@@ -29,8 +30,8 @@
 static int display_detector_mode=DETECTOR_MODE_AVERAGE;
 static int display_average_mode=AVERAGE_MODE_LOG_RECURSIVE;
 
-static int spectrumWIDTH=800;
-static int SPECTRUM_UPDATES_PER_SECOND=10;
+//static int spectrumWIDTH=800;
+//static int SPECTRUM_UPDATES_PER_SECOND=10;
 static double display_average_time=120.0;
 static int updates_per_second=10;
 static int filterLow = -4000;
@@ -129,7 +130,7 @@ static void initAnalyzer(int channel,int buffer_size) {
     int clip = 0;
     int span_clip_l = 0;
     int span_clip_h = 0;
-    int pixels=spectrumWIDTH;
+    int pixels=SPECTRUM_WIDTH;
     int stitches = 1;
     int avm = 0;
     double tau = 0.001 * 120.0;

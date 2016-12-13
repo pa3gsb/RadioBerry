@@ -29,12 +29,11 @@ int main (int   argc, char *argv[])
 {
 	init_radio();
 	
-	radioberry_protocol_init();
+	radioberry_protocol_init();	
+	
+	initSpectrum();
 	
 	startRadioberryServer();
 	
-	while(1){
-	//fprintf(stderr,"running...\n");
-	}
 }
  
