@@ -9,7 +9,7 @@ angular
         controller: function ($window, $scope, $log, RadiostateService) {
             var self = this;
             
-            self.selectedMode = self.agcmode[self.radio.mode];
+            self.selectedMode = self.agcmode[self.radio.agcmode];
         
             self.setAGCMode = function () {
                  self.radio.agcmode = self.selectedMode.code;

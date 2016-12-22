@@ -5,20 +5,22 @@ angular
         bindings: {
             radio: '='
         },
-        controller: function ($window, $scope, $interval, NotifyingService) {
+        controller: function ($window, $scope, $interval, NotifyingService, WebSocketService) {
             var self = this;
+
+            self.ws = WebSocketService;
 
             this.canvasElement = $window.document.getElementById('visualizer');
 
-            NotifyingService.subscribe($scope, function somethingChanged() {
-                // Handle notification
-                console.log("Iam notified....")
-
+            WebSocketService.subscribe($scope, function newSpectrumData() {
+                showSpectrum();
             });
 
-            var createData = function () {
+            var showSpectrum = function () {
                 
                 var dataArray = new Float32Array(1280);
+                dataArray = self.ws.data.spectrum;
+                
                 var bandWidth = 0;
 
                 WIDTH = 900;
@@ -83,7 +85,7 @@ angular
                     var k = 1;
                     for (var i = 0; i < bufferLength; i++) {
                         k = k * -1;
-                        var y = 240.0 + ( (Math.random() * 4) * k) ; //dataArray[i] * -1 * 2;
+                        var y = dataArray.spectrum[i] * -1 * 2; //240.0 + ( (Math.random() * 4) * k) ; //
                         if (i === 0) {
                             canvasCtx.moveTo(x, y);
                         } else {
@@ -139,7 +141,7 @@ angular
                 draw();
             };
             //using interval
-            $interval(createData, 50);
+            //$interval(createData, 50);
         }
     });
 	

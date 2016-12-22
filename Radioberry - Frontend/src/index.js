@@ -1,2 +1,2 @@
 angular
-  .module('app', ['ui.router']);
+  .module('app', ['ui.router', 'ngWebSocket']);
