@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACE,wBAA4B,CAC7B","file":"../../styles/app.css","sourcesContent":["body {\r\n  background-color: lightgrey;\r\n}\r\n"]}

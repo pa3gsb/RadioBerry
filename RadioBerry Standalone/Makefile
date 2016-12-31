@@ -30,7 +30,7 @@ GTKLIBS=`pkg-config --libs gtk+-3.0`
 AUDIO_LIBS=-lasound
 
 ifeq ($(UNAME_N),raspberrypi)
-GPIOLIBS= -lbcm2835 -lwiringPi -lpigpio -lpulse-simple -lpulse
+GPIOLIBS= -lbcm2835 -lwiringPi -lpigpio 
 endif
 ifeq ($(UNAME_N),odroid)
 GPIOLIBS=-lwiringPi

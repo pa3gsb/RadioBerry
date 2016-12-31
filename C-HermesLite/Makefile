@@ -3,24 +3,20 @@ LINK=gcc
 
 OPTIONS=-g 
 
-LIBS=-lrt -lm -lbcm2835 -lwiringPi -lwiringPiDev -lpthread -lpulse-simple -lpulse
+LIBS=-lrt -lm -lbcm2835 -lwiringPi -lwiringPiDev -lpthread 
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
 PROGRAM=hermeslite
 
 SOURCES= \
-hermeslite.c \
-audio.c 
+hermeslite.c 
 
-HEADERS= \
-port.h \
-audio.h
+HEADERS= 
 
 
 OBJS= \
-hermeslite.o \
-audio.o 
+hermeslite.o 
 
 all: prebuild $(PROGRAM) $(HEADERS) $(SOURCES) 
 
