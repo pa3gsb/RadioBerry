@@ -28,7 +28,8 @@ DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,
 rxFIFOEmpty,
 txFIFOFull,
 ptt_in,
-ptt_out);
+ptt_out,
+filter);
 
 input wire clk_10mhz;	
 input wire ad9866_clk;
@@ -60,6 +61,7 @@ output  wire  DEBUG_LED4;  // TX indicator...
 
 input wire ptt_in;
 output wire ptt_out;
+output [6:0] filter; 
 
 // ADC vars...
 wire adc_clock;		
@@ -259,6 +261,11 @@ assign gain_value = {~dither, ~att};
 
 assign ad9866_pga = randomize ? agc_value : gain_value;
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                         FILTER Control
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+filter filter_inst(.clock(clk_10mhz), .frequency(sync_phase_word), .selected_filter(filter));
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Convert frequency to phase word 

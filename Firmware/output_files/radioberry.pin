@@ -199,17 +199,17 @@ GND+                         : 128       :        :                   :         
 GND+                         : 129       :        :                   :         : 8         :                
 VCCIO8                       : 130       : power  :                   : 3.3V    : 8         :                
 GND                          : 131       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 132       :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 133       :        :                   :         : 8         :                
+filter[6]                    : 132       : output : 3.3-V LVCMOS      :         : 8         : Y              
+filter[5]                    : 133       : output : 3.3-V LVCMOS      :         : 8         : Y              
 VCCINT                       : 134       : power  :                   : 1.2V    :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 135       :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 136       :        :                   :         : 8         :                
+filter[4]                    : 135       : output : 3.3-V LVCMOS      :         : 8         : Y              
+filter[3]                    : 136       : output : 3.3-V LVCMOS      :         : 8         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 137       :        :                   :         : 8         :                
 VCCINT                       : 138       : power  :                   : 1.2V    :           :                
 VCCIO8                       : 139       : power  :                   : 3.3V    : 8         :                
 GND                          : 140       : gnd    :                   :         :           :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 141       :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 142       :        :                   :         : 8         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 143       :        :                   :         : 8         :                
+filter[2]                    : 141       : output : 3.3-V LVCMOS      :         : 8         : Y              
+filter[1]                    : 142       : output : 3.3-V LVCMOS      :         : 8         : Y              
+filter[0]                    : 143       : output : 3.3-V LVCMOS      :         : 8         : Y              
 ptt_out                      : 144       : output : 3.3-V LVCMOS      :         : 8         : Y              
 GND                          : EPAD      :        :                   :         :           :                
