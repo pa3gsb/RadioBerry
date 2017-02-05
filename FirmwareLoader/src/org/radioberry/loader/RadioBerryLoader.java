@@ -21,8 +21,17 @@ public class RadioBerryLoader {
 
 	
 	public static void main(String args[]) throws Exception{
+		
+		int freq = 73728000;
+		
+		if (args.length > 0){
+			System.out.println("freq shift = " + args[0]);
+			freq = freq + Integer.valueOf(args[0]);
+		}
+		
+		System.out.println("We will program the SI570 with frequency " + freq);
 		// sets the radioberry clock
-		new SI570().setFrequency(73728000);	
+		new SI570().setFrequency(freq);	
 		// Load FPGA firmware
 		new FPGALoader().load();  
 		//Performance issue...created a C program!!! and called here:
