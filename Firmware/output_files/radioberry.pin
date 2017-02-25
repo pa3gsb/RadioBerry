@@ -80,7 +80,7 @@ nSTATUS                      : 9         :        :                   :         
 RESERVED_INPUT_WITH_WEAK_PULLUP : 10        :        :                   :         : 1         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 11        :        :                   :         : 1         :                
 ~ALTERA_DCLK~ / RESERVED_INPUT : 12        : input  : 3.3-V LVCMOS      :         : 1         : N              
-rxFIFOEmpty                  : 13        : output : 3.3-V LVCMOS      :         : 1         : Y              
+rx1_FIFOEmpty                : 13        : output : 3.3-V LVCMOS      :         : 1         : Y              
 nCONFIG                      : 14        :        :                   :         : 1         :                
 TDI                          : 15        : input  :                   :         : 1         :                
 TCK                          : 16        : input  :                   :         : 1         :                
@@ -100,7 +100,7 @@ VCCINT                       : 29        : power  :                   : 1.2V    
 DEBUG_LED1                   : 30        : output : 3.3-V LVTTL       :         : 2         : Y              
 ptt_in                       : 31        : input  : 3.3-V LVCMOS      :         : 2         : Y              
 txFIFOFull                   : 32        : output : 3.3-V LVCMOS      :         : 2         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 33        :        :                   :         : 2         :                
+rx2_FIFOEmpty                : 33        : output : 3.3-V LVCMOS      :         : 2         : Y              
 VCCINT                       : 34        : power  :                   : 1.2V    :           :                
 VCCA1                        : 35        : power  :                   : 2.5V    :           :                
 GNDA1                        : 36        : gnd    :                   :         :           :                
