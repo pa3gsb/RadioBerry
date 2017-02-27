@@ -15,7 +15,7 @@
 #include <math.h>
 #include <semaphore.h>
 
-#include <bcm2835.h>
+#include <pigpio.h>
 
 void runHermesLite(void);
 void sendPacket(void);
@@ -60,6 +60,9 @@ sem_t tx_empty;
 sem_t tx_full;
 sem_t mutex;
 
+static int rx1_spi_handler;
+static int rx2_spi_handler;
+
 static const int CHANNEL = 0;
 int fdspi;
 unsigned char iqdata[6];
@@ -69,10 +72,13 @@ int audiocounter = 0;
 
 #define SERVICE_PORT	1024
 
-int nrx = 1; // n Receivers
+int hold_nrx=0;
+int nrx = 2; // n Receivers
 
 int holdfreq = 0;
+int holdfreq2 = 0;
 int freq = 4706000;
+int freq2 = 1008000;
 
 int att = 0;
 int holdatt =128;
@@ -98,12 +104,12 @@ socklen_t addrlen = sizeof(remaddr);	/* length of addresses */
 int recvlen;							/* # bytes received */
 
 struct timeval t0;
-	struct timeval t1;
-	struct timeval t10;
-	struct timeval t11;
-	struct timeval t20;
-	struct timeval t21;
-	float elapsed;
+struct timeval t1;
+struct timeval t10;
+struct timeval t11;
+struct timeval t20;
+struct timeval t21;
+float elapsed;
 
 float timedifference_msec(struct timeval t0, struct timeval t1)
 {
@@ -119,25 +125,29 @@ int main(int argc, char **argv)
 	sem_init(&tx_empty, 0, TX_MAX); 
     sem_init(&tx_full, 0, 0);    	
 	
-	if (!bcm2835_init()){
-		printf("init done failed \n");
-        return 1;
+	if (gpioInitialise() < 0) {
+		fprintf(stderr,"hpsdr_protocol (original) : gpio could not be initialized. \n");
+		exit(-1);
 	}
 	
-	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_40 , BCM2835_GPIO_FSEL_OUTP);
-	bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, LOW);
-
-	bcm2835_spi_begin();
-	bcm2835_spi_setBitOrder(BCM2835_SPI_BIT_ORDER_LSBFIRST);      
-	bcm2835_spi_setDataMode(BCM2835_SPI_MODE3);                   
-	bcm2835_spi_setClockDivider(BCM2835_SPI_CLOCK_DIVIDER_16); 
-	bcm2835_spi_chipSelect(BCM2835_SPI_CS0);                      
-	bcm2835_spi_setChipSelectPolarity(BCM2835_SPI_CS0, LOW); 
-	 
+	gpioSetMode(13, PI_INPUT); 	//rx1_FIFOEmpty
+	gpioSetMode(16, PI_INPUT);	//rx2_FIFOEmpty
+	gpioSetMode(20, PI_INPUT); 
+	gpioSetMode(21, PI_OUTPUT); 
+	
+	rx1_spi_handler = spiOpen(0, 15625000, 49155);  //channel 0
+	if (rx1_spi_handler < 0) {
+		fprintf(stderr,"radioberry_protocol: spi bus rx1 could not be initialized. \n");
+		exit(-1);
+	}
+	
+	rx2_spi_handler = spiOpen(1, 15625000, 49155); 	//channel 1
+	if (rx2_spi_handler < 0) {
+		fprintf(stderr,"radioberry_protocol: spi bus rx2 could not be initialized. \n");
+		exit(-1);
+	}
 
 	printf("init done \n");
-	
-	//audio_init();
 		
 	pthread_t pid, pid2;
     pthread_create(&pid, NULL, spiReader, NULL);  
@@ -168,8 +178,12 @@ int main(int argc, char **argv)
 	}
 	runHermesLite();
 	
-	bcm2835_spi_end();
-    bcm2835_close();
+	if (rx1_spi_handler !=0)
+		spiClose(rx1_spi_handler);
+	if (rx2_spi_handler !=0)
+		spiClose(rx2_spi_handler);
+		
+	gpioTerminate();
 }
 
 void runHermesLite() {
@@ -195,32 +209,23 @@ void runHermesLite() {
 	}
 }
 void *packetreader(void *arg) {
-
-	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_38, BCM2835_GPIO_FSEL_INPT);
-	
-	
-	
 	while(1) {
-		//usleep(10);
 		readPackets();
 	}
-
 }
 
 void readPackets() {
-
 	unsigned char buffer[2048];
-	recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
 	
+	recvlen = recvfrom(fd, buffer, sizeof(buffer), 0, (struct sockaddr *)&remaddr, &addrlen);
 	if (recvlen > 0) 
 		handlePacket(buffer);
-	
 }
 
-		int att11 = 0;
-		int prevatt11 = 0;
-		int att523 = 0;
-		int prevatt523 = 0;
+int att11 = 0;
+int prevatt11 = 0;
+int att523 = 0;
+int prevatt523 = 0;
 
 void handlePacket(char* buffer){
 
@@ -303,8 +308,15 @@ void handlePacket(char* buffer){
 			prevatt523 = att523;
 		}
 			
+		if ((buffer[11] & 0xFE)  == 0x00) {
+			nrx = (((buffer[11 + 4] & 0x38) >> 3) + 1);
+		}
 		if ((buffer[523] & 0xFE)  == 0x00) {
 			nrx = (((buffer[523 + 4] & 0x38) >> 3) + 1);
+		}
+		if (hold_nrx != nrx) {
+			hold_nrx=nrx;
+			printf("aantal rx %d \n", nrx);
 		}
 		
 		// select Command
@@ -316,6 +328,17 @@ void handlePacket(char* buffer){
         if ((buffer[523] & 0xFE) == 0x04)
         {
             freq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
+                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
+        }
+		
+		if ((buffer[11] & 0xFE) == 0x06)
+        {
+            freq2 = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
+                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
+        }
+        if ((buffer[523] & 0xFE) == 0x06)
+        {
+            freq2 = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
                     + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
         }
 
@@ -336,6 +359,10 @@ void handlePacket(char* buffer){
 			holdfreq = freq;
 			printf("frequency %d en aantal rx %d \n", freq, nrx);
 		}
+		if (holdfreq2 != freq2) {
+			holdfreq2 = freq2;
+			printf("frequency %d en aantal rx %d \n", freq2, nrx);
+		}
 		//lees data en vul buffers
 		int frame = 0;
 		for (frame; frame < 2; frame++)
@@ -354,7 +381,6 @@ void handlePacket(char* buffer){
 				audiooutputbuffer[audiocounter++] = buffer[k + 2];
 				audiooutputbuffer[audiocounter++] = buffer[k + 3];
 				if (audiocounter ==  1024) {
-					//audio_write(audiooutputbuffer, 1024);
 					audiocounter = 0;
 				}
 	
@@ -362,7 +388,7 @@ void handlePacket(char* buffer){
 				//MSB first according to protocol. (I and Q samples 2 * 16 bits)
 				if (MOX) {
 				
-					while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_38 ) == HIGH) {};	// wait if TX buffer is full.
+					while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
 					
 					sem_wait(&tx_empty);
 					int i = 0;
@@ -425,9 +451,18 @@ void fillPacketToSend() {
 					for (i; i< 6; i++){
 						hpsdrdata[index + i] = get(); // MSB comes first!!!!
 					}
+					//if 2 receivers; than add also data of receiver 2.
+					i =0;
+					for (i; i< 6; i++){
+						if (nrx==2) { 
+							hpsdrdata[index + i + 6] = get(); // MSB comes first!!!!
+						} else
+							get(); //remove the rx samples....reading always the data of rx2
+					}
+					
 					sem_post(&empty); 
-					hpsdrdata[index + 6] = 0x00;	
-					hpsdrdata[index + 7] = 0x00;
+					//hpsdrdata[index + 6] = 0x00;	
+					//hpsdrdata[index + 7] = 0x00;
 				} else {
 					//required to fill data ?...mic data ... maybe in future reading data from audio usb....or adding TLV codec??
 					
@@ -476,8 +511,6 @@ void fillDiscoveryReplyMessage() {
 
 void *spiReader(void *arg) {
 	
-	bcm2835_gpio_fsel(RPI_BPLUS_GPIO_J8_33 , BCM2835_GPIO_FSEL_INPT);		
-
 	int count =0;
 	gettimeofday(&t0, 0);
 	while(1) {
@@ -486,9 +519,9 @@ void *spiReader(void *arg) {
 		if (!MOX) {
 			sem_wait(&mutex); 
 			
-			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, LOW);	// ptt off
+			gpioWrite(21, 0); 	// ptt off
 			
-			while ( bcm2835_gpio_lev(RPI_BPLUS_GPIO_J8_33 ) == HIGH) {}; // wait till rxFIFO buffer is filled with at least one element
+			while ( gpioRead(13) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
 		
 			iqdata[0] = (sampleSpeed & 0x03);
 			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
@@ -497,13 +530,33 @@ void *spiReader(void *arg) {
 			iqdata[4] = ((freq >> 8) & 0xFF);
 			iqdata[5] = (freq & 0xFF);
 					
-			bcm2835_spi_transfern(iqdata, 6);
+			spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
 			//firmware: tdata(56'h00010203040506) -> 0-1-2-3-4-5-6 (element 0 contains 0; second element contains 1)
 			sem_wait(&empty);
+			
 			int i =0;
 			for (i; i< 6; i++){
 					put(iqdata[i]);
 			}
+			
+			//if (nrx==2) {		
+				while ( gpioRead(16) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
+			
+				iqdata[0] = (sampleSpeed & 0x03);
+				iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+				iqdata[2] = ((freq2 >> 24) & 0xFF);
+				iqdata[3] = ((freq2 >> 16) & 0xFF);
+				iqdata[4] = ((freq2 >> 8) & 0xFF);
+				iqdata[5] = (freq2 & 0xFF);
+						
+				spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
+				
+				 i =0;
+				for (i; i< 6; i++){
+						put(iqdata[i]);
+				}			
+			//}
+					
 			sem_post(&full);
 			
 			count ++;
@@ -522,17 +575,16 @@ void *spiReader(void *arg) {
 }
 
 void *spiWriter(void *arg) {
-
+	
 	int lcount =0;
 	gettimeofday(&t20, 0);
 	
 	while(1) {
-	
-			
+		
 		if (MOX) {
 			sem_wait(&mutex);
 			
-			bcm2835_gpio_write(RPI_BPLUS_GPIO_J8_40, HIGH);	// ptt on
+			gpioWrite(21, 1); ;	// ptt on
 				
 			sem_wait(&tx_full); 
 					
@@ -546,7 +598,7 @@ void *spiWriter(void *arg) {
 			for (i; i < 4; i++){			
 				tx_iqdata[2 + i] = get_tx_buffer(); //MSB is first in buffer..
 			}
-			bcm2835_spi_transfern(tx_iqdata, 6);
+			spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 			
 			sem_post(&tx_empty); 
 			

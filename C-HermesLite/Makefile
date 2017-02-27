@@ -3,7 +3,7 @@ LINK=gcc
 
 OPTIONS=-g 
 
-LIBS=-lrt -lm -lbcm2835 -lwiringPi -lwiringPiDev -lpthread 
+LIBS=-lrt -lm -lwiringPi -lpigpio -lpthread 
 
 COMPILE=$(CC) $(OPTIONS) $(INCLUDES)
 
