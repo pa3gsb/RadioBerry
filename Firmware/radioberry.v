@@ -75,7 +75,7 @@ reg 	randomize;				// if randomize is checked (eg in powersdr) the agc value is 
 									// if randomize is not checked (eg in powersdr) the gain value (inversie van s-att) is used for gain
 
 //Debug	
-assign DEBUG_LED3 =  (rx1_freq == 32'd3630000) ? 1'b1:1'b0; 
+assign DEBUG_LED3 =  (tx_freq == 32'd3630000) ? 1'b1:1'b0; 
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         Receive Testing....compile time setup.
@@ -190,8 +190,12 @@ wire spi_rx2_done;
 
 always @ (posedge spi_rx2_done)
 begin	
+	if (!ptt_in) begin
 		rx2_freq <= spi_rx2_recv[31:0];
 		rx2_speed <= spi_rx2_recv[41:40];
+	end else begin
+		tx_freq <= spi_rx2_recv[31:0];
+	end	
 end 
 
 spi_slave spi_slave_rx2_inst(.rstb(!reset),.ten(1'b1),.tdata(rx2_DataFromFIFO),.mlb(1'b1),.ss(spi_ce[1]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_rx2_done),.rdata(spi_rx2_recv));
@@ -342,6 +346,22 @@ localparam M5 = 32'd16777216;   	// M3 = 2^24, used to round the result
 assign ratio_rx2 = rx2_freq * M4 + M5; 
 assign sync_phase_word_rx2 = ratio_rx2[56:25]; 
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+//                         Convert frequency to phase word tx
+//
+//		Calculates  ratio = fo/fs = frequency/73.728Mhz where frequency is in MHz
+//
+//------------------------------------------------------------------------------------------------------------------------------------------------------------
+wire   [31:0] sync_phase_word_tx;
+wire  [63:0] ratio_tx;
+
+reg[31:0] tx_freq;
+
+localparam M6 = 32'd1954687338; 	// B57 = 2^57.   M2 = B57/CLK_FREQ = 73728000
+localparam M7 = 32'd16777216;   	// M3 = 2^24, used to round the result
+
+assign ratio_tx = tx_freq * M6 + M7; 
+assign sync_phase_word_tx = ratio_tx[56:25]; 
 
 //------------------------------------------------------------------------------
 //                           Software Reset Handler
@@ -400,9 +420,11 @@ receiver #(.CICRATE(CICRATE_RX2))
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 reg [47:0] rxDataFromFIFO;
 
+wire rx1req = ptt_in ? 1'b0 : 1'b1;
+
 rxFIFO rxFIFO_inst(	.aclr(reset),
 							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
-							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(1'b1));
+							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 
 	
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -410,17 +432,19 @@ rxFIFO rxFIFO_inst(	.aclr(reset),
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 reg [47:0] rx2_DataFromFIFO;
 
+wire rx2req = ptt_in ? 1'b0 : 1'b1;
+
 rxFIFO rx2_FIFO_inst(.aclr(reset),
 							.wrclk(adc_clock),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
-							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(1'b1));	 		
+							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));	 		
 				
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire spi_tx_done = ptt_in ? spi_done : 1'b0;
+wire wtxreq = ptt_in ? 1'b1 : 1'b0;
 
 txFIFO txFIFO_inst(	.aclr(reset), 
-							.wrclk(spi_sck), .data(spi_recv[31:0]), .wrreq(spi_tx_done),
+							.wrclk(~spi_ce[0]), .data(spi_recv[31:0]), .wrreq(wtxreq),
 							.rdclk(adc_clock), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty), .rdfull(txFIFOFull));
 	
 
@@ -431,7 +455,7 @@ wire [31:0] txDataFromFIFO;
 wire txFIFOEmpty;
 wire txFIFOReadStrobe;
 
-transmitter transmitter_inst(.reset(reset), .clk(adc_clock), .frequency(sync_phase_word), 
+transmitter transmitter_inst(.reset(reset), .clk(adc_clock), .frequency(sync_phase_word_tx), 
 							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe),
 							.out_data(DAC), .PTT(ptt_in), .LED(DEBUG_LED4));	
 

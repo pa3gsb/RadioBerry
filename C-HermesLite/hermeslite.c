@@ -77,8 +77,10 @@ int nrx = 2; // n Receivers
 
 int holdfreq = 0;
 int holdfreq2 = 0;
+int holdtxfreq = 0;
 int freq = 4706000;
 int freq2 = 1008000;
+int txfreq = 3630000;
 
 int att = 0;
 int holdatt =128;
@@ -320,6 +322,17 @@ void handlePacket(char* buffer){
 		}
 		
 		// select Command
+		if ((buffer[11] & 0xFE) == 0x02)
+        {
+            txfreq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
+                    + ((buffer[11 + 3] & 0xFF) << 8) + (buffer[11 + 4] & 0xFF);
+        }
+        if ((buffer[523] & 0xFE) == 0x02)
+        {
+            txfreq = ((buffer[523 + 1] & 0xFF) << 24) + ((buffer[523+ 2] & 0xFF) << 16)
+                    + ((buffer[523 + 3] & 0xFF) << 8) + (buffer[523 + 4] & 0xFF);
+        }
+		
 		if ((buffer[11] & 0xFE) == 0x04)
         {
             freq = ((buffer[11 + 1] & 0xFF) << 24) + ((buffer[11+ 2] & 0xFF) << 16)
@@ -363,6 +376,11 @@ void handlePacket(char* buffer){
 			holdfreq2 = freq2;
 			printf("frequency %d en aantal rx %d \n", freq2, nrx);
 		}
+		if (holdtxfreq != txfreq) {
+			holdtxfreq = txfreq;
+			printf("TX frequency %d\n", txfreq);
+		}
+		
 		//lees data en vul buffers
 		int frame = 0;
 		for (frame; frame < 2; frame++)
@@ -481,7 +499,7 @@ void fillPacketToSend() {
 			}
 			if (MOX){
 				if (sampleSpeed ==0)
-					usleep(620);  // use pin...to indicate status...
+					usleep(620);  // use pin...to indicate status...//usleep(620);
 				if (sampleSpeed == 1)
 					usleep(260); 
 			}
@@ -587,6 +605,16 @@ void *spiWriter(void *arg) {
 			gpioWrite(21, 1); ;	// ptt on
 				
 			sem_wait(&tx_full); 
+			
+			//set the tx freq.
+			tx_iqdata[0] = 0x00;
+			tx_iqdata[1] = 0x00;
+			tx_iqdata[2] = ((txfreq >> 24) & 0xFF);
+			tx_iqdata[3] = ((txfreq >> 16) & 0xFF);
+			tx_iqdata[4] = ((txfreq >> 8) & 0xFF);
+			tx_iqdata[5] = (txfreq & 0xFF);
+						
+			spiXfer(rx2_spi_handler, tx_iqdata, tx_iqdata, 6);
 					
 			tx_iqdata[0] = 0;
 			tx_iqdata[1] = drive_level / 6.4;  // convert drive level from 0-255 to 0-39 )
@@ -600,6 +628,7 @@ void *spiWriter(void *arg) {
 			}
 			spiXfer(rx1_spi_handler, tx_iqdata, tx_iqdata, 6);
 			
+			
 			sem_post(&tx_empty); 
 			
 			lcount ++;
@@ -612,7 +641,7 @@ void *spiWriter(void *arg) {
 			}
 			
 			sem_post(&mutex);
-		}
+		} 
 	}
 }
 

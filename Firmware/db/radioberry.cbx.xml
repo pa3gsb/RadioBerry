@@ -7,6 +7,7 @@
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:C|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_c991.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|lpm_mult:Mult1" CBX_FILE_NAME="mult_gft.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:D|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_d991.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|lpm_mult:Mult2" CBX_FILE_NAME="mult_gft.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:A|lpm_mult:Mult1" CBX_FILE_NAME="mult_35t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:B|lpm_mult:Mult0" CBX_FILE_NAME="mult_35t.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|radioberry|receiver:receiver_rx2_inst|firX8R8:fir2|fir256:E|firromH:rom|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_e991.tdf"/>
