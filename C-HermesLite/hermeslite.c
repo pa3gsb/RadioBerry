@@ -120,11 +120,11 @@ float timedifference_msec(struct timeval t0, struct timeval t1)
 
 int main(int argc, char **argv)
 {
-	sem_init(&empty, 0, MAX); 
+	sem_init(&empty, 0, MAX / 4); 
     sem_init(&full, 0, 0); 
 	sem_init(&mutex, 0, 1);	//mutal exlusion
 
-	sem_init(&tx_empty, 0, TX_MAX); 
+	sem_init(&tx_empty, 0, TX_MAX / 4); 
     sem_init(&tx_full, 0, 0);    	
 	
 	if (gpioInitialise() < 0) {
@@ -197,16 +197,6 @@ void runHermesLite() {
 		
 		if (running) {
 			sendPacket();
-			count ++;
-			if (count == 762) {
-				//usleep(10 * 1000);
-				count = 0;
-				gettimeofday(&t11, 0);
-				elapsed = timedifference_msec(t10, t11);
-
-				//printf("Code packets executed in %f milliseconds.\n", elapsed);
-				gettimeofday(&t10, 0);
-			}
 		}
 	}
 }
@@ -406,7 +396,7 @@ void handlePacket(char* buffer){
 				//MSB first according to protocol. (I and Q samples 2 * 16 bits)
 				if (MOX) {
 				
-					while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
+					//while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
 					
 					sem_wait(&tx_empty);
 					int i = 0;
@@ -495,6 +485,7 @@ void fillPacketToSend() {
 					hpsdrdata[index + 6] = 0x00;
 					
 					//usleep(1); // sleep required????
+					
 				}
 			}
 			if (MOX){
@@ -603,6 +594,8 @@ void *spiWriter(void *arg) {
 			sem_wait(&mutex);
 			
 			gpioWrite(21, 1); ;	// ptt on
+			
+			while ( gpioRead(20) == 1) {};	// wait if TX buffer is full.
 				
 			sem_wait(&tx_full); 
 			
