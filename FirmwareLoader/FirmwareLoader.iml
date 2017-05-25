@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-core.jar" />
+    <libelement value="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-device.jar" />
+    <libelement value="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-gpio-extension.jar" />
+    <libelement value="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-service.jar" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library">
+      <library name="pi4j-core.jar">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-core.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://lib/pi4j-core-sources.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="pi4j-device.jar">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-device.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="pi4j-gpio-extension.jar">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-gpio-extension.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="pi4j-service.jar">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../../RadioBerry/FirmwareLoader/lib/pi4j-service.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="lib" level="project" />
+  </component>
+</module>

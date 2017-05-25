@@ -1,11 +1,8 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="00000000000000000000"/>
+    <hash md5_digest_80b="40a21d85658a4af545a0"/>
   </project>
   <file_info>
-    <file checksum="0x0099E67A" device="EP3C25E144C8" path="radioberry.sof" usercode="0xFFFFFFFF"/>
-    <file path="radioberry.ttf"/>
-    <file path="radioberry.rbf"/>
-    <file path="radioberry.hexout"/>
+    <file device="EP3C25E144C8" path="radioberry.sof" usercode="0xFFFFFFFF"/>
   </file_info>
 </sld_project_info>

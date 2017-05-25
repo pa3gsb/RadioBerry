@@ -1,8 +1,8 @@
 --altsyncram ADDRESS_ACLR_A="NONE" CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" CLOCK_ENABLE_INPUT_A="BYPASS" CLOCK_ENABLE_OUTPUT_A="BYPASS" CYCLONEII_M4K_COMPATIBILITY="ON" DEVICE_FAMILY="Cyclone III" ENABLE_RUNTIME_MOD="NO" INIT_FILE="coefL8H.mif" LOW_POWER_MODE="AUTO" NUMWORDS_A=256 OPERATION_MODE="ROM" OUTDATA_ACLR_A="NONE" OUTDATA_REG_A="CLOCK0" WIDTH_A=18 WIDTH_BYTEENA_A=1 WIDTHAD_A=8 address_a clock0 q_a CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
---VERSION_BEGIN 12.1SP1 cbx_altsyncram 2013:01:31:18:05:07:SJ cbx_cycloneii 2013:01:31:18:05:07:SJ cbx_lpm_add_sub 2013:01:31:18:05:07:SJ cbx_lpm_compare 2013:01:31:18:05:07:SJ cbx_lpm_decode 2013:01:31:18:05:07:SJ cbx_lpm_mux 2013:01:31:18:05:07:SJ cbx_mgl 2013:01:31:18:08:27:SJ cbx_stratix 2013:01:31:18:05:07:SJ cbx_stratixii 2013:01:31:18:05:07:SJ cbx_stratixiii 2013:01:31:18:05:07:SJ cbx_stratixv 2013:01:31:18:05:07:SJ cbx_util_mgl 2013:01:31:18:05:07:SJ  VERSION_END
+--VERSION_BEGIN 13.1 cbx_altsyncram 2013:10:23:18:05:48:SJ cbx_cycloneii 2013:10:23:18:05:48:SJ cbx_lpm_add_sub 2013:10:23:18:05:48:SJ cbx_lpm_compare 2013:10:23:18:05:48:SJ cbx_lpm_decode 2013:10:23:18:05:48:SJ cbx_lpm_mux 2013:10:23:18:05:48:SJ cbx_mgl 2013:10:23:18:06:54:SJ cbx_stratix 2013:10:23:18:05:48:SJ cbx_stratixii 2013:10:23:18:05:48:SJ cbx_stratixiii 2013:10:23:18:05:48:SJ cbx_stratixv 2013:10:23:18:05:48:SJ cbx_util_mgl 2013:10:23:18:05:48:SJ  VERSION_END
 
 
--- Copyright (C) 1991-2012 Altera Corporation
+-- Copyright (C) 1991-2013 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files from any of the foregoing 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="org.radioberry.MasterClock">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="40">
+    <constraints>
+      <xy x="20" y="20" width="500" height="469"/>
+    </constraints>
+    <properties/>
+    <border type="line"/>
+    <children>
+      <grid id="b7eaa" binding="contentPanel" layout-manager="FlowLayout" hgap="5" vgap="50" flow-align="1">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="f84f5" class="javax.swing.JButton" binding="downButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <font size="26"/>
+              <text value="Down"/>
+            </properties>
+          </component>
+          <component id="924ad" class="javax.swing.JComboBox" binding="step">
+            <constraints/>
+            <properties>
+              <font size="26"/>
+              <model>
+                <item value="1"/>
+                <item value="10"/>
+                <item value="100"/>
+                <item value="1000"/>
+                <item value="10000"/>
+                <item value="100000"/>
+              </model>
+            </properties>
+          </component>
+          <component id="f2349" class="javax.swing.JButton" binding="upButton" default-binding="true">
+            <constraints/>
+            <properties>
+              <font size="26"/>
+              <text value="Up"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="49ba8" class="javax.swing.JLabel" binding="freq">
+        <constraints border-constraint="North"/>
+        <properties>
+          <enabled value="false"/>
+          <font size="48"/>
+          <horizontalAlignment value="0"/>
+          <text value="73780000"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

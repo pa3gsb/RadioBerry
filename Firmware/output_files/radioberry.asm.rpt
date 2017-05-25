@@ -1,6 +1,6 @@
 Assembler report for radioberry
-Sat Mar 04 14:27:50 2017
-Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
+Thu May 25 13:38:45 2017
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
 ---------------------
@@ -10,10 +10,10 @@ Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Editio
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.sof
-  6. Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.ttf
-  7. Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.rbf
-  8. Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.hexout
+  5. Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.sof
+  6. Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.ttf
+  7. Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.rbf
+  8. Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.hexout
   9. Assembler Messages
 
 
@@ -21,7 +21,7 @@ Quartus II 64-Bit Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Editio
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2012 Altera Corporation
+Copyright (C) 1991-2013 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Mar 04 14:27:50 2017 ;
+; Assembler Status      ; Successful - Thu May 25 13:38:45 2017 ;
 ; Revision Name         ; radioberry                            ;
 ; Top-level Entity Name ; radioberry                            ;
 ; Family                ; Cyclone III                           ;
@@ -65,7 +65,7 @@ applicable agreement for further details.
 ; Clock source for configuration device                                       ; Internal ; Internal      ;
 ; Clock frequency of the configuration device                                 ; 10 MHZ   ; 10 MHz        ;
 ; Divide clock frequency by                                                   ; 1        ; 1             ;
-; Auto user code                                                              ; Off      ; Off           ;
+; Auto user code                                                              ; On       ; On            ;
 ; Use configuration device                                                    ; Off      ; Off           ;
 ; Configuration device                                                        ; Auto     ; Auto          ;
 ; Configuration device auto user code                                         ; Off      ; Off           ;
@@ -80,55 +80,55 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+-----------------------------------------------------------+
-; Assembler Generated Files                                 ;
-+-----------------------------------------------------------+
-; File Name                                                 ;
-+-----------------------------------------------------------+
-; C:/dev/RadioBerry/Firmware/output_files/radioberry.sof    ;
-; C:/dev/RadioBerry/Firmware/output_files/radioberry.ttf    ;
-; C:/dev/RadioBerry/Firmware/output_files/radioberry.rbf    ;
-; C:/dev/RadioBerry/Firmware/output_files/radioberry.hexout ;
-+-----------------------------------------------------------+
++---------------------------------------------------------------+
+; Assembler Generated Files                                     ;
++---------------------------------------------------------------+
+; File Name                                                     ;
++---------------------------------------------------------------+
+; C:/dev/git/RadioBerry/Firmware/output_files/radioberry.sof    ;
+; C:/dev/git/RadioBerry/Firmware/output_files/radioberry.ttf    ;
+; C:/dev/git/RadioBerry/Firmware/output_files/radioberry.rbf    ;
+; C:/dev/git/RadioBerry/Firmware/output_files/radioberry.hexout ;
++---------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.sof ;
-+----------------+-----------------------------------------------------------------+
-; Option         ; Setting                                                         ;
-+----------------+-----------------------------------------------------------------+
-; Device         ; EP3C25E144C8                                                    ;
-; JTAG usercode  ; 0xFFFFFFFF                                                      ;
-; Checksum       ; 0x0099E67A                                                      ;
-+----------------+-----------------------------------------------------------------+
++--------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.sof ;
++----------------+---------------------------------------------------------------------+
+; Option         ; Setting                                                             ;
++----------------+---------------------------------------------------------------------+
+; Device         ; EP3C25E144C8                                                        ;
+; JTAG usercode  ; 0x0099CB21                                                          ;
+; Checksum       ; 0x0099CB21                                                          ;
++----------------+---------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.ttf ;
-+--------------------+-------------------------------------------------------------+
-; Option             ; Setting                                                     ;
-+--------------------+-------------------------------------------------------------+
-; Tabular Text File  ;                                                             ;
-+--------------------+-------------------------------------------------------------+
++--------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.ttf ;
++--------------------+-----------------------------------------------------------------+
+; Option             ; Setting                                                         ;
++--------------------+-----------------------------------------------------------------+
+; Tabular Text File  ;                                                                 ;
++--------------------+-----------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------+
-; Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.rbf ;
-+---------------------+------------------------------------------------------------+
-; Option              ; Setting                                                    ;
-+---------------------+------------------------------------------------------------+
-; Raw Binary File     ;                                                            ;
-;  Compression Ratio  ; 2                                                          ;
-+---------------------+------------------------------------------------------------+
++--------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.rbf ;
++---------------------+----------------------------------------------------------------+
+; Option              ; Setting                                                        ;
++---------------------+----------------------------------------------------------------+
+; Raw Binary File     ;                                                                ;
+;  Compression Ratio  ; 2                                                              ;
++---------------------+----------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/dev/RadioBerry/Firmware/output_files/radioberry.hexout ;
-+----------------------------------+--------------------------------------------------+
-; Option                           ; Setting                                          ;
-+----------------------------------+--------------------------------------------------+
-; Hexadecimal (Intel-format) File  ;                                                  ;
-+----------------------------------+--------------------------------------------------+
++-----------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/dev/git/RadioBerry/Firmware/output_files/radioberry.hexout ;
++----------------------------------+------------------------------------------------------+
+; Option                           ; Setting                                              ;
++----------------------------------+------------------------------------------------------+
+; Hexadecimal (Intel-format) File  ;                                                      ;
++----------------------------------+------------------------------------------------------+
 
 
 +--------------------+
@@ -136,14 +136,14 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
-    Info: Version 12.1 Build 243 01/31/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Mar 04 14:27:47 2017
+    Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+    Info: Processing started: Thu May 25 13:38:42 2017
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off RadioBerry -c radioberry
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 504 megabytes
-    Info: Processing ended: Sat Mar 04 14:27:50 2017
+    Info: Peak virtual memory: 536 megabytes
+    Info: Processing ended: Thu May 25 13:38:45 2017
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:03
 
