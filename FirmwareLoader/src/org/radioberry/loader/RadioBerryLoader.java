@@ -22,7 +22,7 @@ public class RadioBerryLoader {
 	
 	public static void main(String args[]) throws Exception{
 		
-		int freq = 73728000;
+		int freq = 76800000; //73728000;
 		
 		if (args.length > 0){
 			System.out.println("freq shift = " + args[0]);
