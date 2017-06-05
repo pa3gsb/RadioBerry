@@ -29,8 +29,7 @@ module varcic(decimation, clock, in_strobe,  out_strobe, in_data, out_data );
   parameter IN_WIDTH = 18;
   parameter ACC_WIDTH = 45;
   parameter OUT_WIDTH = 18;
-
-  parameter CICRATE;
+  parameter CICRATE = 12;
   
   input [5:0] decimation; 
   
@@ -45,9 +44,7 @@ module varcic(decimation, clock, in_strobe,  out_strobe, in_data, out_data );
 //------------------------------------------------------------------------------
 //                               control
 //------------------------------------------------------------------------------
-reg [15:0] sample_no;
-initial sample_no = 16'd0;
-
+reg [15:0] sample_no = 0;
 
 always @(posedge clock)
   if (in_strobe)
@@ -119,6 +116,7 @@ endgenerate
 */		
 // also math.log(growthN,2) * 5
 
+// FIXME: Should be cleaner way to do all this...
 localparam GROWTH2  =  5;
 localparam GROWTH4  = 10;
 localparam GROWTH8  = 15;
@@ -155,16 +153,25 @@ localparam MSB24 =  (IN_WIDTH + GROWTH24) - 1;
 localparam LSB24 =  (IN_WIDTH + GROWTH24) - OUT_WIDTH;
 
 
+localparam GROWTH5  =  12;
+localparam GROWTH10  = 17;
+localparam GROWTH20  = 22;
+localparam GROWTH40 = 27;
+
+localparam MSB5  =  (IN_WIDTH + GROWTH5)  - 1;           
+localparam LSB5  =  (IN_WIDTH + GROWTH5)  - OUT_WIDTH;   
+
+localparam MSB10  =  (IN_WIDTH + GROWTH10)  - 1;            
+localparam LSB10  =  (IN_WIDTH + GROWTH10)  - OUT_WIDTH;  
+
+localparam MSB20  =  (IN_WIDTH + GROWTH20)  - 1;           
+localparam LSB20  =  (IN_WIDTH + GROWTH20)  - OUT_WIDTH;  
+
+localparam MSB40 =  (IN_WIDTH + GROWTH40) - 1;       
+localparam LSB40 =  (IN_WIDTH + GROWTH40) - OUT_WIDTH;
+
 generate
-  if (CICRATE == 8)
-    always @(posedge clock)
-      case (decimation)
-         3: out_data <= comb_data[STAGES][MSB3:LSB3]   + comb_data[STAGES][LSB3-1];
-         6: out_data <= comb_data[STAGES][MSB6:LSB6]   + comb_data[STAGES][LSB6-1];
-         12: out_data <= comb_data[STAGES][MSB12:LSB12]   + comb_data[STAGES][LSB12-1];
-        default: out_data <= comb_data[STAGES][MSB24:LSB24] + comb_data[STAGES][LSB24-1];        
-      endcase
-  else
+  if (CICRATE == 10)
     always @(posedge clock)
       case (decimation)
          2: out_data <= comb_data[STAGES][MSB2:LSB2]   + comb_data[STAGES][LSB2-1];
@@ -172,9 +179,31 @@ generate
          8: out_data <= comb_data[STAGES][MSB8:LSB8]   + comb_data[STAGES][LSB8-1];
         default: out_data <= comb_data[STAGES][MSB16:LSB16] + comb_data[STAGES][LSB16-1];        
       endcase
+  else if (CICRATE == 13)
+    always @(posedge clock)
+      case (decimation)
+         2: out_data <= comb_data[STAGES][MSB2:LSB2]   + comb_data[STAGES][LSB2-1];
+         4: out_data <= comb_data[STAGES][MSB4:LSB4]   + comb_data[STAGES][LSB4-1];
+         8: out_data <= comb_data[STAGES][MSB8:LSB8]   + comb_data[STAGES][LSB8-1];
+        default: out_data <= comb_data[STAGES][MSB16:LSB16] + comb_data[STAGES][LSB16-1];        
+      endcase
+  else if (CICRATE == 5)
+    always @(posedge clock)
+      case (decimation)
+         5: out_data <= comb_data[STAGES][MSB5:LSB5]   + comb_data[STAGES][LSB5-1];
+         10: out_data <= comb_data[STAGES][MSB10:LSB10]   + comb_data[STAGES][LSB10-1];
+         20: out_data <= comb_data[STAGES][MSB20:LSB20]   + comb_data[STAGES][LSB20-1];
+        default: out_data <= comb_data[STAGES][MSB40:LSB40] + comb_data[STAGES][LSB40-1];    
+      endcase 
+  else
+    always @(posedge clock)
+      case (decimation)
+         3: out_data <= comb_data[STAGES][MSB3:LSB3]   + comb_data[STAGES][LSB3-1];
+         6: out_data <= comb_data[STAGES][MSB6:LSB6]   + comb_data[STAGES][LSB6-1];
+         12: out_data <= comb_data[STAGES][MSB12:LSB12]   + comb_data[STAGES][LSB12-1];
+        default: out_data <= comb_data[STAGES][MSB24:LSB24] + comb_data[STAGES][LSB24-1];        
+      endcase
 endgenerate    
 
 
 endmodule
-
-  
