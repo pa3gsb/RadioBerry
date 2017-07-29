@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/dev/RadioBerry/FirmwareLoader/lib/pi4j-core.jar" sourcepath="lib/pi4j-core-sources.jar"/>
-	<classpathentry kind="lib" path="C:/dev/RadioBerry/FirmwareLoader/lib/pi4j-device.jar"/>
-	<classpathentry kind="lib" path="C:/dev/RadioBerry/FirmwareLoader/lib/pi4j-gpio-extension.jar"/>
-	<classpathentry kind="lib" path="C:/dev/RadioBerry/FirmwareLoader/lib/pi4j-service.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="lib" path="lib/pi4j-service.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
