@@ -1,12 +1,13 @@
 package org.radioberry.clock;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CDevice;
 import com.pi4j.io.i2c.I2CFactory;
 
-public class SI570 {
+public class SI570 implements Serializable {
 
 	private final I2CBus bus;
 	private I2CDevice si570;
@@ -17,16 +18,23 @@ public class SI570 {
 	public SI570() throws Exception {
 		bus = I2CFactory.getInstance(I2CBus.BUS_1);
 		si570 = bus.getDevice(0x55);
-
-		// read the settings and print...
-		getSI570Settings();
 		
-		// discovered (using the prev method) that these are the initial settings; based on these settings
-		// the calculation is done... when this class was initialized before and another freq was set the
-		// calc is wrong.... by setting the initial settings the calc is always right..
-		byte[] si570reg = {(byte) 0xE1, (byte) 0xC2, (byte) 0xB5, (byte) 0xC9, (byte) 0x7A, (byte) 0xAE};
-
-		calc(si570reg);
+		Xtal xtal = new Xtal().readSerializedObject();
+		
+		// read the settings and print...
+		byte[] si570reg = getSI570Settings();
+		
+		if (null!=xtal) {
+			fxtal = xtal.getXtal();
+		} else {
+			
+			calcFixedXtalFreq(si570reg);
+			
+			xtal = new Xtal();
+			xtal.setXtal(fxtal);
+			xtal.writeSerializedObject();
+		}
+		
 	}
 
 	public void setFrequency(int freq) throws Exception {
@@ -34,6 +42,7 @@ public class SI570 {
 		this.newFreq = freq;
 		
 		writeFreq();
+		
 	}
 
 	private byte[] getSI570Settings() throws IOException {
@@ -55,7 +64,7 @@ public class SI570 {
 	static double FOSC_MAX = 5670.0;
 	static double FOSC_MIN = 4850.0;
 
-	private void calc(byte[] registers) {
+	private void calcFixedXtalFreq(byte[] registers) {
 		byte[] bytes = new byte[6]; // need to read 6 bytes
 
 		for (int i = 0; i < 6; i++) {
@@ -178,7 +187,8 @@ public class SI570 {
 		new_regs[0] |= (byte) (new_hs_bits << 5);
 
 		for (int j = 0; j < new_regs.length; j++) {
-			System.out.println("newRegs[" + j + "]: " + new_regs[j]);
+			//System.out.println("newRegs[" + j + "]: " + new_regs[j]);
+			System.out.println("newRegs[" + j + "]: " + String.format("%02x ", new_regs[j]));
 		}
 
 		si570.write(((byte) 137), ((byte) 0x10)); // assert freeze dco
