@@ -1,0 +1,133 @@
+--alt_sync_fifo DEVICE_FAMILY="Cyclone III" LPM_NUMWORDS=64 LPM_SHOWAHEAD="OFF" LPM_WIDTH=48 LPM_WIDTHU=6 OVERFLOW_CHECKING="ON" UNDERFLOW_CHECKING="ON" USE_EAB="OFF" aclr data q rdclk rdreq wrclk wrempty wrreq
+--VERSION_BEGIN 13.1 cbx_a_gray2bin 2013:10:23:18:05:48:SJ cbx_a_graycounter 2013:10:23:18:05:48:SJ cbx_altdpram 2013:10:23:18:05:48:SJ cbx_altsyncram 2013:10:23:18:05:48:SJ cbx_cycloneii 2013:10:23:18:05:48:SJ cbx_dcfifo 2013:10:23:18:05:48:SJ cbx_fifo_common 2013:10:23:18:05:48:SJ cbx_lpm_add_sub 2013:10:23:18:05:48:SJ cbx_lpm_compare 2013:10:23:18:05:48:SJ cbx_lpm_counter 2013:10:23:18:05:48:SJ cbx_lpm_decode 2013:10:23:18:05:48:SJ cbx_lpm_mux 2013:10:23:18:05:48:SJ cbx_mgl 2013:10:23:18:06:54:SJ cbx_scfifo 2013:10:23:18:05:48:SJ cbx_stratix 2013:10:23:18:05:48:SJ cbx_stratixii 2013:10:23:18:05:48:SJ cbx_stratixiii 2013:10:23:18:05:48:SJ cbx_stratixv 2013:10:23:18:05:48:SJ cbx_util_mgl 2013:10:23:18:05:48:SJ  VERSION_END
+
+
+-- Copyright (C) 1991-2013 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION altdpram (aclr, byteena[WIDTH_BYTEENA-1..0], data[WIDTH-1..0], inclock, inclocken, outclock, outclocken, rdaddress[WIDTHAD-1..0], rdaddressstall, rden, wraddress[WIDTHAD-1..0], wraddressstall, wren)
+WITH ( ACF_BLOCK_RAM_AND_MLAB_EQUIVALENT_PAUSED_READ_CAPABILITIES, ACF_BLOCK_RAM_AND_MLAB_EQUIVALENT_POWER_UP_CONDITIONS, ACF_DISABLE_MLAB_RAM_USE, ACF_IMPLEMENT_MLAB_IN_16_BIT_DEEP_MODE, BYTE_SIZE, INDATA_ACLR, INDATA_REG, LPM_FILE, lpm_hint, MAXIMUM_DEPTH, NUMWORDS, OUTDATA_ACLR, OUTDATA_REG, RAM_BLOCK_TYPE, RDADDRESS_ACLR, RDADDRESS_REG, RDCONTROL_ACLR, RDCONTROL_REG, READ_DURING_WRITE_MODE_MIXED_PORTS, USE_EAB, WIDTH, WIDTH_BYTEENA = 1, WIDTHAD, WRADDRESS_ACLR, WRADDRESS_REG, WRCONTROL_ACLR, WRCONTROL_REG)
+RETURNS ( q[WIDTH-1..0]);
+FUNCTION carry_sum (cin, sin)
+RETURNS ( cout, sout);
+FUNCTION cntr_58b (aclr, clock, cnt_en)
+RETURNS ( q[6..0]);
+
+--synthesis_resources = altdpram 1 lut 46 reg 42 
+SUBDESIGN alt_sync_fifo_k4j
+( 
+	aclr	:	input;
+	data[47..0]	:	input;
+	q[47..0]	:	output;
+	rdclk	:	input;
+	rdempty	:	output;
+	rdreq	:	input;
+	rdusedw[5..0]	:	output;
+	wrclk	:	input;
+	wrempty	:	output;
+	wrfull	:	output;
+	wrreq	:	input;
+	wrusedw[5..0]	:	output;
+) 
+VARIABLE 
+	dpram4 : altdpram
+		WITH (
+			OUTDATA_REG = "OUTCLOCK",
+			RDCONTROL_ACLR = "OFF",
+			RDCONTROL_REG = "UNREGISTERED",
+			USE_EAB = "OFF",
+			WIDTH = 48,
+			WIDTHAD = 6
+		);
+	cs11a[1..0] : carry_sum;
+	cs12a[6..0] : carry_sum;
+	cs13a[6..0] : carry_sum;
+	cs14 : carry_sum;
+	cs6a[6..0] : carry_sum;
+	dffe10a[6..0] : dffe;
+	dffe5a[6..0] : dffe;
+	dffe7a[6..0] : dffe;
+	dffe8a[6..0] : dffe;
+	dffe9a[6..0] : dffe;
+	add_sub2_result_int[6..0]	:	WIRE;
+	add_sub2_cout	:	WIRE;
+	add_sub2_dataa[5..0]	:	WIRE;
+	add_sub2_datab[5..0]	:	WIRE;
+	add_sub2_result[5..0]	:	WIRE;
+	add_sub3_dataa[6..0]	:	WIRE;
+	add_sub3_datab[6..0]	:	WIRE;
+	add_sub3_result[6..0]	:	WIRE;
+	cntr1 : cntr_58b;
+	fast_feed_read	: WIRE;
+	one[6..0]	: WIRE;
+	read_count_actual[6..0]	: WIRE;
+
+BEGIN 
+	dpram4.aclr = aclr;
+	dpram4.data[] = data[];
+	dpram4.inclock = wrclk;
+	dpram4.outclock = rdclk;
+	dpram4.outclocken = cs14.sout;
+	dpram4.rdaddress[5..0] = read_count_actual[5..0];
+	dpram4.wraddress[5..0] = cntr1.q[5..0];
+	dpram4.wren = cs11a[1..1].sout;
+	cs11a[].cin = ( ((! cs11a[0..0].cout) & wrreq), ((! (cntr1.q[6..6] $ dffe10a[6..6].q)) $ add_sub2_cout));
+	cs11a[].sin = ( ((! cs11a[0..0].cout) & wrreq), ((! (cntr1.q[6..6] $ dffe10a[6..6].q)) $ add_sub2_cout));
+	cs12a[].cin = ( ((! (cntr1.q[6..1] $ dffe10a[6..1].q)) & cs12a[5..0].cout), (! (cntr1.q[0..0] $ dffe10a[0..0].q)));
+	cs12a[].sin = ( ((! (cntr1.q[6..1] $ dffe10a[6..1].q)) & cs12a[5..0].cout), (! (cntr1.q[0..0] $ dffe10a[0..0].q)));
+	cs13a[].cin = ( ((! (dffe9a[6..1].q $ dffe7a[6..1].q)) & cs13a[5..0].cout), (! (dffe9a[0..0].q $ dffe7a[0..0].q)));
+	cs13a[].sin = ( ((! (dffe9a[6..1].q $ dffe7a[6..1].q)) & cs13a[5..0].cout), (! (dffe9a[0..0].q $ dffe7a[0..0].q)));
+	cs14.cin = ((! cs13a[6..6].cout) & rdreq);
+	cs14.sin = ((! cs13a[6..6].cout) & rdreq);
+	cs6a[].cin = ( (read_count_actual[6..1] & cs6a[5..0].cout), (fast_feed_read & read_count_actual[0..0]));
+	cs6a[].sin = ( (read_count_actual[6..1] $ cs6a[5..0].cout), (fast_feed_read $ read_count_actual[0..0]));
+	dffe10a[].clk = wrclk;
+	dffe10a[].clrn = (! aclr);
+	dffe10a[].d = dffe7a[].q;
+	dffe5a[].clk = rdclk;
+	dffe5a[].clrn = (! aclr);
+	dffe5a[].d = (cs6a[].sout $ one[]);
+	dffe7a[].clk = rdclk;
+	dffe7a[].clrn = (! aclr);
+	dffe7a[].d = read_count_actual[];
+	dffe7a[].ena = cs14.sout;
+	dffe8a[].clk = wrclk;
+	dffe8a[].clrn = (! aclr);
+	dffe8a[].d = cntr1.q[];
+	dffe9a[].clk = rdclk;
+	dffe9a[].clrn = (! aclr);
+	dffe9a[].d = dffe8a[].q;
+	add_sub2_result_int[] = (0, add_sub2_dataa[]) - (0, add_sub2_datab[]);
+	add_sub2_result[] = add_sub2_result_int[5..0];
+	add_sub2_cout = !add_sub2_result_int[6];
+	add_sub2_dataa[] = cntr1.q[5..0];
+	add_sub2_datab[] = dffe10a[5..0].q;
+	add_sub3_result[] = add_sub3_dataa[] - add_sub3_datab[];
+	add_sub3_dataa[] = dffe9a[].q;
+	add_sub3_datab[] = dffe7a[].q;
+	cntr1.aclr = aclr;
+	cntr1.clock = wrclk;
+	cntr1.cnt_en = cs11a[1..1].sout;
+	fast_feed_read = cs14.cout;
+	one[] = B"0000001";
+	q[] = dpram4.q[];
+	rdempty = cs13a[6..6].sout;
+	rdusedw[5..0] = add_sub3_result[5..0];
+	read_count_actual[] = (dffe5a[].q $ one[]);
+	wrempty = cs12a[6..6].sout;
+	wrfull = cs11a[0..0].sout;
+	wrusedw[5..0] = add_sub2_result[5..0];
+END;
+--VALID FILE
