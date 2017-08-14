@@ -1,8 +1,8 @@
 --dffpipe DELAY=2 WIDTH=11 clock clrn d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF;SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS
---VERSION_BEGIN 13.1 cbx_a_gray2bin 2013:10:23:18:05:48:SJ cbx_a_graycounter 2013:10:23:18:05:48:SJ cbx_altdpram 2013:10:23:18:05:48:SJ cbx_altsyncram 2013:10:23:18:05:48:SJ cbx_cycloneii 2013:10:23:18:05:48:SJ cbx_dcfifo 2013:10:23:18:05:48:SJ cbx_fifo_common 2013:10:23:18:05:48:SJ cbx_lpm_add_sub 2013:10:23:18:05:48:SJ cbx_lpm_compare 2013:10:23:18:05:48:SJ cbx_lpm_counter 2013:10:23:18:05:48:SJ cbx_lpm_decode 2013:10:23:18:05:48:SJ cbx_lpm_mux 2013:10:23:18:05:48:SJ cbx_mgl 2013:10:23:18:06:54:SJ cbx_scfifo 2013:10:23:18:05:48:SJ cbx_stratix 2013:10:23:18:05:48:SJ cbx_stratixii 2013:10:23:18:05:48:SJ cbx_stratixiii 2013:10:23:18:05:48:SJ cbx_stratixv 2013:10:23:18:05:48:SJ cbx_util_mgl 2013:10:23:18:05:48:SJ  VERSION_END
+--VERSION_BEGIN 12.1SP1 cbx_a_gray2bin 2013:01:31:18:05:07:SJ cbx_a_graycounter 2013:01:31:18:05:07:SJ cbx_altdpram 2013:01:31:18:05:07:SJ cbx_altsyncram 2013:01:31:18:05:07:SJ cbx_cycloneii 2013:01:31:18:05:07:SJ cbx_dcfifo 2013:01:31:18:05:07:SJ cbx_fifo_common 2013:01:31:18:05:07:SJ cbx_lpm_add_sub 2013:01:31:18:05:07:SJ cbx_lpm_compare 2013:01:31:18:05:07:SJ cbx_lpm_counter 2013:01:31:18:05:07:SJ cbx_lpm_decode 2013:01:31:18:05:07:SJ cbx_lpm_mux 2013:01:31:18:05:07:SJ cbx_mgl 2013:01:31:18:08:27:SJ cbx_scfifo 2013:01:31:18:05:07:SJ cbx_stratix 2013:01:31:18:05:07:SJ cbx_stratixii 2013:01:31:18:05:07:SJ cbx_stratixiii 2013:01:31:18:05:07:SJ cbx_stratixv 2013:01:31:18:05:07:SJ cbx_util_mgl 2013:01:31:18:05:07:SJ  VERSION_END
 
 
--- Copyright (C) 1991-2013 Altera Corporation
+-- Copyright (C) 1991-2012 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files from any of the foregoing 
@@ -31,12 +31,12 @@ SUBDESIGN alt_synch_pipe_rld
 	q[10..0]	:	output;
 ) 
 VARIABLE 
-	dffpipe8 : dffpipe_qe9;
+	dffpipe12 : dffpipe_qe9;
 
 BEGIN 
-	dffpipe8.clock = clock;
-	dffpipe8.clrn = clrn;
-	dffpipe8.d[] = d[];
-	q[] = dffpipe8.q[];
+	dffpipe12.clock = clock;
+	dffpipe12.clrn = clrn;
+	dffpipe12.d[] = d[];
+	q[] = dffpipe12.q[];
 END;
 --VALID FILE

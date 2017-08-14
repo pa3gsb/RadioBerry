@@ -1,4 +1,4 @@
---dffpipe DELAY=7 WIDTH=11 clock clrn d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF;SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS
+--dffpipe DELAY=8 WIDTH=10 clock clrn d q ALTERA_INTERNAL_OPTIONS=X_ON_VIOLATION_OPTION=OFF;SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS
 --VERSION_BEGIN 13.1 cbx_a_gray2bin 2013:10:23:18:05:48:SJ cbx_a_graycounter 2013:10:23:18:05:48:SJ cbx_altdpram 2013:10:23:18:05:48:SJ cbx_altsyncram 2013:10:23:18:05:48:SJ cbx_cycloneii 2013:10:23:18:05:48:SJ cbx_dcfifo 2013:10:23:18:05:48:SJ cbx_fifo_common 2013:10:23:18:05:48:SJ cbx_lpm_add_sub 2013:10:23:18:05:48:SJ cbx_lpm_compare 2013:10:23:18:05:48:SJ cbx_lpm_counter 2013:10:23:18:05:48:SJ cbx_lpm_decode 2013:10:23:18:05:48:SJ cbx_lpm_mux 2013:10:23:18:05:48:SJ cbx_mgl 2013:10:23:18:06:54:SJ cbx_scfifo 2013:10:23:18:05:48:SJ cbx_stratix 2013:10:23:18:05:48:SJ cbx_stratixii 2013:10:23:18:05:48:SJ cbx_stratixiii 2013:10:23:18:05:48:SJ cbx_stratixv 2013:10:23:18:05:48:SJ cbx_util_mgl 2013:10:23:18:05:48:SJ  VERSION_END
 
 
@@ -17,26 +17,26 @@
 --  applicable agreement for further details.
 
 
-FUNCTION dffpipe_4f9 (clock, clrn, d[10..0])
-RETURNS ( q[10..0]);
+FUNCTION dffpipe_4f9 (clock, clrn, d[9..0])
+RETURNS ( q[9..0]);
 
---synthesis_resources = reg 77 
+--synthesis_resources = reg 80 
 OPTIONS ALTERA_INTERNAL_OPTION = "X_ON_VIOLATION_OPTION=OFF;SYNCHRONIZER_IDENTIFICATION=FORCED_IF_ASYNCHRONOUS";
 
 SUBDESIGN alt_synch_pipe_5md
 ( 
 	clock	:	input;
 	clrn	:	input;
-	d[10..0]	:	input;
-	q[10..0]	:	output;
+	d[9..0]	:	input;
+	q[9..0]	:	output;
 ) 
 VARIABLE 
-	dffpipe1 : dffpipe_4f9;
+	dffpipe8 : dffpipe_4f9;
 
 BEGIN 
-	dffpipe1.clock = clock;
-	dffpipe1.clrn = clrn;
-	dffpipe1.d[] = d[];
-	q[] = dffpipe1.q[];
+	dffpipe8.clock = clock;
+	dffpipe8.clrn = clrn;
+	dffpipe8.d[] = d[];
+	q[] = dffpipe8.q[];
 END;
 --VALID FILE

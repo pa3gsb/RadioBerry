@@ -43,7 +43,7 @@ double timebase = 0.0;
 
 sem_t empty;
 sem_t full;
-#define MAX 3600   
+#define MAX 7200   
 
 unsigned char buffer[MAX];
 int fill = 0; 
@@ -548,23 +548,23 @@ void *spiReader(void *arg) {
 					put(iqdata[i]);
 			}
 			
-			//if (nrx==2) {		
-				while ( gpioRead(16) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
-			
-				iqdata[0] = (sampleSpeed & 0x03);
-				iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
-				iqdata[2] = ((freq2 >> 24) & 0xFF);
-				iqdata[3] = ((freq2 >> 16) & 0xFF);
-				iqdata[4] = ((freq2 >> 8) & 0xFF);
-				iqdata[5] = (freq2 & 0xFF);
-						
-				spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
 				
-				 i =0;
-				for (i; i< 6; i++){
-						put(iqdata[i]);
-				}			
-			//}
+			while ( gpioRead(16) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
+		
+			iqdata[0] = (sampleSpeed & 0x03);
+			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
+			iqdata[2] = ((freq2 >> 24) & 0xFF);
+			iqdata[3] = ((freq2 >> 16) & 0xFF);
+			iqdata[4] = ((freq2 >> 8) & 0xFF);
+			iqdata[5] = (freq2 & 0xFF);
+					
+			spiXfer(rx2_spi_handler, iqdata, iqdata, 6);
+			
+			 i =0;
+			for (i; i< 6; i++){
+					put(iqdata[i]);
+			}			
+			
 					
 			sem_post(&full);
 			

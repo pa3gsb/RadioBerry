@@ -64,10 +64,6 @@ input wire ptt_in;
 output wire ptt_out;
 output [6:0] filter; 
 
-// ADC vars...
-wire adc_clock;		
-reg [11:0]	adc;
-
 //ATT
 reg   [4:0] att;           // 0-31 dB attenuator value
 reg 	dither;					// if 0 than 32db additional gain.
@@ -77,57 +73,6 @@ reg 	randomize;				// if randomize is checked (eg in powersdr) the agc value is 
 //Debug	
 assign DEBUG_LED3 =  (tx_freq == 32'd3630000) ? 1'b1:1'b0; 
 
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-//                         Receive Testing....compile time setup.
-//
-//		Testing ON: 
-//			Testing mode is on; 	
-//										The wire ad9866_present must be set to 0 (=false); 
-//										Using the pllclock to set a clock as close to the 73.728 Mhz.
-//										10 Mhz clock in divided by 25 and multiplied with 295 results in 73.750Mhz
-//										This clock will be used iso of the ad9866 clock and also the ADC will be generated.
-//										A pure CW signal with a frequency of around 4.609 Mhz will be received.
-//		Testing OFF:
-//			Testing mode is off; 
-//										The wire ad9866_present must be set to 1 (=true); 
-//										The AD9866 clock will be used and the actual ADC data will be used.
-
-//------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire ad9866_present = 1'b1;
-wire pll_locked;
-wire test_ad9866_clk;
-
-pllclock pllclock_inst(.inclk0(clk_10mhz), .c0(test_ad9866_clk), .locked(pll_locked));
-assign adc_clock = ad9866_present ? ad9866_clk : test_ad9866_clk;
-
-reg [3:0] incnt;
-always @ (posedge adc_clock)
-  begin
-	if (ad9866_present)
-			adc <= ad9866_adio;
-	else begin
-			// Test sine wave
-        case (incnt)
-            4'h0 : adc = 12'h000;
-            4'h1 : adc = 12'hfcb;
-            4'h2 : adc = 12'hf9f;
-            4'h3 : adc = 12'hf81;
-            4'h4 : adc = 12'hf76;
-            4'h5 : adc = 12'hf81;
-            4'h6 : adc = 12'hf9f;
-            4'h7 : adc = 12'hfcb;
-            4'h8 : adc = 12'h000;
-            4'h9 : adc = 12'h035;
-            4'ha : adc = 12'h061;
-            4'hb : adc = 12'h07f;
-            4'hc : adc = 12'h08a;
-            4'hd : adc = 12'h07f;
-            4'he : adc = 12'h061;
-            4'hf : adc = 12'h035;
-        endcase
-		end
-		incnt <= incnt + 4'h1; 
-	end
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         AD9866 Control
@@ -136,8 +81,8 @@ always @ (posedge adc_clock)
 assign ad9866_mode = 1'b0;				//HALFDUPLEX
 assign ad9866_rst_n = ~reset;
 assign ad9866_adio = ptt_in ? DAC[13:2] : 12'bZ;
-assign ad9866_rxclk = adc_clock;	 
-assign ad9866_txclk = adc_clock;	 
+assign ad9866_rxclk = ad9866_clk;	 
+assign ad9866_txclk = ad9866_clk;	 
 
 assign ad9866_rxen = (~ptt_in) ? 1'b1: 1'b0;
 assign ad9866_txen = (ptt_in) ? 1'b1: 1'b0;
@@ -250,11 +195,11 @@ always @ (rx2_speed)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         GAIN Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-wire rxclipp = (adc == 12'b011111111111);
-wire rxclipn = (adc == 12'b100000000000);
-wire rxnearclip = (adc[11:8] == 4'b0111) | (adc[11:8] == 4'b1000);
-wire rxgoodlvlp = (adc[11:9] == 3'b011);
-wire rxgoodlvln = (adc[11:9] == 3'b100);
+wire rxclipp = (ad9866_adio == 12'b011111111111);
+wire rxclipn = (ad9866_adio == 12'b100000000000);
+wire rxnearclip = (ad9866_adio[11:8] == 4'b0111) | (ad9866_adio[11:8] == 4'b1000);
+wire rxgoodlvlp = (ad9866_adio[11:9] == 3'b011);
+wire rxgoodlvln = (ad9866_adio[11:9] == 3'b100);
 
 reg agc_nearclip;
 reg agc_goodlvl;
@@ -263,24 +208,24 @@ reg [5:0] agc_value;
 wire agc_clrnearclip;
 wire agc_clrgoodlvl;
 
-always @(posedge adc_clock)
+always @(posedge ad9866_clk)
 begin
     if (agc_clrnearclip) agc_nearclip <= 1'b0;
     else if (rxnearclip) agc_nearclip <= 1'b1;
 end
 
-always @(posedge adc_clock)
+always @(posedge ad9866_clk)
 begin
     if (agc_clrgoodlvl) agc_goodlvl <= 1'b0;
     else if (rxgoodlvlp | rxgoodlvln) agc_goodlvl <= 1'b1;
 end
 
-always @(posedge adc_clock)
+always @(posedge ad9866_clk)
 begin
     agc_delaycnt <= agc_delaycnt + 1;
 end
 
-always @(posedge adc_clock)
+always @(posedge ad9866_clk)
 begin
     if (reset) 
         agc_value <= 6'b011111;
@@ -373,9 +318,9 @@ reset_handler reset_handler_inst(.clock(clk_10mhz), .reset(reset));
 //                           Pipeline for adc fanout
 //------------------------------------------------------------------------------
 reg [11:0] adcpipe [0:1];
-always @ (posedge adc_clock) begin
-    adcpipe[0] <= adc;
-    adcpipe[1] <= adc;
+always @ (posedge ad9866_clk) begin
+    adcpipe[0] <= ad9866_adio;
+    adcpipe[1] <= ad9866_adio;
 end
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -388,7 +333,7 @@ wire	rx_strobe;
 localparam CICRATE = 6'd08;
 
 receiver #(.CICRATE(CICRATE)) 
-		receiver_inst(	.clock(adc_clock),
+		receiver_inst(	.clock(ad9866_clk),
 						.rate(rx1_rate), 
 						.frequency(sync_phase_word),
 						.out_strobe(rx_strobe),
@@ -407,7 +352,7 @@ localparam CICRATE_RX2 = 6'd08;
 
 receiver #(.CICRATE(CICRATE_RX2)) 
 		receiver_rx2_inst(	
-						.clock(adc_clock),
+						.clock(ad9866_clk),
 						.rate(rx2_rate), 
 						.frequency(sync_phase_word_rx2),
 						.out_strobe(rx2_strobe),
@@ -423,8 +368,23 @@ reg [47:0] rxDataFromFIFO;
 wire rx1req = ptt_in ? 1'b0 : 1'b1;
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
-							.wrclk(adc_clock),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
+							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
+
+
+
+//always @(posedge ad9866_clk)
+//begin	
+//	if (rx_strobe) begin
+//		rxDataFromFIFO <= {rx_I, rx_Q};
+//		rx1_FIFOEmpty <= 0;
+//	end else begin
+//		if (~spi_ce[0]) 
+//			rx1_FIFOEmpty <= 1;
+//	
+//	end
+//end
+
 
 	
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -435,8 +395,22 @@ reg [47:0] rx2_DataFromFIFO;
 wire rx2req = ptt_in ? 1'b0 : 1'b1;
 
 rxFIFO rx2_FIFO_inst(.aclr(reset),
-							.wrclk(adc_clock),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
-							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));	 		
+							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
+							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));	
+
+//always @(posedge ad9866_clk)
+//begin	
+//	if (rx2_strobe) begin
+//		rx2_DataFromFIFO <= {rx2_I, rx2_Q};
+//		rx2_FIFOEmpty <= 0;
+//	end else begin
+//		if (~spi_ce[0]) 
+//			rx2_FIFOEmpty <= 1;
+//	
+//	end
+//end
+
+							
 				
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
@@ -445,7 +419,7 @@ wire wtxreq = ptt_in ? 1'b1 : 1'b0;
 
 txFIFO txFIFO_inst(	.aclr(reset), 
 							.wrclk(~spi_ce[0]), .data(spi_recv[31:0]), .wrreq(wtxreq),
-							.rdclk(adc_clock), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty), .rdfull(txFIFOFull));
+							.rdclk(ad9866_clk), .q(txDataFromFIFO), .rdreq(txFIFOReadStrobe),  .rdempty(txFIFOEmpty), .rdfull(txFIFOFull));
 	
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -455,7 +429,7 @@ wire [31:0] txDataFromFIFO;
 wire txFIFOEmpty;
 wire txFIFOReadStrobe;
 
-transmitter transmitter_inst(.reset(reset), .clk(adc_clock), .frequency(sync_phase_word_tx), 
+transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
 							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe),
 							.out_data(DAC), .PTT(ptt_in), .LED(DEBUG_LED4));	
 

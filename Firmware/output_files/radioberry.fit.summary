@@ -1,16 +1,16 @@
-Fitter Status : Successful - Sat Aug 12 15:11:46 2017
+Fitter Status : Successful - Mon Aug 14 17:10:13 2017
 Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Web Edition
 Revision Name : radioberry
 Top-level Entity Name : radioberry
 Family : Cyclone III
 Device : EP3C25E144C8
 Timing Models : Final
-Total logic elements : 12,520 / 24,624 ( 51 % )
-    Total combinational functions : 9,999 / 24,624 ( 41 % )
-    Dedicated logic registers : 9,789 / 24,624 ( 40 % )
-Total registers : 9789
+Total logic elements : 12,926 / 24,624 ( 52 % )
+    Total combinational functions : 10,005 / 24,624 ( 41 % )
+    Dedicated logic registers : 9,925 / 24,624 ( 40 % )
+Total registers : 9925
 Total pins : 51 / 83 ( 61 % )
 Total virtual pins : 0
-Total memory bits : 334,336 / 608,256 ( 55 % )
+Total memory bits : 358,912 / 608,256 ( 59 % )
 Embedded Multiplier 9-bit elements : 92 / 132 ( 70 % )
 Total PLLs : 0 / 4 ( 0 % )
