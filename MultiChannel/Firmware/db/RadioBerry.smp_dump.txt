@@ -1,0 +1,5 @@
+
+State Machine - |radioberry|ad9866:ad9866_inst|dut2_state
+Name dut2_state.1 
+dut2_state.0 0 
+dut2_state.1 1 

@@ -1,0 +1,142 @@
+Flow report for radioberry
+Sat Aug 26 19:41:56 2017
+Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------------+
+; Flow Summary                                                                    ;
++------------------------------------+--------------------------------------------+
+; Flow Status                        ; Successful - Sat Aug 26 19:41:38 2017      ;
+; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
+; Revision Name                      ; radioberry                                 ;
+; Top-level Entity Name              ; radioberry                                 ;
+; Family                             ; Cyclone III                                ;
+; Device                             ; EP3C25E144C8                               ;
+; Timing Models                      ; Final                                      ;
+; Total logic elements               ; 9,096 / 24,624 ( 37 % )                    ;
+;     Total combinational functions  ; 6,651 / 24,624 ( 27 % )                    ;
+;     Dedicated logic registers      ; 7,104 / 24,624 ( 29 % )                    ;
+; Total registers                    ; 7104                                       ;
+; Total pins                         ; 40 / 83 ( 48 % )                           ;
+; Total virtual pins                 ; 0                                          ;
+; Total memory bits                  ; 233,472 / 608,256 ( 38 % )                 ;
+; Embedded Multiplier 9-bit elements ; 80 / 132 ( 61 % )                          ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                              ;
++------------------------------------+--------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 08/26/2017 19:39:25 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; radioberry          ;
++-------------------+---------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                       ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 220295161909995.150376916501292       ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; RAM: 2-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; ROM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; FIFO                                  ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; FIFO                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 13.1                                  ; --            ; --          ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
+; MISC_FILE                           ; Polyphase_FIR/firram36I_1024_bb.v     ; --            ; --          ; --         ;
+; MISC_FILE                           ; Polyphase_FIR/firromI_1024_bb.v       ; --            ; --          ; --         ;
+; MISC_FILE                           ; txFIFO_bb.v                           ; --            ; --          ; --         ;
+; MISC_FILE                           ; rxFIFO_bb.v                           ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                     ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                     ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                            ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                            ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; --          ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --          ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --         ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                          ; --            ; --          ; --         ;
+; VERILOG_INPUT_VERSION               ; SystemVerilog_2005                    ; Verilog_2001  ; --          ; --         ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES   ; Off                                   ; --            ; --          ; --         ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                             ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis      ; 00:00:26     ; 1.0                     ; 666 MB              ; 00:00:24                           ;
+; Fitter                    ; 00:01:35     ; 1.0                     ; 959 MB              ; 00:01:34                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 508 MB              ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:17     ; 1.0                     ; 654 MB              ; 00:00:16                           ;
+; Total                     ; 00:02:21     ; --                      ; --                  ; 00:02:17                           ;
++---------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++----------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                        ;
++---------------------------+------------------+-----------+------------+----------------+
+; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
++---------------------------+------------------+-----------+------------+----------------+
+; Analysis & Synthesis      ; LAPTOP-E9KMQT1S  ; Windows 7 ; 6.2        ; x86_64         ;
+; Fitter                    ; LAPTOP-E9KMQT1S  ; Windows 7 ; 6.2        ; x86_64         ;
+; Assembler                 ; LAPTOP-E9KMQT1S  ; Windows 7 ; 6.2        ; x86_64         ;
+; TimeQuest Timing Analyzer ; LAPTOP-E9KMQT1S  ; Windows 7 ; 6.2        ; x86_64         ;
++---------------------------+------------------+-----------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off RadioBerry -c radioberry
+quartus_fit --read_settings_files=off --write_settings_files=off RadioBerry -c radioberry
+quartus_asm --read_settings_files=off --write_settings_files=off RadioBerry -c radioberry
+quartus_sta RadioBerry -c radioberry
+
+
+
