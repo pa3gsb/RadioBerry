@@ -74,7 +74,7 @@ int nnrx =0;
 #define SERVICE_PORT	1024
 
 int hold_nrx=0;
-int nrx = 2; // n Receivers
+int nrx = 4; // n Receivers
 
 int holdfreq = 0;
 int holdfreq2 = 0;
@@ -238,6 +238,8 @@ void handlePacket(char* buffer){
 				printf("SDR Program sends Start command \n");
 				return;
 			} else {
+				fill = 0;
+				use = 0;
 				running = 0;
 				last_sequence_number = 0;
 				printf("SDR Program sends Stop command \n");
@@ -394,23 +396,11 @@ void handlePacket(char* buffer){
 		}
 		
 		int x=0;
-		for (x; x < 4; x++) {
+		for (x; x < nrx; x++) {
 			if (freqArray[x] != holdFreqArray[x]) {
-				printf("frequency %d en aantal rx %d \n", freqArray[x] , nrx);
+				printf("frequency rx%d - %d en aantal rx %d \n", x, freqArray[x] , nrx);
 				holdFreqArray[x] = freqArray[x];
 			}
-		}
-		//if (holdfreq != freq1) {
-		//	holdfreq = freq1;
-		//	printf("frequency %d en aantal rx %d \n", freq1, nrx);
-		//}
-		//if (holdfreq2 != freq2) {
-		//	holdfreq2 = freq2;
-		//	printf("frequency %d en aantal rx %d \n", freq2, nrx);
-		//}
-		if (holdtxfreq != txfreq) {
-			holdtxfreq = txfreq;
-			printf("TX frequency %d\n", txfreq);
 		}
 		
 		//lees data en vul buffers
@@ -497,14 +487,7 @@ void fillPacketToSend() {
 				index = 16 + coarse_pointer + (j * (8 + factor));
 
 				if (!MOX) {
-					//sem_wait(&full);            
-					//int i =0;
-					//for (i; i< 6; i++){
-					//	hpsdrdata[index + i] = get(); // MSB comes first!!!!
-					//}
-					
-					//sem_post(&empty); 
-					
+				
 					int nrrx=0;
 					for (nrrx ; nrrx < nrx; nrrx++) {
 						
@@ -566,6 +549,7 @@ void fillDiscoveryReplyMessage() {
 
 void *spiReader(void *arg) {
 	
+	long slack = 0;
 	
 	long long value = 0;
 	long long prevalue = 0;
@@ -583,9 +567,9 @@ void *spiReader(void *arg) {
 			
 			freq = freqArray[nnrx];
 
-			while ( gpioRead(13) == 1) {}; // wait till rxFIFO buffer is filled with at least one element
-			
-			iqdata[0] = (((nnrx << 2) & 0x1C)  | (sampleSpeed & 0x03));
+			while ( gpioRead(13) == 1) {slack++;}; // wait till rxFIFO buffer is filled with at least one element
+			//00 0000 ---  01 0100  --- 10 1000  --- 11  1100
+			iqdata[0] = (((nnrx << 2) & 0x0C)  | (sampleSpeed & 0x03));
 			iqdata[1] = (((rando << 6) & 0x40) | ((dither <<5) & 0x20) |  (att & 0x1F));
 			iqdata[2] = ((freq >> 24) & 0xFF);
 			iqdata[3] = ((freq >> 16) & 0xFF);
@@ -594,18 +578,18 @@ void *spiReader(void *arg) {
 					
 			spiXfer(rx1_spi_handler, iqdata, iqdata, 6);
 			//firmware: tdata(56'h00010203040506) -> 0-1-2-3-4-5-6 (element 0 contains 0; second element contains 1)
-			sem_wait(&empty);
+			//sem_wait(&empty);
 			
 			int i =0;
 			value = 0;
 			for (i; i< 6; i++){
 					put(iqdata[i]);
 					//printf("%x ", iqdata[i]);
-					value = (((iqdata[i] & 0xFF) << (i * 8)) ) | value;
+					//value = (((iqdata[i] & 0xFF) << (i * 8)) ) | value;
 			}
 			//printf("value = %d \n", value);
 						
-			sem_post(&full);
+			//sem_post(&full);
 		
 			count ++;
 			if (count == 48000) {
@@ -613,6 +597,8 @@ void *spiReader(void *arg) {
 				gettimeofday(&t1, 0);
 				elapsed = timedifference_msec(t0, t1);
 				printf("Code rx mode spi executed in %f milliseconds.\n", elapsed);
+				printf("number of empt reads %d \n", slack);
+				slack = 0;
 				gettimeofday(&t0, 0);
 			}
 			

@@ -1,0 +1,16 @@
+Fitter Status : Successful - Mon Sep 11 19:38:53 2017
+Quartus II 64-Bit Version : 13.1.0 Build 162 10/23/2013 SJ Web Edition
+Revision Name : wsprberry
+Top-level Entity Name : radioberry
+Family : Cyclone III
+Device : EP3C25E144C8
+Timing Models : Final
+Total logic elements : 23,189 / 24,624 ( 94 % )
+    Total combinational functions : 19,790 / 24,624 ( 80 % )
+    Dedicated logic registers : 18,405 / 24,624 ( 75 % )
+Total registers : 18405
+Total pins : 40 / 83 ( 48 % )
+Total virtual pins : 0
+Total memory bits : 380,928 / 608,256 ( 63 % )
+Embedded Multiplier 9-bit elements : 132 / 132 ( 100 % )
+Total PLLs : 0 / 4 ( 0 % )

@@ -1,0 +1,185 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'spi_sck'
+Slack : 0.219
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'ad9866_clk'
+Slack : 0.639
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'clk_10mhz'
+Slack : 91.705
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Setup 'spi_ce0'
+Slack : 196072.419
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'ad9866_clk'
+Slack : 0.397
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'clk_10mhz'
+Slack : 0.454
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'spi_ce0'
+Slack : 0.485
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'spi_sck'
+Slack : 0.526
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866_clk'
+Slack : -2.123
+TNS   : -4.246
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866_rxclk'
+Slack : -2.123
+TNS   : -2.123
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'ad9866_txclk'
+Slack : -2.123
+TNS   : -2.123
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'clk_10mhz'
+Slack : 49.754
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_sck'
+Slack : 3471.927
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_ce0'
+Slack : 98038.763
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'spi_ce1'
+Slack : 196074.431
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'spi_sck'
+Slack : 0.599
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'ad9866_clk'
+Slack : 1.105
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'clk_10mhz'
+Slack : 92.140
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Setup 'spi_ce0'
+Slack : 196072.778
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'ad9866_clk'
+Slack : 0.331
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'clk_10mhz'
+Slack : 0.403
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'spi_ce0'
+Slack : 0.432
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'spi_sck'
+Slack : 0.495
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866_clk'
+Slack : -2.123
+TNS   : -4.246
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866_rxclk'
+Slack : -2.123
+TNS   : -2.123
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'ad9866_txclk'
+Slack : -2.123
+TNS   : -2.123
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'clk_10mhz'
+Slack : 49.747
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_sck'
+Slack : 3471.843
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_ce0'
+Slack : 98038.631
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'spi_ce1'
+Slack : 196074.431
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'spi_sck'
+Slack : 1.497
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'ad9866_clk'
+Slack : 2.054
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'clk_10mhz'
+Slack : 96.271
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'spi_ce0'
+Slack : 196075.809
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'ad9866_clk'
+Slack : 0.129
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'spi_sck'
+Slack : 0.153
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'clk_10mhz'
+Slack : 0.187
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'spi_ce0'
+Slack : 0.199
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866_clk'
+Slack : 3.106
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866_rxclk'
+Slack : 3.106
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'ad9866_txclk'
+Slack : 3.106
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'clk_10mhz'
+Slack : 49.268
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_sck'
+Slack : 3471.310
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_ce0'
+Slack : 98038.289
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'spi_ce1'
+Slack : 196074.431
+TNS   : 0.000
+
+------------------------------------------------------------

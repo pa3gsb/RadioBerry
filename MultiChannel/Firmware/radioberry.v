@@ -11,11 +11,7 @@
 //
 //				Radioberry SDR firmware code.
 //
-//				Multichannel approach; getting four 48K sample rate channels per SPI channel.
-//
-//				Rpi contains 2 SPI busses; so 8 channels can be possible! 
-//  
-//				Running a WSPR engines per Rx channel at the Rpi would be great!
+//				Multichannel approach; getting four 48K sample rate channels SPI channel.
 // 
 //				Lets do the experiment!
 //
@@ -99,15 +95,15 @@ ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 wire [47:0] spi_recv;
 wire spi_done;
-reg [2:0] nnrx;
+reg [1:0] nnrx;
 
 always @ (posedge spi_done)
 begin	
-	rx_freq[spi_recv[44:42]] <= spi_recv[31:0];
+	rx_freq[spi_recv[43:42]] <= spi_recv[31:0];
 	rx_speed <= spi_recv[41:40];
 	att <= spi_recv[36:32];
 	dither <= spi_recv[37];
-	nnrx <= spi_recv[44:42];
+	nnrx <= spi_recv[43:42];
 end 
 
 spi_slave spi_slave_rx_inst(.rstb(!reset),.ten(1'b1),.tdata(rxDataFromFIFO[nnrx]),.mlb(1'b1),.ss(spi_ce[0]),.sck(spi_sck),.sdin(spi_mosi), .sdout(spi_miso),.done(spi_done),.rdata(spi_recv));
@@ -179,7 +175,7 @@ reset_handler reset_handler_inst(.clock(clk_10mhz), .reset(reset));
 //------------------------------------------------------------------------------
 //                           Pipeline for adc fanout
 //------------------------------------------------------------------------------
-reg [11:0] adcpipe [0:7];
+reg [11:0] adcpipe [0:11];
 always @ (posedge ad9866_clk) begin
     adcpipe[0] <= ad9866_adio;
     adcpipe[1] <= ad9866_adio;
@@ -189,12 +185,16 @@ always @ (posedge ad9866_clk) begin
     adcpipe[5] <= ad9866_adio;
 	adcpipe[6] <= ad9866_adio;
     adcpipe[7] <= ad9866_adio;
+	 adcpipe[8] <= ad9866_adio;
+    adcpipe[9] <= ad9866_adio;
+	adcpipe[10] <= ad9866_adio;
+    adcpipe[11] <= ad9866_adio;
 end
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                        Receiver module nRx
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
-localparam NR = 2; // Number of Receivers 
+localparam NR = 12; // Number of Receivers 
 
 wire	[23:0] rx_I [0:NR-1];
 wire	[23:0] rx_Q [0:NR-1];
@@ -224,7 +224,7 @@ generate
   end
 endgenerate
 
-assign rx_FIFOEmpty =  (nnrx == 0 && emptyFIFO[0]) || (nnrx == 1 && emptyFIFO[1]) ;//|| (nnrx == 2 && emptyFIFO[2]) || (nnrx == 3 && emptyFIFO[3]) ;
+assign rx_FIFOEmpty =  (nnrx == 2'b00 && emptyFIFO[0]) || (nnrx == 2'b01 && emptyFIFO[1]) || (nnrx == 2'b10 && emptyFIFO[2]) || (nnrx == 2'b11 && emptyFIFO[3]) ;
 
 								
 //------------------------------------------------------------------------------
