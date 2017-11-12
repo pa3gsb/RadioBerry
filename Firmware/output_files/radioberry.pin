@@ -179,8 +179,8 @@ GNDA2                        : 108       : gnd    :                   :         
 VCCD_PLL2                    : 109       : power  :                   : 1.2V    :           :                
 ad9866_mode                  : 110       : output : 3.3-V LVCMOS      :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 111       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 112       :        :                   :         : 7         :                
-RESERVED_INPUT_WITH_WEAK_PULLUP : 113       :        :                   :         : 7         :                
+KEY_DOT                      : 112       : input  : 3.3-V LVCMOS      :         : 7         : Y              
+KEY_DASH                     : 113       : input  : 3.3-V LVCMOS      :         : 7         : Y              
 RESERVED_INPUT_WITH_WEAK_PULLUP : 114       :        :                   :         : 7         :                
 RESERVED_INPUT_WITH_WEAK_PULLUP : 115       :        :                   :         : 7         :                
 VCCINT                       : 116       : power  :                   : 1.2V    :           :                

@@ -1,5 +1,5 @@
 Flow report for radioberry
-Mon Aug 14 18:49:03 2017
+Sun Nov 12 13:53:12 2017
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -40,22 +40,22 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------+
 ; Flow Summary                                                                    ;
 +------------------------------------+--------------------------------------------+
-; Flow Status                        ; Successful - Mon Aug 14 18:48:34 2017      ;
+; Flow Status                        ; Successful - Sun Nov 12 13:52:48 2017      ;
 ; Quartus II 64-Bit Version          ; 13.1.0 Build 162 10/23/2013 SJ Web Edition ;
 ; Revision Name                      ; radioberry                                 ;
 ; Top-level Entity Name              ; radioberry                                 ;
 ; Family                             ; Cyclone III                                ;
 ; Device                             ; EP3C25E144C8                               ;
 ; Timing Models                      ; Final                                      ;
-; Total logic elements               ; 12,926 / 24,624 ( 52 % )                   ;
-;     Total combinational functions  ; 10,005 / 24,624 ( 41 % )                   ;
-;     Dedicated logic registers      ; 9,925 / 24,624 ( 40 % )                    ;
-; Total registers                    ; 9925                                       ;
-; Total pins                         ; 51 / 83 ( 61 % )                           ;
+; Total logic elements               ; 12,998 / 24,624 ( 53 % )                   ;
+;     Total combinational functions  ; 10,176 / 24,624 ( 41 % )                   ;
+;     Dedicated logic registers      ; 9,991 / 24,624 ( 41 % )                    ;
+; Total registers                    ; 9991                                       ;
+; Total pins                         ; 53 / 83 ( 64 % )                           ;
 ; Total virtual pins                 ; 0                                          ;
-; Total memory bits                  ; 358,912 / 608,256 ( 59 % )                 ;
+; Total memory bits                  ; 374,912 / 608,256 ( 62 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 92 / 132 ( 70 % )                          ;
-; Total PLLs                         ; 0 / 4 ( 0 % )                              ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                             ;
 +------------------------------------+--------------------------------------------+
 
 
@@ -64,7 +64,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/14/2017 18:45:08 ;
+; Start date & time ; 11/12/2017 13:49:52 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; radioberry          ;
 +-------------------+---------------------+
@@ -75,14 +75,16 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 220295161909995.150272910809256       ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 220295161909995.151049099206464       ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; RAM: 2-PORT                           ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; ROM: 1-PORT                           ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; FIFO                                  ; --            ; --          ; --         ;
 ; IP_TOOL_NAME                        ; FIFO                                  ; --            ; --          ; --         ;
+; IP_TOOL_NAME                        ; ALTPLL                                ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 12.1                                  ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 13.1                                  ; --            ; --          ; --         ;
 ; IP_TOOL_VERSION                     ; 13.1                                  ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
@@ -90,6 +92,8 @@ applicable agreement for further details.
 ; MISC_FILE                           ; Polyphase_FIR/firromI_1024_bb.v       ; --            ; --          ; --         ;
 ; MISC_FILE                           ; txFIFO_bb.v                           ; --            ; --          ; --         ;
 ; MISC_FILE                           ; rxFIFO_bb.v                           ; --            ; --          ; --         ;
+; MISC_FILE                           ; PLL_IAMBIC_bb.v                       ; --            ; --          ; --         ;
+; MISC_FILE                           ; PLL_IAMBIC.ppf                        ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                     ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                     ; --            ; --          ; --         ;
 ; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                            ; --            ; --          ; --         ;
@@ -110,11 +114,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:40     ; 1.0                     ; 674 MB              ; 00:00:39                           ;
-; Fitter                    ; 00:02:29     ; 1.0                     ; 1030 MB             ; 00:02:25                           ;
-; Assembler                 ; 00:00:04     ; 1.0                     ; 516 MB              ; 00:00:03                           ;
-; TimeQuest Timing Analyzer ; 00:00:27     ; 1.0                     ; 711 MB              ; 00:00:26                           ;
-; Total                     ; 00:03:40     ; --                      ; --                  ; 00:03:33                           ;
+; Analysis & Synthesis      ; 00:00:36     ; 1.0                     ; 671 MB              ; 00:00:35                           ;
+; Fitter                    ; 00:02:05     ; 1.0                     ; 1021 MB             ; 00:02:05                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 518 MB              ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:23     ; 1.0                     ; 719 MB              ; 00:00:22                           ;
+; Total                     ; 00:03:07     ; --                      ; --                  ; 00:03:05                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

@@ -29,7 +29,8 @@ rx1_FIFOEmpty, rx2_FIFOEmpty,
 txFIFOFull,
 ptt_in,
 ptt_out,
-filter);
+filter,
+KEY_DOT, KEY_DASH);
 
 input wire clk_10mhz;	
 input wire ad9866_clk;
@@ -63,6 +64,9 @@ output  wire  DEBUG_LED4;  // TX indicator...
 input wire ptt_in;
 output wire ptt_out;
 output [6:0] filter; 
+input  wire KEY_DOT;  		//dot input from external input
+input  wire KEY_DASH;      //dash input from external input
+
 
 //ATT
 reg   [4:0] att;           // 0-31 dB attenuator value
@@ -99,7 +103,45 @@ always @ (posedge clk_10mhz)
 assign ad9866rqst = tx_gain != prev_gain;
 
 ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866_sdio),.sdo(ad9866_sdo),.sen_n(ad9866_sen_n),.dataout(),.extrqst(ad9866rqst),.gain(tx_gain));
+ 
+//--------------------------------------------------------------------------------------------
+//  	Iambic CW Keyer
+//--------------------------------------------------------------------------------------------
+wire clk_192K;
+wire clk_30K;
 
+PLL_IAMBIC PLL_IAMBIC_inst (.inclk0(clk_10mhz), .c0(clk_192K), .c1(clk_30K), .c2(),  .c3(), .locked());
+
+//wire 			 keyout;
+//wire   [5:0] keyer_speed; 			// CW keyer speed 0-60 WPM
+//wire         keyer_mode;			// 0 = Mode A, 1 = Mode B
+//wire 			 iambic;					// 0 = external/straight/bug  1 = iambic
+//wire         key_reverse;		   // reverse CW keyes if set
+//wire   [7:0] keyer_weight;			// keyer weight 33-66
+//wire         keyer_spacing;		// 0 = off, 1 = on
+//wire 			break_in;				// if set then use break in mode
+//wire 			 CWX;						// CW keyboard from PC 
+//wire         Dot;						// CW dot key from PC
+//wire         Dash;					// CW dash key from PC]
+
+wire 			keyout;
+iambic #(30) iambic_inst (.clock(clk_30K), .cw_speed(6'd12),  .iambic_mode(2'b01), .weight(8'd26), 
+                          .letter_space(1'b1), .dot_key(!KEY_DOT), .dash_key(!KEY_DASH),
+								  .CWX(1'b0), .paddle_swap(1'b0), .keyer_out(keyout));
+								  
+		
+								  
+//--------------------------------------------------------------------------------------------
+//  	Calculate  Raised Cosine profile for sidetone and CW envelope when internal CW selected 
+//--------------------------------------------------------------------------------------------
+	
+wire [15:0] CW_RF;
+wire CW_PTT;	
+//wire   [7:0] RF_delay;				// 0 - 255, sets delay in mS from CW Key activation to RF out
+//wire   [9:0] hang;					// 0 - 1000, sets delay in mS from release of CW Key to dropping of PTT
+
+profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8'd0), .hang(10'd300), .PTT(CW_PTT));	
+						  						  
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         SPI Control
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -371,22 +413,6 @@ rxFIFO rxFIFO_inst(	.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 
-
-
-//always @(posedge ad9866_clk)
-//begin	
-//	if (rx_strobe) begin
-//		rxDataFromFIFO <= {rx_I, rx_Q};
-//		rx1_FIFOEmpty <= 0;
-//	end else begin
-//		if (~spi_ce[0]) 
-//			rx1_FIFOEmpty <= 1;
-//	
-//	end
-//end
-
-
-	
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          rxFIFO Handler (IQ Samples) rx2
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -398,20 +424,7 @@ rxFIFO rx2_FIFO_inst(.aclr(reset),
 							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
 							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));	
 
-//always @(posedge ad9866_clk)
-//begin	
-//	if (rx2_strobe) begin
-//		rx2_DataFromFIFO <= {rx2_I, rx2_Q};
-//		rx2_FIFOEmpty <= 0;
-//	end else begin
-//		if (~spi_ce[0]) 
-//			rx2_FIFOEmpty <= 1;
-//	
-//	end
-//end
-
-							
-				
+		
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                          txFIFO Handler ( IQ-Transmit)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -430,8 +443,8 @@ wire txFIFOEmpty;
 wire txFIFOReadStrobe;
 
 transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
-							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe),
-							.out_data(DAC), .PTT(ptt_in), .LED(DEBUG_LED4));	
+							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
+							.out_data(DAC), .PTT(ptt_in), .CW_PTT(CW_PTT), .LED(DEBUG_LED4));	
 
 wire [13:0] DAC;
 	

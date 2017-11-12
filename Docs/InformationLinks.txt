@@ -2,6 +2,10 @@
 Links:
 
 
+https://help.github.com/articles/syncing-a-fork/
+
+
+
 https://learn.adafruit.com/introducing-the-raspberry-pi-model-b-plus-plus-differences-vs-model-b/power-supply
 
 https://learn.adafruit.com/system/assets/assets/000/017/950/original/raspberry_pi_dims.png?1405287230

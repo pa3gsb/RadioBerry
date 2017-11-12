@@ -1,5 +1,5 @@
-PLL_Name	pllclock:pllclock_inst|altpll:altpll_component|pllclock_altpll:auto_generated|pll1
-PLLJITTER	27
+PLL_Name	PLL_IAMBIC:PLL_IAMBIC_inst|altpll:altpll_component|PLL_IAMBIC_altpll:auto_generated|pll1
+PLLJITTER	49
 PLLSPEmax	84
 PLLSPEmin	-53
 
