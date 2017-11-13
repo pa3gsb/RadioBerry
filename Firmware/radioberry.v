@@ -30,7 +30,7 @@ txFIFOFull,
 ptt_in,
 ptt_out,
 filter,
-KEY_DOT, KEY_DASH);
+KEY_DOT, KEY_DASH, key_dot_rpi, key_dash_rpi);
 
 input wire clk_10mhz;	
 input wire ad9866_clk;
@@ -66,6 +66,8 @@ output wire ptt_out;
 output [6:0] filter; 
 input  wire KEY_DOT;  		//dot input from external input
 input  wire KEY_DASH;      //dash input from external input
+output wire key_dot_rpi;
+output wire key_dash_rpi;
 
 
 //ATT
@@ -107,6 +109,10 @@ ad9866 ad9866_inst(.reset(reset),.clk(clk_10mhz),.sclk(ad9866_sclk),.sdio(ad9866
 //--------------------------------------------------------------------------------------------
 //  	Iambic CW Keyer
 //--------------------------------------------------------------------------------------------
+// passing the keying actions (dot and dash) to the RPI for setting the sidetone.
+assign key_dot_rpi = KEY_DOT;
+assign key_dash_rpi = KEY_DASH;
+
 wire clk_192K;
 wire clk_30K;
 
