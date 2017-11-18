@@ -30,7 +30,7 @@ txFIFOFull,
 ptt_in,
 ptt_out,
 filter,
-KEY_DOT, KEY_DASH, key_dot_rpi, key_dash_rpi);
+KEY_DOT, KEY_DASH, key_dot_rpi, key_dash_rpi, cw_ptt);
 
 input wire clk_10mhz;	
 input wire ad9866_clk;
@@ -68,6 +68,7 @@ input  wire KEY_DOT;  		//dot input from external input
 input  wire KEY_DASH;      //dash input from external input
 output wire key_dot_rpi;
 output wire key_dash_rpi;
+output wire cw_ptt;
 
 
 //ATT
@@ -115,38 +116,26 @@ assign key_dash_rpi = KEY_DASH;
 
 wire clk_192K;
 wire clk_30K;
-
 PLL_IAMBIC PLL_IAMBIC_inst (.inclk0(clk_10mhz), .c0(clk_192K), .c1(clk_30K), .c2(),  .c3(), .locked());
 
-//wire 			 keyout;
-//wire   [5:0] keyer_speed; 			// CW keyer speed 0-60 WPM
-//wire         keyer_mode;			// 0 = Mode A, 1 = Mode B
-//wire 			 iambic;					// 0 = external/straight/bug  1 = iambic
-//wire         key_reverse;		   // reverse CW keyes if set
-//wire   [7:0] keyer_weight;			// keyer weight 33-66
-//wire         keyer_spacing;		// 0 = off, 1 = on
-//wire 			break_in;				// if set then use break in mode
-//wire 			 CWX;						// CW keyboard from PC 
-//wire         Dot;						// CW dot key from PC
-//wire         Dash;					// CW dash key from PC]
+reg	[5:0] 	cw_speed; 			// CW keyer speed 0-60 WPM
+reg	[1:0] 	iambic_mode;		// 00 = straight/bug, 01 = Mode A, 10 = Mode B
+reg [6:0] 	keyer_weight;		// keyer weight 33-66
+reg			keyer_revers;		// reverse keyer
+wire		keyout;
 
-wire 			keyout;
-iambic #(30) iambic_inst (.clock(clk_30K), .cw_speed(6'd12),  .iambic_mode(2'b01), .weight(8'd26), 
-                          .letter_space(1'b1), .dot_key(!KEY_DOT), .dash_key(!KEY_DASH),
-								  .CWX(1'b0), .paddle_swap(1'b0), .keyer_out(keyout));
-								  
-		
-								  
+iambic #(30) iambic_inst (	.clock(clk_30K), .cw_speed(cw_speed),  .iambic_mode(iambic_mode), .weight({1'b0, keyer_weight}), 
+							.letter_space(1'b0), .dot_key(!KEY_DOT), .dash_key(!KEY_DASH),
+							.CWX(1'b0), .paddle_swap(keyer_revers), .keyer_out(keyout));
+								  							  
 //--------------------------------------------------------------------------------------------
 //  	Calculate  Raised Cosine profile for sidetone and CW envelope when internal CW selected 
 //--------------------------------------------------------------------------------------------
-	
 wire [15:0] CW_RF;
-wire CW_PTT;	
-//wire   [7:0] RF_delay;				// 0 - 255, sets delay in mS from CW Key activation to RF out
-//wire   [9:0] hang;					// 0 - 1000, sets delay in mS from release of CW Key to dropping of PTT
+//wire   [7:0] delay;				// 0 - 255, sets delay in mS from CW Key activation to RF out
+//wire   [9:0] hang;				// 0 - 1000, sets delay in mS from release of CW Key to dropping of PTT
 
-profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8'd0), .hang(10'd300), .PTT(CW_PTT));	
+profile profile_CW(.clock(clk_192K), .CW_char(keyout), .profile(CW_RF), .delay(8'd20), .hang(10'd300), .PTT(cw_ptt));	
 						  						  
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
 //                         SPI Control
@@ -187,6 +176,10 @@ begin
 		rx2_freq <= spi_rx2_recv[31:0];
 		rx2_speed <= spi_rx2_recv[41:40];
 	end else begin
+		iambic_mode <= spi_rx2_recv[47:46];
+		cw_speed <= spi_rx2_recv[45:40];
+		keyer_revers <= spi_rx2_recv[39:39];
+		keyer_weight <= spi_rx2_recv[38:32];
 		tx_freq <= spi_rx2_recv[31:0];
 	end	
 end 
@@ -450,7 +443,7 @@ wire txFIFOReadStrobe;
 
 transmitter transmitter_inst(.reset(reset), .clk(ad9866_clk), .frequency(sync_phase_word_tx), 
 							 .afTxFIFO(txDataFromFIFO), .afTxFIFOEmpty(txFIFOEmpty), .afTxFIFOReadStrobe(txFIFOReadStrobe), .CW_RF(CW_RF), 
-							.out_data(DAC), .PTT(ptt_in), .CW_PTT(CW_PTT), .LED(DEBUG_LED4));	
+							.out_data(DAC), .PTT(ptt_in), .CW_PTT(cw_ptt), .LED(DEBUG_LED4));	
 
 wire [13:0] DAC;
 	

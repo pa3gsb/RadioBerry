@@ -118,7 +118,7 @@ VCCIO3                       : 47        : power  :                   : 3.3V    
 GND                          : 48        : gnd    :                   :         :           :                
 spi_mosi                     : 49        : input  : 3.3-V LVCMOS      :         : 3         : Y              
 key_dot_rpi                  : 50        : output : 3.3-V LVCMOS      :         : 3         : Y              
-RESERVED_INPUT_WITH_WEAK_PULLUP : 51        :        :                   :         : 3         :                
+cw_ptt                       : 51        : output : 3.3-V LVCMOS      :         : 3         : Y              
 GND+                         : 52        :        :                   :         : 3         :                
 GND+                         : 53        :        :                   :         : 3         :                
 GND+                         : 54        :        :                   :         : 4         :                
