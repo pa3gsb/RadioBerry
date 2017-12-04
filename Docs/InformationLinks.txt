@@ -2,6 +2,8 @@
 Links:
 
 
+https://electronics.stackexchange.com/questions/248248/altera-fpga-i-o-weak-pull-ups
+
 https://help.github.com/articles/syncing-a-fork/
 
 
