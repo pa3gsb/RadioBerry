@@ -407,9 +407,11 @@ receiver #(.CICRATE(CICRATE_RX2))
 reg [47:0] rxDataFromFIFO;
 
 wire rx1req = ptt_in ? 1'b0 : 1'b1;
+wire [10:0] rx1_wrusedw;
+assign rx1_FIFOEmpty = rx1_wrusedw[7]; 
 
 rxFIFO rxFIFO_inst(	.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrempty(rx1_FIFOEmpty), 
+							.wrclk(ad9866_clk),.data({rx_I, rx_Q}),.wrreq(rx_strobe), .wrusedw(rx1_wrusedw), 
 							.rdclk(~spi_ce[0]),.q(rxDataFromFIFO),.rdreq(rx1req));
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -418,9 +420,11 @@ rxFIFO rxFIFO_inst(	.aclr(reset),
 reg [47:0] rx2_DataFromFIFO;
 
 wire rx2req = ptt_in ? 1'b0 : 1'b1;
+wire [10:0] rx2_wrusedw;
+assign rx2_FIFOEmpty = rx2_wrusedw[7];
 
 rxFIFO rx2_FIFO_inst(.aclr(reset),
-							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrempty(rx2_FIFOEmpty), 
+							.wrclk(ad9866_clk),.data({rx2_I, rx2_Q}),.wrreq(rx2_strobe), .wrusedw(rx2_wrusedw), 
 							.rdclk(~spi_ce[1]),.q(rx2_DataFromFIFO),.rdreq(rx2req));	
 
 		

@@ -1,5 +1,5 @@
 Assembler report for radioberry
-Mon Dec 04 14:48:53 2017
+Sat May 12 18:51:35 2018
 Quartus II 64-Bit Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
 
 
@@ -40,7 +40,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Dec 04 14:48:53 2017 ;
+; Assembler Status      ; Successful - Sat May 12 18:51:35 2018 ;
 ; Revision Name         ; radioberry                            ;
 ; Top-level Entity Name ; radioberry                            ;
 ; Family                ; Cyclone III                           ;
@@ -98,8 +98,8 @@ applicable agreement for further details.
 ; Option         ; Setting                                                             ;
 +----------------+---------------------------------------------------------------------+
 ; Device         ; EP3C25E144C8                                                        ;
-; JTAG usercode  ; 0x00A506ED                                                          ;
-; Checksum       ; 0x00A506ED                                                          ;
+; JTAG usercode  ; 0x00A616A6                                                          ;
+; Checksum       ; 0x00A616A6                                                          ;
 +----------------+---------------------------------------------------------------------+
 
 
@@ -137,14 +137,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 13.1.0 Build 162 10/23/2013 SJ Web Edition
-    Info: Processing started: Mon Dec 04 14:48:50 2017
+    Info: Processing started: Sat May 12 18:51:31 2018
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off RadioBerry -c radioberry
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 538 megabytes
-    Info: Processing ended: Mon Dec 04 14:48:53 2017
-    Info: Elapsed time: 00:00:03
+    Info: Peak virtual memory: 562 megabytes
+    Info: Processing ended: Sat May 12 18:51:35 2018
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:03
 
 
